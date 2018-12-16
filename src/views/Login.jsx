@@ -4,11 +4,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Checkbox, Form, Icon, Input, message} from 'antd';
+import {List, InputItem} from 'antd-mobile';
+import {createForm} from 'rc-form';
 import HelloTs from '../components/HelloTs';
-import styles from '../stylesheets/Login.css'
 
-const FormItem = Form.Item;
+const dataObj = {
+    id: '1',
+    type: 'List',
+    key: 'a',
+    props: {'chenlizan': 1},
+    children:
+        [
+            {
+                id: '1-1',
+                type: 'InputItem'
+            },
+            {
+                id: '1-2',
+                type: 'InputItem',
+            }
+        ]
+}
+
+function generateReactElement(object) {
+    const {type, props, children} = object
+    return React.createElement(require('antd-mobile')[type] || type, props)
+}
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -18,60 +39,34 @@ class LoginForm extends React.Component {
     getChildContext() {
     }
 
-    componentDidUpdate() {
-        const {result} = this.props;
-        void (result ? this.info(result) : '');
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.props.handleLoginRequested(values);
-                console.log('Received values of form: ', values);
-            }
-        });
-    };
-
-    info = (msg) => {
-        message.info(msg);
-    };
-
     render() {
-        const {getFieldDecorator} = this.props.form;
+        const {getFieldProps} = this.props.form;
+
+        const test = () => {
+            return (
+                <List renderHeader={() => 'Not editable / Disabled'}>
+                    <InputItem
+                        value="not editable"
+                        editable={false}
+                    >姓名</InputItem>
+                    <InputItem
+                        value="style of disabled `InputItem`"
+                        disabled
+                    >姓名</InputItem>
+                </List>
+            )
+        };
+
+        const _test = test();
+
+        const _test1 = generateReactElement(dataObj);
+
         return (
-            <Form onSubmit={this.handleSubmit} className={styles.login_form}>
-                <FormItem>
-                    {getFieldDecorator('userName', {
-                        rules: [{required: true, message: 'Please input your username!'}],
-                    })(
-                        <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="Username"/>
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('password', {
-                        rules: [{required: true, message: 'Please input your Password!'}],
-                    })(
-                        <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>} type="password"
-                               placeholder="Password"/>
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>
-                    )}
-                    <a className={styles.login_form_forgot} href="">Forgot password</a>
-                    <Button type="primary" htmlType="submit" className={styles.login_form_button}>
-                        Log in
-                    </Button>
-                    Or <a href="">register now!</a>
-                </FormItem>
+            <div>
                 <HelloTs compiler="TypeScript" framework="React"/>
-            </Form>
-        )
+                {_test}
+            </div>
+        );
     }
 }
 
@@ -84,6 +79,6 @@ LoginForm.contextTypes = {};
 
 LoginForm.childContextTypes = {};
 
-const WrappedLoginForm = Form.create()(LoginForm);
+const WrappedLoginForm = createForm()(LoginForm);
 
 export default WrappedLoginForm;
