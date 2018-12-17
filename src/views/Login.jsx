@@ -38,13 +38,11 @@ class LoginForm extends React.Component {
 
         const _test1 = test();
 
-        // const _test2 = GenerateView(testData);
-
         return (
             <div>
                 <HelloTs compiler="TypeScript" framework="React"/>
                 {_test1}
-                <GenerateView />
+                <GenerateView uiMeta={testData}/>
             </div>
         );
     }

@@ -8,7 +8,9 @@ const dataObj = {
             {
                 namespace: 'antd-mobile',
                 type: 'InputItem',
-                id: 'InputItem1'
+                id: 'InputItem1',
+                children: '测试',
+                props:{value:"not editable"}
             },
             {
                 namespace: 'antd-mobile',
