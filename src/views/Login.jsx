@@ -7,29 +7,8 @@ import PropTypes from 'prop-types';
 import {List, InputItem} from 'antd-mobile';
 import {createForm} from 'rc-form';
 import HelloTs from '../components/HelloTs';
-
-const dataObj = {
-    id: '1',
-    type: 'List',
-    key: 'a',
-    props: {'chenlizan': 1},
-    children:
-        [
-            {
-                id: '1-1',
-                type: 'InputItem'
-            },
-            {
-                id: '1-2',
-                type: 'InputItem',
-            }
-        ]
-}
-
-function generateReactElement(object) {
-    const {type, props, children} = object
-    return React.createElement(require('antd-mobile')[type] || type, props)
-}
+import GenerateView from '../generateView/index';
+import testData from  '../generateView/testData';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -57,14 +36,15 @@ class LoginForm extends React.Component {
             )
         };
 
-        const _test = test();
+        const _test1 = test();
 
-        const _test1 = generateReactElement(dataObj);
+        // const _test2 = GenerateView(testData);
 
         return (
             <div>
                 <HelloTs compiler="TypeScript" framework="React"/>
-                {_test}
+                {_test1}
+                <GenerateView />
             </div>
         );
     }

@@ -3,6 +3,7 @@
  */
 
 import * as React from 'react';
+// @ts-ignore
 import * as styles from '../stylesheets/HelloTs.less';
 
 export interface HelloProps {
