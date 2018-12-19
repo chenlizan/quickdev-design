@@ -18,9 +18,8 @@ class LoginForm extends React.Component {
     }
 
     componentDidMount() {
-        const {uiMeta} = this.testGv.props;
-        uiMeta.children[0].children = 'XX';
-        this.testGv.setState({_date: Date.now()});
+        this.testGv.findUI('span1');
+        this.testGv.updateUI('InputItem1',{value: "111editable"})
     }
 
     render() {

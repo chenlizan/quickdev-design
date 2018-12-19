@@ -21,6 +21,7 @@ const dataObj = {
             {
                 namespace: 'html',
                 type: 'span',
+                id:'span1',
                 children: '测试测试',
                 props:{}
             }
