@@ -3,12 +3,11 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {List, InputItem} from 'antd-mobile';
+import * as PropTypes from 'prop-types';
 import {createForm} from 'rc-form';
 import HelloTs from '../components/HelloTs';
 import GenerateView from '../generateView/index';
-import testData from  '../generateView/testData';
+import testData from '../generateView/testData';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -18,31 +17,18 @@ class LoginForm extends React.Component {
     getChildContext() {
     }
 
+    componentDidMount() {
+        const {uiMeta} = this.testGv.props;
+        uiMeta.children[0].children = 'XX';
+        this.testGv.setState({_date: Date.now()});
+    }
+
     render() {
         const {getFieldProps} = this.props.form;
-
-        const test = () => {
-            return (
-                <List renderHeader={() => 'Not editable / Disabled'}>
-                    <InputItem
-                        value="not editable"
-                        editable={false}
-                    >姓名</InputItem>
-                    <InputItem
-                        value="style of disabled `InputItem`"
-                        disabled
-                    >姓名</InputItem>
-                </List>
-            )
-        };
-
-        const _test1 = test();
-
         return (
             <div>
                 <HelloTs compiler="TypeScript" framework="React"/>
-                {_test1}
-                <GenerateView uiMeta={testData}/>
+                <GenerateView ref={node => this.testGv = node} uiMeta={testData}/>
             </div>
         );
     }
