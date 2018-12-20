@@ -16,12 +16,18 @@ const Login = Loadable({
     loading: () => null
 });
 
+const TestQuickDev = Loadable({
+    loader: () => import('../views/TestQuickDev'),
+    loading: () => null
+});
+
 export const routes = (
     <HashRouter>
         <App>
             <Switch>
                 <Route path="/" exact component={Login}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/test" component={TestQuickDev}/>
             </Switch>
         </App>
     </HashRouter>

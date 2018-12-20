@@ -62,4 +62,3 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
         return this.generateComponent([_.cloneDeep(uiMeta)]);
     }
 }
-
