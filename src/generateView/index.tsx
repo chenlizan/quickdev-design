@@ -4,11 +4,11 @@ import * as _ from 'lodash';
 import {GenerateViewPropsType} from './PropsType';
 import 'antd-mobile/dist/antd-mobile.less';
 
-export interface GenerateViewProps extends GenerateViewPropsType {
-    test: 'test'
+interface GenerateViewProps extends GenerateViewPropsType {
+    uiProps?: object
 }
 
-export default class GenerateView extends React.Component<GenerateViewProps, any> {
+export default class GenerateView extends React.PureComponent<GenerateViewProps, any> {
 
     constructor(props: Readonly<GenerateViewProps>) {
         super(props);
@@ -20,30 +20,26 @@ export default class GenerateView extends React.Component<GenerateViewProps, any
 
     public updateUI(id: string, props: any): void {
         const {uiMeta} = this.props;
-        const fun = (uiMeta: any) => {
+        (function recursive(uiMeta: Array<any>) {
             for (let i = 0, len = uiMeta.length; i < len; i++) {
                 if (uiMeta[i].id === id) {
-                    uiMeta[i].props = {...uiMeta[i].props, ...props};
+                    _.assign(uiMeta[i].props, props);
                 } else if (uiMeta[i].children && Array.isArray(uiMeta[i].children)) {
-                    fun(uiMeta[i].children);
+                    recursive(uiMeta[i].children);
                 }
             }
-        }
-        fun([uiMeta]);
+        })([uiMeta]);
         this.setState({_date: Date.now()});
     }
 
     private generateReactElement(element: any): any {
+        const {uiProps} = this.props;
         const {namespace, type, id, props, children} = element;
         if (namespace === 'antd-mobile') {
-            props['key'] = uuid();
-            props['ref'] = (node: any) => (this as any)[id] = node;
-            props['uiMeta'] = element;
+            _.assign(props, {key: uuid()}, {ref: (node: any) => (this as any)[id] = node}, (uiProps as any)[id]);
             return React.createElement(require('antd-mobile')[type], props, children);
         } else if (namespace === 'html') {
-            props['key'] = uuid();
-            props['ref'] = (node: any) => (this as any)[id] = node;
-            props['uiMeta'] = element;
+            _.assign(props, {key: uuid()}, {ref: (node: any) => (this as any)[id] = node});
             return React.createElement(type, props, children);
         } else {
             return element;

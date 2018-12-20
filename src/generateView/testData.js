@@ -21,9 +21,18 @@ const dataObj = {
             {
                 namespace: 'html',
                 type: 'span',
-                id:'span1',
+                id: 'span1',
                 children: '测试测试',
-                props:{}
+                props: {}
+            },
+            {
+                namespace: 'antd-mobile',
+                type: 'Button',
+                id: 'Button1',
+                children: '测试按钮',
+                props: {
+                    style: {backgroundColor: 'red'}
+                }
             }
         ]
 };

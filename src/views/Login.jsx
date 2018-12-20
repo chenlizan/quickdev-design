@@ -19,15 +19,23 @@ class LoginForm extends React.Component {
 
     componentDidMount() {
         this.testGv.findUI('span1');
-        this.testGv.updateUI('InputItem1',{value: "111editable"})
+        this.testGv.updateUI('InputItem1', {value: "111editable"})
     }
+
+    uiPropsHandler = {
+        "Button1": {
+            onClick: (e) => {
+                console.log(e);
+            }
+        }
+    };
 
     render() {
         const {getFieldProps} = this.props.form;
         return (
             <div>
                 <HelloTs compiler="TypeScript" framework="React"/>
-                <GenerateView ref={node => this.testGv = node} uiMeta={testData}/>
+                <GenerateView ref={node => this.testGv = node} uiMeta={testData} uiProps={this.uiPropsHandler}/>
             </div>
         );
     }
