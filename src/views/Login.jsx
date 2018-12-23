@@ -4,10 +4,11 @@
 
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import {createForm} from 'rc-form';
+import {Button, Checkbox, Form, Icon, Input, message} from 'antd';
 import HelloTs from '../components/HelloTs';
-import GenerateView from '../generateView/index';
-import testData from '../generateView/testData';
+import styles from '../stylesheets/Login.css'
+
+const FormItem = Form.Item;
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -17,27 +18,60 @@ class LoginForm extends React.Component {
     getChildContext() {
     }
 
-    componentDidMount() {
-        this.testGv.findUI('span1');
-        this.testGv.updateUI('InputItem1', {value: "111editable"})
+    componentDidUpdate() {
+        const {result} = this.props;
+        void (result ? this.info(result) : '');
     }
 
-    uiPropsHandler = {
-        "Button1": {
-            onClick: (e) => {
-                console.log(e);
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                this.props.handleLoginRequested(values);
+                console.log('Received values of form: ', values);
             }
-        }
+        });
+    };
+
+    info = (msg) => {
+        message.info(msg);
     };
 
     render() {
-        const {getFieldProps} = this.props.form;
+        const {getFieldDecorator} = this.props.form;
         return (
-            <div>
+            <Form onSubmit={this.handleSubmit} className={styles.login_form}>
+                <FormItem>
+                    {getFieldDecorator('userName', {
+                        rules: [{required: true, message: 'Please input your username!'}],
+                    })(
+                        <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="Username"/>
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('password', {
+                        rules: [{required: true, message: 'Please input your Password!'}],
+                    })(
+                        <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>} type="password"
+                               placeholder="Password"/>
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('remember', {
+                        valuePropName: 'checked',
+                        initialValue: true,
+                    })(
+                        <Checkbox>Remember me</Checkbox>
+                    )}
+                    <a className={styles.login_form_forgot} href="">Forgot password</a>
+                    <Button type="primary" htmlType="submit" className={styles.login_form_button}>
+                        Log in
+                    </Button>
+                    Or <a href="">register now!</a>
+                </FormItem>
                 <HelloTs compiler="TypeScript" framework="React"/>
-                <GenerateView ref={node => this.testGv = node} uiMeta={testData} uiProps={this.uiPropsHandler}/>
-            </div>
-        );
+            </Form>
+        )
     }
 }
 
@@ -50,6 +84,6 @@ LoginForm.contextTypes = {};
 
 LoginForm.childContextTypes = {};
 
-const WrappedLoginForm = createForm()(LoginForm);
+const WrappedLoginForm = Form.create()(LoginForm);
 
 export default WrappedLoginForm;

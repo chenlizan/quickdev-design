@@ -2,9 +2,8 @@ import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
 import {GenerateViewPropsType} from './PropsType';
-import 'antd-mobile/dist/antd-mobile.less';
 
-interface GenerateViewProps extends GenerateViewPropsType {
+export interface GenerateViewProps extends GenerateViewPropsType {
     uiProps?: object
 }
 
@@ -33,7 +32,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
     }
 
     private generateReactElement(element: any): any {
-        const {uiProps} = this.props;
+        const {uiProps = {}} = this.props;
         const {namespace, type, id, props, children} = element;
         if (namespace === 'antd-mobile') {
             _.assign(props, {key: uuid()}, {ref: (node: any) => (this as any)[id] = node}, (uiProps as any)[id]);

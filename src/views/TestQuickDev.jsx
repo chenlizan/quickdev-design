@@ -1,6 +1,8 @@
-import GenerateView from '../generateView/index';
-import testData from '../generateView/testData';
+import GenerateView from '../components/GenerateView';
+import testData from '../testData';
 import _ from 'lodash';
+
+
 
 export default class TestQuickDev extends GenerateView {
 
