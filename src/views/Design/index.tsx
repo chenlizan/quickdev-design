@@ -13,11 +13,11 @@ export default class Design extends React.PureComponent<any, any> {
             <div>
                 <Header>Header</Header>
                 <Layout>
-                    <Sider>Sider</Sider>
-                    <Content>
-                        <DesignContent uiMeta={test}/>
-                    </Content>
-                    <Sider>Sider</Sider>
+                    {/*<Sider>Sider</Sider>*/}
+                    {/*<Content>*/}
+                        {/*<DesignContent uiMeta={test}/>*/}
+                    {/*</Content>*/}
+                    {/*<Sider>Sider</Sider>*/}
                 </Layout>
                 <Footer>Footer</Footer>
             </div>
