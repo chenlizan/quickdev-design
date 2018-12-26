@@ -17,9 +17,11 @@ export default class Design extends React.PureComponent<any, any> {
                 <Header style={{backgroundColor: 'wheat'}}>Header</Header>
                 <Layout>
                     <Sider>Sider</Sider>
+                    <div>|</div>
                     <Content>
                         <DesignContent uiMeta={test}/>
                     </Content>
+                    <div>|</div>
                     <Sider>Sider</Sider>
                 </Layout>
                 <Footer>Footer</Footer>

@@ -17,20 +17,20 @@ export default class DesignContentForMobile extends React.PureComponent<any, any
     onClickForMenu = (e: any) => {
         (this as any).setState({
             modeName: e.item.props.children.props.children,
-            modeSize: e.item.props.children.props.modesize
+            modeSize: e.item.props.children.props['data-size']
         });
     };
 
     menu = (
         <Menu onClick={this.onClickForMenu}>
             <Menu.Item>
-                <a modesize={{width: 320, height: 568}}>iPhone 5/SE</a>
+                <a data-size={{width: 320, height: 568}}>iPhone 5/SE</a>
             </Menu.Item>
             <Menu.Item>
-                <a modesize={{width: 375, height: 667}}>iPhone 6/7/8</a>
+                <a data-size={{width: 375, height: 667}}>iPhone 6/7/8</a>
             </Menu.Item>
             <Menu.Item>
-                <a modesize={{width: 414, height: 736}}>iPhone 6/7/8 Plus</a>
+                <a data-size={{width: 414, height: 736}}>iPhone 6/7/8 Plus</a>
             </Menu.Item>
         </Menu>
     );
@@ -40,7 +40,8 @@ export default class DesignContentForMobile extends React.PureComponent<any, any
         const {modeName, modeSize} = this.state;
         return (
             <div>
-                <Dropdown overlay={this.menu} trigger={['click']}><a>{modeName}<Icon type="down"/></a></Dropdown>
+                <Dropdown overlay={this.menu} trigger={['click']}><a
+                    style={{display: 'inline-block', margin: 5}}>{modeName}<Icon type="down"/></a></Dropdown>
                 <Scrollbars autoHide className={styles.design_content_mobile} style={modeSize}>
                     <GenerateView uiMeta={uiMeta}/>
                 </Scrollbars>
