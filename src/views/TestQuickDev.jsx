@@ -3,8 +3,11 @@ import testData from '../testData';
 import _ from 'lodash';
 
 
-
 export default class TestQuickDev extends GenerateView {
+
+    constructor(props) {
+        super(props);
+    }
 
     static defaultProps = {
         uiMeta: testData,
