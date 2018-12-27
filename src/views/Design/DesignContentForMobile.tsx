@@ -40,8 +40,8 @@ export default class DesignContentForMobile extends React.PureComponent<any, any
         const {modeName, modeSize} = this.state;
         return (
             <div>
-                <Dropdown overlay={this.menu} trigger={['click']}><a
-                    style={{display: 'inline-block', margin: 5}}>{modeName}<Icon type="down"/></a></Dropdown>
+                <Dropdown className={styles.design_content_mobile_mode} overlay={this.menu} trigger={['click']}>
+                    <a>{modeName}<Icon type="down"/></a></Dropdown>
                 <Scrollbars autoHide className={styles.design_content_mobile} style={modeSize}>
                     <GenerateView uiMeta={uiMeta}/>
                 </Scrollbars>

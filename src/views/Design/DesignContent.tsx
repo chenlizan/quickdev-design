@@ -8,7 +8,7 @@ export default class DesignContent extends React.Component<any, any> {
     render(): React.ReactNode {
         const {uiMeta} = this.props;
         return (
-            <div style={{flex:'auto'}}>
+            <div>
                 <DesignContentForMobile uiMeta={uiMeta}/>
             </div>
         )
