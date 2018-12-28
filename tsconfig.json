@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "jsx": "react",
     "module": "commonjs",
     "strict": true,
