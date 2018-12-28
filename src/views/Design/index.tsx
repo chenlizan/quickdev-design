@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Layout} from 'antd';
-import Draggable from 'react-draggable';
 import DesignContent from './DesignContent';
 import Dropzone from './Dropzone';
 
 const {Header, Footer, Sider, Content,} = Layout;
 import DivideLine, {DraggableData} from '../../components/DivideLine';
-import * as test from '../../testData';
+import * as test from "../../testData/jsonData.json";
 import * as styles from '../../stylesheets/Design.less';
 import {GenerateViewProps} from "../../components/GenerateView/index";
 

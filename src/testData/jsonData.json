@@ -1,0 +1,52 @@
+{
+  "namespace": "antd-mobile",
+  "type": "List",
+  "id": "list1",
+  "props": {
+    "chenlizan": 1
+  },
+  "children": [
+    {
+      "namespace": "antd-mobile",
+      "type": "InputItem",
+      "id": "InputItem1",
+      "children": "测试",
+      "props": {
+        "value": "not editable",
+        "editable": false
+      }
+    },
+    {
+      "namespace": "antd-mobile",
+      "type": "InputItem",
+      "props": {
+        "value": "editable"
+      }
+    },
+    {
+      "namespace": "html",
+      "type": "span",
+      "id": "span1",
+      "children": "测试测试",
+      "props": {}
+    },
+    {
+      "namespace": "antd-mobile",
+      "type": "DatePickerView",
+      "props": {
+        "mode": "year"
+      }
+    },
+    {
+      "namespace": "antd-mobile",
+      "type": "Button",
+      "id": "Button1",
+      "children": "测试按钮1",
+      "props": {
+        "style": {
+          "backgroundColor": "red"
+        }
+      }
+    }
+  ]
+}

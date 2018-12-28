@@ -1,6 +1,8 @@
 import * as React from 'react'
 import Dropzone from 'react-dropzone'
 
+const stripBom = require('strip-bom');
+
 export  default  class Basic extends React.Component {
     constructor(props:any) {
         super(props)
@@ -13,6 +15,9 @@ export  default  class Basic extends React.Component {
         var reader = new FileReader();
         reader.readAsText(files[0]);
         reader.onload = function(e){
+
+            const data = JSON.parse(stripBom(e.target.result));
+
             console.log(e)
         }
 
