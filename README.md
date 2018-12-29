@@ -1,4 +1,4 @@
-# react-boilerplate
+# quickdev-mobile
 
 ## Getting Started
 

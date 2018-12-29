@@ -3,11 +3,14 @@
  */
 
 import Login from "./Login";
+import Design from "./Design";
 
 export const initState = {
-    Login: Login.initState
+    Login: Login.initState,
+    Design: Design.initState
 };
 
 export const reducers = {
-    Login: Login.reducer
+    Login: Login.reducer,
+    Design: Design.reducer
 };

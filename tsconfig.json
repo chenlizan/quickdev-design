@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-//    "resolveJsonModule": true,
+    "declaration": true,
     "jsx": "react",
     "module": "commonjs",
     "strict": true,

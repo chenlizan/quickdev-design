@@ -1,15 +1,13 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import {Layout} from 'antd';
-import DesignContent from './DesignContent';
+import DesignContent from '../../containers/Design/DesignContent';
+import DesignToolBar from '../../containers/Design/DesignToolBar';
 import Dropzone from './Dropzone';
-
-const {Header, Footer, Sider, Content,} = Layout;
 import DivideLine, {DraggableData} from '../../components/DivideLine';
 import * as styles from '../../stylesheets/Design.less';
 
-const test = require("../../testData/jsonData.json");
-
+const {Header, Footer, Sider, Content,} = Layout;
 
 export default class Design extends React.PureComponent<any, any> {
 
@@ -18,7 +16,6 @@ export default class Design extends React.PureComponent<any, any> {
         this.state = {
             leftOffset: 250,
             rightOffset: 250,
-            data:{}
         }
     }
 
@@ -38,13 +35,13 @@ export default class Design extends React.PureComponent<any, any> {
         return (
             <div className={styles.design}>
                 <Header className={styles.design_header}>
-                    <Dropzone onChange={(e:any)=>this.setState({data:e})}/>
+                    <DesignToolBar/>
                 </Header>
                 <Layout>
                     <Sider width={leftOffset}>Sider</Sider>
                     <DivideLine id="left" className={styles.design_divider} onDrag={this.handleDragLeft}></DivideLine>
                     <Content>
-                        <DesignContent uiMeta={data}/>
+                        <DesignContent/>
                     </Content>
                     <DivideLine id="right" className={styles.design_divider} onDrag={this.handleDragRight}></DivideLine>
                     <Sider width={rightOffset}>Sider</Sider>

@@ -1,5 +1,5 @@
 import GenerateView from '../components/GenerateView';
-import testData from '../testData';
+import testData from '../testData/jsonData';
 import _ from 'lodash';
 
 

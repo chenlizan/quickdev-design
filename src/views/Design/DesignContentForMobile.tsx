@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import {Menu, Dropdown, Icon} from 'antd';
-import GenerateView from '../../components/GenerateView';
+import GenerateView, {GenerateViewProps} from '../../components/GenerateView';
 import * as styles from '../../stylesheets/Design.less';
 
-export default class DesignContentForMobile extends React.PureComponent<any, any> {
+export default class DesignContentForMobile extends React.PureComponent<GenerateViewProps, any> {
 
     constructor(props: any) {
         super(props);

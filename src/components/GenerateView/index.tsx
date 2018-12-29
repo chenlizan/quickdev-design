@@ -41,7 +41,6 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
             _.assign(props, {key: uuid()}, {ref: (node: any) => (this as any)[id] = node});
             return React.createElement(type, props, children);
         } else {
-            if (_.isObject(element) && Object.keys(element).length === 0) return null;
             return element;
         }
     }
@@ -59,6 +58,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
 
     render(): React.ReactNode {
         const {uiMeta} = this.props;
+        if (Object.keys(uiMeta).length === 0) return null;
         return this.generateComponent([_.cloneDeep(uiMeta)]);
     }
 }
