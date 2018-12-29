@@ -1,61 +1,38 @@
 import * as React from 'react'
-import Dropzone from 'react-dropzone'
+import DropZone from 'react-dropzone'
 
+const parseJson = require('parse-json');
 const stripBom = require('strip-bom');
 
-export  default  class Basic extends React.Component {
-    constructor(props:any) {
+export default class Basic extends React.Component {
+    constructor(props: any) {
         super(props)
-        this.state = {
-            files: []
+    }
+
+    onDrop = (acceptedFiles: Blob[]) => {
+        const reader = new FileReader();
+        reader.readAsText(acceptedFiles[0]);
+        const type = acceptedFiles[0].type;
+        reader.onloadend = (e) => {
+            if (type === "text/javascript") {
+                const data = eval(stripBom((e.target as any).result));
+                console.log(data);
+            } else if (type === "application/json") {
+                (this.props as any).onChange(parseJson((stripBom((e.target as any).result))));
+            }
         }
-    }
-
-    onDrop(files) {
-        var reader = new FileReader();
-        reader.readAsText(files[0]);
-        reader.onload = function(e){
-
-            const data = JSON.parse(stripBom(e.target.result));
-
-            console.log(e)
-        }
-
-
-        this.setState({files});
-    }
-
-    onCancel() {
-        this.setState({
-            files: []
-        });
-    }
+    };
 
     render() {
-        const files = this.state.files.map(file => (
-            <li key={file.name}>
-                {file.name} - {file.size} bytes
-            </li>
-        ))
-
         return (
-            <section>
-                <Dropzone
-                    onDrop={this.onDrop.bind(this)}
-                    onFileDialogCancel={this.onCancel.bind(this)}
-                >
-                    {({getRootProps, getInputProps}) => (
-                        <div {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            <p>Drop files here, or click to select files</p>
-                        </div>
-                    )}
-                </Dropzone>
-                <aside>
-                    <h4>Files</h4>
-                    <ul>{files}</ul>
-                </aside>
-            </section>
-        );
+            <DropZone accept=".json,.js" multiple={false} onDrop={this.onDrop.bind(this)}>
+                {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>将文件拖至此处，或单击选择文件</p>
+                    </div>
+                )}
+            </DropZone>
+        )
     }
 }

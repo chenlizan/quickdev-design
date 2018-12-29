@@ -53,8 +53,7 @@ export default class DivideLine extends React.PureComponent<DivideLineProps, any
         const thisNode = ReactDOM.findDOMNode(this);
         const {id, onDrag} = this.props;
         if (thisNode && onDrag) {
-            // @ts-ignore
-            const offsetX = id === 'left' ? 0 : thisNode.ownerDocument.body.clientWidth;
+            const offsetX = id === 'left' ? 0 : thisNode.ownerDocument!.body.clientWidth;
             onDrag(e, {x: Math.abs(offsetX - e.clientX), y: e.clientY});
         }
     };
