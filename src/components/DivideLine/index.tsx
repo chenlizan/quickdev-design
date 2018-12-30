@@ -1,6 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import classNames from 'classnames';
 import {addEvent, removeEvent} from './utils';
+
+const omit = require('omit.js').default;
 
 const eventsFor = {
     start: 'mousedown',
@@ -8,28 +11,24 @@ const eventsFor = {
     stop: 'mouseup'
 };
 
-type EventHandler<T> = (e: T) => void | false;
+export type DraggableData = { x: number, y: number };
 
-export type DraggableData = {
-    x: number, y: number
-};
+type EventHandler<T> = (e: T) => void;
 
 type DraggableEventHandler = (e: MouseEvent, data: DraggableData) => void;
 
-type DivideLineProps = {
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+interface DivideLineProps extends React.HTMLAttributes<HTMLDivElement> {
     id?: string;
     className?: string;
-    onDrag?: DraggableEventHandler,
-    onMouseDown?: (e: MouseEvent) => void,
+    onMove?: DraggableEventHandler;
     style?: React.CSSProperties;
 }
 
 export default class DivideLine extends React.PureComponent<DivideLineProps, any> {
 
-    static defaultProps = {
-        onDrag: (() => {
-        }) as DraggableEventHandler
-    };
+    static defaultProps: DivideLineProps;
 
     componentWillUnmount(): void {
         const thisNode = ReactDOM.findDOMNode(this);
@@ -49,12 +48,12 @@ export default class DivideLine extends React.PureComponent<DivideLineProps, any
         }
     };
 
-    handleDrag: EventHandler<MouseEvent> = (e) => {
+    handleDrag: EventHandler<MouseEvent> = (e: any) => {
         const thisNode = ReactDOM.findDOMNode(this);
-        const {id, onDrag} = this.props;
-        if (thisNode && onDrag) {
+        const {id, onMove} = this.props;
+        if (thisNode && onMove) {
             const offsetX = id === 'left' ? 0 : thisNode.ownerDocument!.body.clientWidth;
-            onDrag(e, {x: Math.abs(offsetX - e.clientX), y: e.clientY});
+            onMove(e, {x: Math.abs(offsetX - e.clientX), y: e.clientY});
         }
     };
 
@@ -67,18 +66,28 @@ export default class DivideLine extends React.PureComponent<DivideLineProps, any
         }
     };
 
-    onMouseDown: EventHandler<MouseEvent> = (e: MouseEvent) => {
+    onMouseDown: EventHandler<MouseEvent> = (e) => {
         this.handleDragStart(e);
     };
 
-    onMouseUp: EventHandler<MouseEvent> = (e: MouseEvent) => {
+    onMouseUp: EventHandler<MouseEvent> = (e: any): void => {
         this.handleDragStop(e);
     };
 
     render(): React.ReactNode {
+        const {className} = this.props;
+        const otherProps = omit(this.props, [
+            'id',
+            'onDrag',
+            'style'
+        ]);
         return (
-            // @ts-ignore
-            <div {...this.props} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp}/>
+            <div
+                {...otherProps}
+                className={classNames(className)}
+                onMouseDown={this.onMouseDown}
+                onMouseUp={this.onMouseUp}
+            />
         )
     }
 }

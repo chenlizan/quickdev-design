@@ -1,14 +1,23 @@
 import * as React from 'react'
+import * as PropTypes from 'prop-types';
 import DropZone from 'react-dropzone'
 
 const parseJson = require('parse-json');
 const stripBom = require('strip-bom');
 
-export default class Index extends React.Component<any,any> {
+export interface DropzoneProps {
+    onChange?: (value?: object) => void
+}
 
-    displayName: "Dropzone" | undefined;
+export default class Dropzone extends React.Component<DropzoneProps, any> {
 
-    constructor(props: any) {
+    static defaultProps: DropzoneProps;
+
+    static propTypes = {
+        onChange: PropTypes.func
+    };
+
+    constructor(props: Readonly<DropzoneProps>) {
         super(props)
     }
 
@@ -27,7 +36,7 @@ export default class Index extends React.Component<any,any> {
 
     render() {
         return (
-            <DropZone accept=".json,.js" multiple={false} onDrop={this.onDrop.bind(this)}>
+            <DropZone accept="application/json,text/javascript" multiple={false} onDrop={this.onDrop}>
                 {({getRootProps, getInputProps}) => (
                     <div {...getRootProps()}>
                         <input {...getInputProps()} />

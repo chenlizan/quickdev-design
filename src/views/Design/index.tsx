@@ -1,9 +1,8 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import {Layout} from 'antd';
 import DesignContent from '../../containers/Design/DesignContent';
 import DesignToolBar from '../../containers/Design/DesignToolBar';
-import Dropzone from './Dropzone';
+import DesignLeft from '../../containers/Design/DesignLeft';
 import DivideLine, {DraggableData} from '../../components/DivideLine';
 import * as styles from '../../stylesheets/Design.less';
 
@@ -14,37 +13,39 @@ export default class Design extends React.PureComponent<any, any> {
     constructor(props: Readonly<any>) {
         super(props);
         this.state = {
-            leftOffset: 250,
-            rightOffset: 250,
+            leftWidth: 250,
+            rightWidth: 250,
         }
     }
 
     handleDragLeft = (e: MouseEvent, data: DraggableData) => {
         this.setState({
-            leftOffset: data.x
+            leftWidth: data.x
         });
     };
     handleDragRight = (e: MouseEvent, data: DraggableData) => {
         this.setState({
-            rightOffset: data.x
+            rightWidth: data.x
         });
     };
 
     render(): React.ReactNode {
-        const {data, leftOffset, rightOffset} = this.state;
+        const {leftWidth, rightWidth} = this.state;
         return (
             <div className={styles.design}>
                 <Header className={styles.design_header}>
                     <DesignToolBar/>
                 </Header>
                 <Layout>
-                    <Sider width={leftOffset}>Sider</Sider>
-                    <DivideLine id="left" className={styles.design_divider} onDrag={this.handleDragLeft}></DivideLine>
+                    <Sider width={leftWidth}>
+                        <DesignLeft className={styles.design_left}/>
+                    </Sider>
+                    <DivideLine id="left" className={styles.design_divider} onMove={this.handleDragLeft}></DivideLine>
                     <Content>
                         <DesignContent/>
                     </Content>
-                    <DivideLine id="right" className={styles.design_divider} onDrag={this.handleDragRight}></DivideLine>
-                    <Sider width={rightOffset}>Sider</Sider>
+                    <DivideLine id="right" className={styles.design_divider} onMove={this.handleDragRight}></DivideLine>
+                    <Sider width={rightWidth}>Sider</Sider>
                 </Layout>
                 <Footer className={styles.design_footer}>Footer</Footer>
             </div>

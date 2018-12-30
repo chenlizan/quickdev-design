@@ -3,7 +3,9 @@ import * as PropTypes from 'prop-types';
 
 import DesignContentForMobile from './DesignContentForMobile';
 
-export default class DesignContent extends React.Component<any, any> {
+export default class Index extends React.Component<any, any> {
+
+    displayName: "DesignContent" | undefined;
 
     render(): React.ReactNode {
         const {uiMeta} = this.props;
