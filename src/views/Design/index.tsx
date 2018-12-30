@@ -3,7 +3,7 @@ import {Layout} from 'antd';
 import DesignContent from '../../containers/Design/DesignContent';
 import DesignToolBar from '../../containers/Design/DesignToolBar';
 import DesignLeft from '../../containers/Design/DesignLeft';
-import DivideLine, {DraggableData} from '../../components/DivideLine';
+import DivideLine, {DraggableData} from '../../components/DividerLine';
 import * as styles from '../../stylesheets/Design.less';
 
 const {Header, Footer, Sider, Content,} = Layout;
@@ -40,11 +40,11 @@ export default class Design extends React.PureComponent<any, any> {
                     <Sider width={leftWidth}>
                         <DesignLeft className={styles.design_left}/>
                     </Sider>
-                    <DivideLine id="left" className={styles.design_divider} onMove={this.handleDragLeft}></DivideLine>
+                    <DivideLine orientation="left" className={styles.design_divider} onDrag={this.handleDragLeft}></DivideLine>
                     <Content>
                         <DesignContent/>
                     </Content>
-                    <DivideLine id="right" className={styles.design_divider} onMove={this.handleDragRight}></DivideLine>
+                    <DivideLine orientation="right" className={styles.design_divider} onDrag={this.handleDragRight}></DivideLine>
                     <Sider width={rightWidth}>Sider</Sider>
                 </Layout>
                 <Footer className={styles.design_footer}>Footer</Footer>

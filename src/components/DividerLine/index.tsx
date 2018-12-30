@@ -19,16 +19,16 @@ type DraggableEventHandler = (e: MouseEvent, data: DraggableData) => void;
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-interface DivideLineProps extends React.HTMLAttributes<HTMLDivElement> {
-    id?: string;
+interface DividerLineProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onDrag'> {
     className?: string;
-    onMove?: DraggableEventHandler;
+    orientation?: 'left' | 'right';
+    onDrag?: DraggableEventHandler;
     style?: React.CSSProperties;
 }
 
-export default class DivideLine extends React.PureComponent<DivideLineProps, any> {
+export default class DividerLine extends React.PureComponent<DividerLineProps, any> {
 
-    static defaultProps: DivideLineProps;
+    static defaultProps: DividerLineProps;
 
     componentWillUnmount(): void {
         const thisNode = ReactDOM.findDOMNode(this);
@@ -50,10 +50,10 @@ export default class DivideLine extends React.PureComponent<DivideLineProps, any
 
     handleDrag: EventHandler<MouseEvent> = (e: any) => {
         const thisNode = ReactDOM.findDOMNode(this);
-        const {id, onMove} = this.props;
-        if (thisNode && onMove) {
-            const offsetX = id === 'left' ? 0 : thisNode.ownerDocument!.body.clientWidth;
-            onMove(e, {x: Math.abs(offsetX - e.clientX), y: e.clientY});
+        const {orientation, onDrag} = this.props;
+        if (thisNode && onDrag) {
+            const offsetX = orientation === 'left' ? 0 : thisNode.ownerDocument!.body.clientWidth;
+            onDrag(e, {x: Math.abs(offsetX - e.clientX), y: e.clientY});
         }
     };
 
@@ -77,9 +77,7 @@ export default class DivideLine extends React.PureComponent<DivideLineProps, any
     render(): React.ReactNode {
         const {className} = this.props;
         const otherProps = omit(this.props, [
-            'id',
-            'onDrag',
-            'style'
+            'onDrag'
         ]);
         return (
             <div
