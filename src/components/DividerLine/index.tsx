@@ -70,7 +70,7 @@ export default class DividerLine extends React.PureComponent<DividerLineProps, a
         this.handleDragStart(e);
     };
 
-    onMouseUp: EventHandler<MouseEvent> = (e: any): void => {
+    onMouseUp: EventHandler<MouseEvent> = (e) => {
         this.handleDragStop(e);
     };
 
