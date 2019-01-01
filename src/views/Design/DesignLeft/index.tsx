@@ -4,14 +4,28 @@ import {Tabs, Tree} from 'antd';
 const TabPane = Tabs.TabPane;
 const {TreeNode} = Tree;
 
+const uiMeta =  [require('../../../testData/jsonData')];
+
+
 export default class Index extends React.PureComponent<any, any> {
 
     displayName: "DesignLeft" | undefined;
 
+
+    generateTree: any = () => {
+        for (let i = 0, len = uiMeta.length; i < len; i++) {
+            if (uiMeta[i].children && Array.isArray(uiMeta[i].children)) {
+
+            }
+            rows.push(this.generateReactElement(uiMeta[i]));
+        }
+    }
+
     render(): React.ReactNode {
         return (
-            <Tabs {...this.props} defaultActiveKey="1" tabPosition="left">
-                <TabPane tab="Tab 1" key="1"><Tree
+            <Tabs {...this.props} type="card" defaultActiveKey="1"
+                  tabPosition="left">
+                <TabPane tab="视图" key="1"><Tree
                     showLine
                     defaultExpandedKeys={['0-0-0']}
                 >
@@ -31,7 +45,7 @@ export default class Index extends React.PureComponent<any, any> {
                     </TreeNode>
                 </Tree>
                 </TabPane>
-                <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+                <TabPane tab="Tab" key="2">Content of Tab Pane 2</TabPane>
             </Tabs>
         )
     }
