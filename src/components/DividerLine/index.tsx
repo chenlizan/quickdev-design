@@ -48,7 +48,7 @@ export default class DividerLine extends React.PureComponent<DividerLineProps, a
         }
     };
 
-    handleDrag: EventHandler<MouseEvent> = (e: any) => {
+    handleDrag: EventHandler<MouseEvent> = (e) => {
         const thisNode = ReactDOM.findDOMNode(this);
         const {orientation, onDrag} = this.props;
         if (thisNode && onDrag) {

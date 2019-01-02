@@ -13,7 +13,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
         super(props);
     }
 
-    public findUI(id: string): any {
+    public findUI(id: string): React.ReactNode {
         return (this as any)[id];
     }
 
@@ -31,7 +31,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
         this.setState({_date: Date.now()});
     }
 
-    private generateReactElement(element: any): any {
+    private generateReactElement(element: any): JSX.Element {
         const {uiProps = {}} = this.props;
         const {namespace, type, id, props, children} = element;
         if (namespace === 'antd-mobile') {
@@ -45,15 +45,15 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
         }
     }
 
-    private generateComponent(uiMeta: any): any {
-        const rows = [];
+    private generateComponent(uiMeta: Array<any>): Array<JSX.Element> {
+        const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
             if (uiMeta[i].children && Array.isArray(uiMeta[i].children)) {
                 uiMeta[i].children = this.generateComponent(uiMeta[i].children);
             }
-            rows.push(this.generateReactElement(uiMeta[i]));
+            element.push(this.generateReactElement(uiMeta[i]));
         }
-        return rows;
+        return element;
     }
 
     render(): React.ReactNode {

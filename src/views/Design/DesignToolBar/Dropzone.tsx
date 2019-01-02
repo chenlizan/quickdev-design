@@ -21,7 +21,7 @@ export default class Dropzone extends React.Component<DropzoneProps, any> {
         super(props)
     }
 
-    onDrop = (acceptedFiles: Blob[]) => {
+    onDrop = (acceptedFiles: Blob[]): void => {
         const reader = new FileReader();
         reader.readAsText(acceptedFiles[0]);
         const type = acceptedFiles[0].type;

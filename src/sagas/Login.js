@@ -4,7 +4,7 @@
 
 import {delay} from 'redux-saga';
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {login_succeeded_creator, login_failed_creator} from '../action'
+import {login_succeeded_creator, login_failed_creator} from '../action';
 
 function* loginProcess(action) {
     try {

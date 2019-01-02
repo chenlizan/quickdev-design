@@ -10,3 +10,7 @@ export const login_failed_creator = createAction('LOGIN_FAILED');
 
 //DesignToolBar
 export const toolbar_open_file = createAction('TOOLBAR_OPEN_FILE');
+
+
+//Saga
+export const pre_process_data = createAction('UIMETA_DATA');

@@ -4,7 +4,9 @@ import DesignLeft from '../../views/Design/DesignLeft';
 // import {toolbar_open_file} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
-    return {}
+    return {
+        uiMeta: (state as any).Design.uiMeta
+    }
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

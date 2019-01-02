@@ -9,7 +9,7 @@ const initState: Design = {
 }
 
 const reducer = handleActions<Design>({
-        TOOLBAR_OPEN_FILE: (state, action) => ({
+    UIMETA_DATA: (state, action) => ({
             ...state, uiMeta: action.payload
         }),
     }, initState
