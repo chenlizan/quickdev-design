@@ -1,19 +1,10 @@
 import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import {Tabs, Tree} from 'antd';
-import {AntTreeNode} from "antd/lib/tree";
 
 const TabPane = Tabs.TabPane;
 const {TreeNode} = Tree;
 
-interface AntTreeNodeDropEvent {
-    node: AntTreeNode;
-    dragNode: AntTreeNode;
-    dragNodesKeys: string[];
-    dropPosition: number;
-    dropToGap?: boolean;
-    event: React.MouseEventHandler<any>;
-}
 
 export default class Index extends React.PureComponent<any, any> {
 
@@ -31,7 +22,7 @@ export default class Index extends React.PureComponent<any, any> {
         return element;
     };
 
-    onDrop = (info: AntTreeNodeDropEvent) => {
+    onDrop = (info: any) => {
         const {uiMeta} = this.props;
         const dropKey = info.node.props.eventKey;
         const dragKey = info.dragNode.props.eventKey;
@@ -61,7 +52,7 @@ export default class Index extends React.PureComponent<any, any> {
     render(): React.ReactNode {
         const {uiMeta} = this.props;
         return (
-            <Tabs {...this.props} type="card" defaultActiveKey="1" tabPosition="left">
+            <Tabs {...this.props}  defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="视图" key="1">
                     <Tree defaultExpandAll draggable showLine onDrop={this.onDrop}>
                         {this.generateTreeNode([uiMeta])}

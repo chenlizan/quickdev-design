@@ -16,12 +16,41 @@
   }
 
   &_left {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     background-color: powderblue;
 
-    [class="ant-tabs-bar ant-tabs-left-bar"] {
-      width: 40px;
+    [class="ant-tabs-content ant-tabs-content-animated ant-tabs-bottom-content"] {
+      height: 100%;
+    }
+
+  }
+
+  &_right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: powderblue;
+
+    [class="ant-tabs-content ant-tabs-content-animated ant-tabs-bottom-content"] {
+      height: 100%;
+    }
+
+    [class="ant-tabs-nav ant-tabs-nav-animated"] {
+      width: 100%;
+
+      > div {
+        display: flex;
+      }
+    }
+
+    [role="tab"] {
+      flex: 1;
+      margin: initial;
+      text-align: center;
     }
   }
 
