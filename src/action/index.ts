@@ -4,13 +4,15 @@
 
 import {createAction} from 'redux-actions';
 
-export const login_requested_creator = createAction('LOGIN_REQUESTED');
-export const login_succeeded_creator = createAction('LOGIN_SUCCEEDED');
-export const login_failed_creator = createAction('LOGIN_FAILED');
+//Saga
+export const ui_meta_data = createAction('UI_META_DATA');
+
 
 //DesignToolBar
 export const toolbar_open_file = createAction('TOOLBAR_OPEN_FILE');
 
 
-//Saga
-export const ui_meta_data = createAction('UI_META_DATA');
+//DesignRight
+export const right_choose_component = createAction('RIGHT_CHOOSE_COMPONENT');
+
+

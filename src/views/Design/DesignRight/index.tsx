@@ -5,10 +5,11 @@ import Component, {ClickEventHandler} from './Component';
 const TabPane = Tabs.TabPane;
 
 export default class Index extends React.PureComponent<any, any> {
+
     displayName: "DesignRight" | undefined;
 
     handleClick: ClickEventHandler = (e, data) => {
-        console.log(data);
+        this.props.handleChooseComponent(data);
     };
 
     render(): React.ReactNode {

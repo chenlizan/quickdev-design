@@ -1,7 +1,7 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignRight from '../../views/Design/DesignRight';
-// import {toolbar_open_file} from '../../action/index';
+import {right_choose_component} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
     return {
@@ -11,7 +11,7 @@ const mapStateToProps = (state: object) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        // handleOpenFile: bindActionCreators(toolbar_open_file, dispatch)
+        handleChooseComponent: bindActionCreators(right_choose_component, dispatch)
     }
 }
 

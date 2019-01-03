@@ -3,12 +3,10 @@
  */
 
 import {all} from 'redux-saga/effects'
-import {loginSaga} from './Login'
-import {f1} from './Design';
+import {OpenFile} from './Design';
 
 export default function* rootSaga() {
     yield all([
-        loginSaga(),
-        f1()
+        OpenFile()
     ])
 }
