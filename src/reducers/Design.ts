@@ -9,7 +9,7 @@ const initState: Design = {
 }
 
 const reducer = handleActions<Design>({
-    UIMETA_DATA: (state, action) => ({
+        UI_META_DATA: (state, action) => ({
             ...state, uiMeta: action.payload
         }),
     }, initState

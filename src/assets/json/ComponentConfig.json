@@ -1,0 +1,28 @@
+{
+  "group": [
+    {
+      "namespace": "antd-mobile",
+      "name": "Layout 布局",
+      "components": [
+        {
+          "name": "Flex 布局",
+          "type": "Flex"
+        }
+      ]
+    },
+    {
+      "namespace": "antd-mobile",
+      "name": "DataEntry 数据录入",
+      "components": [
+        {
+          "name": "Button 按钮",
+          "type": "Button"
+        },
+        {
+          "name": "Checkbox 复选框",
+          "type": "Checkbox"
+        }
+      ]
+    }
+  ]
+}

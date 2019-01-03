@@ -13,4 +13,4 @@ export const toolbar_open_file = createAction('TOOLBAR_OPEN_FILE');
 
 
 //Saga
-export const pre_process_data = createAction('UIMETA_DATA');
+export const ui_meta_data = createAction('UI_META_DATA');

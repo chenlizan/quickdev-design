@@ -1,34 +1,61 @@
 import * as React from 'react';
-import {Collapse} from 'antd';
+import {Collapse, Button} from 'antd';
+import * as uuid from 'uuid/v4';
 
+const configMeta = require('../../../assets/json/ComponentConfig.json').group;
 const Panel = Collapse.Panel;
 
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+type ClickData = { namespace: string, type: string }
 
-const customPanelStyle = {
-    background: '#f7f7f7',
-    border: 0,
-    overflow: 'hidden',
-};
+export type ClickEventHandler = (e: MouseEvent, data: ClickData) => void;
 
-export default class Component extends React.PureComponent <any, any> {
+interface ComponentProps {
+    onClick?: ClickEventHandler
+}
+
+export default class Component extends React.PureComponent <ComponentProps, any> {
+
+    handleClick = (e: any): void => {
+        const {onClick} = this.props;
+        if (onClick) {
+            onClick(e, e.currentTarget.dataset);
+        }
+    };
+
+    generateChild(configMeta: Array<any>, namespace: string): Array<JSX.Element> {
+        const element = [];
+        for (let i = 0, len = configMeta.length; i < len; i++) {
+            element.push(
+                <Button
+                    data-type={configMeta[i].type}
+                    data-namespace={namespace}
+                    key={uuid()}
+                    onClick={this.handleClick}
+                    style={{marginBottom: 5}}
+                >
+                    {configMeta[i].name}
+                </Button>
+            )
+        }
+        return element;
+    }
+
+    generatePanel(): Array<JSX.Element> {
+        const element = [];
+        for (let i = 0, len = configMeta.length; i < len; i++) {
+            element.push(
+                <Panel header={configMeta[i].name} key={uuid()}>
+                    {this.generateChild(configMeta[i].components, configMeta[i].namespace)}
+                </Panel>
+            )
+        }
+        return element;
+    }
 
     render(): React.ReactNode {
         return (
-            <Collapse bordered={false} defaultActiveKey={['1']}>
-                <Panel header="This is panel header 1" key="1" style={customPanelStyle}>
-                    <p>{text}</p>
-                </Panel>
-                <Panel header="This is panel header 2" key="2" style={customPanelStyle}>
-                    <p>{text}</p>
-                </Panel>
-                <Panel header="This is panel header 3" key="3" style={customPanelStyle}>
-                    <p>{text}</p>
-                </Panel>
+            <Collapse>
+                {this.generatePanel()}
             </Collapse>
         );
     }

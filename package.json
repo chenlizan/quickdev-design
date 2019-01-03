@@ -57,7 +57,7 @@
     "eslint-plugin-flowtype": "^2.50.3",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.12.1",
+    "eslint-plugin-react": "^7.12.2",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.0.0",
     "html-webpack-include-assets-plugin": "^1.0.6",
