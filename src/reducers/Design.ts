@@ -5,7 +5,13 @@ interface Design {
 }
 
 const initState: Design = {
-    uiMeta: {}
+    uiMeta: {
+        "namespace": "html",
+        "type": "div",
+        "key": "app-root",
+        "props": {},
+        "children": []
+    }
 }
 
 const reducer = handleActions<Design>({

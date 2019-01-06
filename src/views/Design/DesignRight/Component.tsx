@@ -31,7 +31,7 @@ export default class Component extends React.PureComponent <ComponentProps, any>
                     data-namespace={namespace}
                     key={uuid()}
                     onClick={this.handleClick}
-                    style={{marginBottom: 5}}
+                    style={{marginBottom: 5, marginRight: 5}}
                 >
                     {configMeta[i].name}
                 </Button>

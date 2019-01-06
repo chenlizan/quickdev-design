@@ -3,10 +3,11 @@
  */
 
 import {all} from 'redux-saga/effects'
-import {OpenFile} from './Design';
+import {Choose, Open} from './Design';
 
 export default function* rootSaga() {
     yield all([
-        OpenFile()
+        Choose(),
+        Open()
     ])
 }
