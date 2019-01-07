@@ -15,14 +15,7 @@ function* process(action: any) {
     try {
         const getUiMeta = (state: { Design: { uiMeta: any; }; }) => state.Design.uiMeta;
         let uiMeta = yield select(getUiMeta);
-        if (Object.keys(uiMeta).length > 0) {
-            uiMeta['children'] = [];
-            uiMeta['children'].push(action.payload);
-        } else {
-            uiMeta = action.payload;
-            uiMeta['id'] = uuid();
-            uiMeta['key'] = uuid();
-        }
+        uiMeta['children'].push(action.payload);
         yield put(ui_meta_data(JSON.parse(JSON.stringify(uiMeta))));
     } catch (e) {
         console.log(e);
