@@ -14,9 +14,12 @@ function* loadData(action: any) {
 function* process(action: any) {
     try {
         const getUiMeta = (state: { Design: { uiMeta: any; }; }) => state.Design.uiMeta;
-        let uiMeta = yield select(getUiMeta);
-        uiMeta['children'].push(action.payload);
-        yield put(ui_meta_data(JSON.parse(JSON.stringify(uiMeta))));
+        const uiMeta = yield select(getUiMeta);
+        let meta = _.assign({}, action.payload)
+        meta['key'] = uuid();
+        meta['props'] = {};
+        uiMeta['children'].push(meta);
+        yield put(ui_meta_data(_.cloneDeep(uiMeta)));
     } catch (e) {
         console.log(e);
     }

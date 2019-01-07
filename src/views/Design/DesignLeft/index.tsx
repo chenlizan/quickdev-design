@@ -14,7 +14,7 @@ export default class Index extends React.PureComponent<any, any> {
         const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
             element.push(
-                <TreeNode title={uiMeta[i].type} key={uuid()}>
+                <TreeNode title={uiMeta[i].key === 'app-root' ? '' : uiMeta[i].type} key={uiMeta[i].key}>
                     {(uiMeta[i].children && Array.isArray(uiMeta[i].children)) ? this.generateTreeNode(uiMeta[i].children) : null}
                 </TreeNode>
             )
@@ -51,11 +51,12 @@ export default class Index extends React.PureComponent<any, any> {
 
     render(): React.ReactNode {
         const {uiMeta} = this.props;
+        const treeNode = this.generateTreeNode([uiMeta]);
         return (
-            <Tabs {...this.props}  defaultActiveKey="1" tabPosition="bottom">
+            <Tabs {...this.props} defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="视图" key="1">
                     <Tree defaultExpandAll draggable showLine onDrop={this.onDrop}>
-                        {this.generateTreeNode([uiMeta])}
+                        {treeNode}
                     </Tree>
                 </TabPane>
                 <TabPane tab="Tab" key="2">Content of Tab Pane 2</TabPane>
