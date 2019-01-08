@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Tabs} from 'antd';
+import Attribute from './Attribute';
 import Component, {ClickEventHandler} from './Component';
 
 const TabPane = Tabs.TabPane;
@@ -19,7 +20,9 @@ export default class Index extends React.PureComponent<any, any> {
                 <TabPane tab="部件" key="1">
                     <Component onClick={this.handleClick}/>
                 </TabPane>
-                <TabPane tab="属性" key="2">Content of Tab Pane 2</TabPane>
+                <TabPane tab="属性" key="2">
+                    <Attribute uiMeta={uiMeta}/>
+                </TabPane>
             </Tabs>
         )
     }
