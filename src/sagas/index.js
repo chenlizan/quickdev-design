@@ -3,11 +3,12 @@
  */
 
 import {all} from 'redux-saga/effects'
-import {Choose, Open} from './Design';
+import {ChooseComponent, ChooseNode, Open} from './Design';
 
 export default function* rootSaga() {
     yield all([
-        Choose(),
+        ChooseComponent(),
+        ChooseNode(),
         Open()
     ])
 }

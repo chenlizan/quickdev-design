@@ -49,13 +49,18 @@ export default class Index extends React.PureComponent<any, any> {
         console.log(dragObj);
     };
 
+    onSelect = (selectedKeys: any, info: any) => {
+        console.log('selected', selectedKeys, info);
+        this.props.handleChooseNode(selectedKeys[0]);
+    };
+
     render(): React.ReactNode {
         const {uiMeta} = this.props;
         const treeNode = this.generateTreeNode([uiMeta]);
         return (
             <Tabs {...this.props} defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="视图" key="1">
-                    <Tree defaultExpandAll draggable showLine onDrop={this.onDrop}>
+                    <Tree defaultExpandAll draggable showLine onDrop={this.onDrop} onSelect={this.onSelect}>
                         {treeNode}
                     </Tree>
                 </TabPane>

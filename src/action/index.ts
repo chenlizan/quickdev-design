@@ -13,6 +13,8 @@ export const toolbar_open_file = createAction('TOOLBAR_OPEN_FILE');
 
 
 //DesignRight
-export const right_choose_component = createAction('RIGHT_CHOOSE_COMPONENT');
+export const choose_component = createAction('CHOOSE_COMPONENT');
 
 
+//DesignLeft
+export const current_choose_node = createAction('CURRENT_CHOOSE_NODE');

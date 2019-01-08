@@ -18,6 +18,9 @@ const reducer = handleActions<Design>({
         UI_META_DATA: (state, action) => ({
             ...state, uiMeta: action.payload
         }),
+        CURRENT_CHOOSE_NODE: (state, action) => ({
+            ...state, currentNode: action.payload
+        })
     }, initState
 );
 

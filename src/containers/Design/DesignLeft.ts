@@ -1,7 +1,7 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignLeft from '../../views/Design/DesignLeft';
-// import {toolbar_open_file} from '../../action/index';
+import {current_choose_node} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
     return {
@@ -11,8 +11,8 @@ const mapStateToProps = (state: object) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        // handleOpenFile: bindActionCreators(toolbar_open_file, dispatch)
+        handleChooseNode: bindActionCreators(current_choose_node, dispatch)
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignLeft);
