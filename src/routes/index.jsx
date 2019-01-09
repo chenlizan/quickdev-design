@@ -5,6 +5,9 @@
 import React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import Loadable from 'react-loadable';
+// import TestQuickDev from '../views/TestQuickDev';
+
+// const _dd = new TestQuickDev();
 
 const App = Loadable({
     loader: () => import('../App'),

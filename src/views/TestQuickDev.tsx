@@ -1,11 +1,11 @@
+import * as _ from 'lodash';
 import GenerateView from '../components/GenerateView';
-import testData from '../testData/jsonData';
-import _ from 'lodash';
 
+const testData = require('../testData/jsonData');
 
 export default class TestQuickDev extends GenerateView {
 
-    constructor(props) {
+    constructor(props:any) {
         super(props);
     }
 
@@ -20,7 +20,7 @@ export default class TestQuickDev extends GenerateView {
 
     uiPropsHandler = {
         "Button1": {
-            onClick: (e) => {
+            onClick: (e:any) => {
                 console.log(e);
             }
         }

@@ -1,5 +1,4 @@
-
-const testModule =  require('./testModule');
+import testModule from './testModule';
 
 export default {
     testModule

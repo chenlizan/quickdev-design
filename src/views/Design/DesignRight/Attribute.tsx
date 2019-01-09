@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {Form, Input} from 'antd';
+import * as uuid from 'uuid/v4';
+import {Form} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
+import AttributeField from '../../../components/AttributeField';
 
 const configMeta = require('../../../assets/json/AttributeConfig/Button');
-
-import indexModule from './indexModule';
 
 interface AttributeProps extends FormComponentProps {
     // uiMeta: object
@@ -26,12 +26,8 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const element = [];
         for (let i = 0, len = configMeta.length; i < len; i++) {
             element.push(
-                <Form.Item  {...formItemLayout} label={configMeta[i].label}>
-                    {getFieldDecorator('userName', {
-                        rules: [{required: true, message: 'Please input your username!'}],
-                    })(
-                        React.createElement(configMeta[i].default['testModule'])
-                    )}
+                <Form.Item key={uuid()} {...formItemLayout} label={configMeta[i].label}>
+                    {getFieldDecorator('userName', {})(React.createElement((AttributeField as any)[configMeta[i].type]))}
                 </Form.Item>
             )
         }
