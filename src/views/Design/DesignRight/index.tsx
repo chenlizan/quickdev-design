@@ -21,7 +21,7 @@ export default class Index extends React.PureComponent<any, any> {
                     <Component onClick={this.handleClick}/>
                 </TabPane>
                 <TabPane tab="属性" key="2">
-                    <Attribute uiMeta={uiMeta}/>
+                    <Attribute/>
                 </TabPane>
             </Tabs>
         )
