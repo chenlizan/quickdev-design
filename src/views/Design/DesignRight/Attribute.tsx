@@ -45,8 +45,10 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
 
 export default Form.create({
     onFieldsChange: (props, fields) => {
+        console.log(props);
     },
     onValuesChange: (props, changedValues, allValues) => {
+        console.log(props);
     }
 })(Attribute)
 
