@@ -4,10 +4,13 @@ import {Form} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
 import AttributeField from '../../../components/AttributeField';
 
-const configMeta = require('../../../assets/json/AttributeConfig/Button');
+interface PropData {
+    namespace: string,
+    type: string
+}
 
-interface AttributeProps extends FormComponentProps {
-    // uiMeta: object
+export interface AttributeProps extends FormComponentProps {
+    currentProps: PropData
 }
 
 const formItemLayout = {
@@ -35,15 +38,27 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
     }
 
     render(): React.ReactNode {
+        const {namespace, type} = this.props.currentProps;
+        let formItem = (<span>无属性配置</span>);
+        if (namespace && type) {
+            const path = `../../../assets/json/AttributeConfig/${namespace}/${type}`;
+            const configMeta = require(path);
+            if (configMeta) {
+                formItem = this.generateFormItem(configMeta)
+            }
+        }
         return (
             <Form>
-                {this.generateFormItem(configMeta)}
+                {formItem}
             </Form>
         );
     }
 }
 
 export default Form.create({
+    mapPropsToFields: props => {
+        console.log(props);
+    },
     onFieldsChange: (props, fields) => {
         console.log(props);
     },

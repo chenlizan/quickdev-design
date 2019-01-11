@@ -5,7 +5,6 @@ import {choose_component} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
     return {
-        uiMeta: (state as any).Design.uiMeta
     }
 };
 

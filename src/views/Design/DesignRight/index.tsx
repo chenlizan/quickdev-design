@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Tabs} from 'antd';
-import Attribute from './Attribute';
+import Attribute from '../../../containers/Design/DesignRightAttribute';
 import Component, {ClickEventHandler} from './Component';
 
 const TabPane = Tabs.TabPane;
@@ -14,7 +14,7 @@ export default class Index extends React.PureComponent<any, any> {
     };
 
     render(): React.ReactNode {
-        const {uiMeta} = this.props;
+        const {currentNode, uiMeta} = this.props;
         return (
             <Tabs {...this.props} defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="部件" key="1">

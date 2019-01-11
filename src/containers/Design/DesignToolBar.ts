@@ -11,6 +11,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         handleOpenFile: bindActionCreators(toolbar_open_file, dispatch)
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignToolBar);

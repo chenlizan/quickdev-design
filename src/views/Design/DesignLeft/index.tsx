@@ -29,24 +29,24 @@ export default class Index extends React.PureComponent<any, any> {
         const dropPos = info.node.props.pos.split('-');
         const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
 
-        const loop = (data, key, callback) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.children && Array.isArray(item.children)) {
-                    return loop(item.children, key, callback);
-                }
-            });
-        };
+        // const loop = (data, key, callback) => {
+        //     data.forEach((item, index, arr) => {
+        //         if (item.key === key) {
+        //             return callback(item, index, arr);
+        //         }
+        //         if (item.children && Array.isArray(item.children)) {
+        //             return loop(item.children, key, callback);
+        //         }
+        //     });
+        // };
+        //
+        // let dragObj;
+        // loop([uiMeta], dragKey, (item, index, arr) => {
+        //     arr.splice(index, 1);
+        //     dragObj = item;
+        // });
 
-        let dragObj;
-        loop([uiMeta], dragKey, (item, index, arr) => {
-            arr.splice(index, 1);
-            dragObj = item;
-        });
-
-        console.log(dragObj);
+        // console.log(dragObj);
     };
 
     onSelect = (selectedKeys: any, info: any) => {

@@ -6,6 +6,7 @@ import {createAction} from 'redux-actions';
 
 //Saga
 export const ui_meta_data = createAction('UI_META_DATA');
+export const ui_meta_props = createAction('UI_META_PROPS');
 
 
 //DesignToolBar

@@ -1,10 +1,9 @@
 import * as _ from 'lodash';
 import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {ui_meta_data} from '../action/index';
+import {ui_meta_data, ui_meta_props} from '../action/index';
 
 const getDesign = (state: { Design: any; }) => state.Design;
-
 
 function* loadData(action: any) {
     try {
@@ -14,8 +13,8 @@ function* loadData(action: any) {
     }
 }
 
-function addTreeNode(uiMeta: any, key: string, value: object) {
-    if (!key) {
+function addTreeNode(uiMeta: Array<any>, key: string, value: object) {
+    if (key === undefined) {
         return uiMeta[0].children.push(value);
     }
     for (let i = 0, len = uiMeta.length; i < len; i++) {
@@ -30,21 +29,30 @@ function addTreeNode(uiMeta: any, key: string, value: object) {
     }
 }
 
+function getTreeNode(uiMeta: Array<any>, key: string): any {
+    for (let i = 0, len = uiMeta.length; i < len; i++) {
+        if (uiMeta[i].key === key) {
+            return uiMeta[i];
+        } else if (uiMeta[i].children) {
+            return getTreeNode(uiMeta[i].children, key);
+        }
+    }
+    return {};
+}
+
 function* process(action: any) {
     try {
         const Design = yield select(getDesign);
-        console.log(Design);
         if (action.type === 'CHOOSE_COMPONENT') {
             let meta = _.assign({}, action.payload);
             meta['key'] = uuid();
             meta['props'] = {};
-            // Design.uiMeta['children'].push(meta);
             addTreeNode([Design.uiMeta], Design.currentNode, meta);
-
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }
-
-
+        if (action.type === 'CHOOSE_COMPONENT') {
+            yield put(ui_meta_props(getTreeNode([Design.uiMeta], Design.currentNode)));
+        }
     } catch (e) {
         console.log(e);
     }
