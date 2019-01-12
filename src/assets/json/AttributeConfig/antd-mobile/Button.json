@@ -1,5 +1,6 @@
 [
   {
+    "id": "children",
     "label": "标签",
     "type": "Label"
   }

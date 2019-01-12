@@ -1,15 +1,15 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignRight from '../../views/Design/DesignRight';
-import {choose_component} from '../../action/index';
+import {attribute_change, choose_component} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
-    return {
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
+        handleAttributeChange: bindActionCreators(attribute_change, dispatch),
         handleChooseComponent: bindActionCreators(choose_component, dispatch)
     }
 }

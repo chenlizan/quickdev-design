@@ -15,6 +15,7 @@ export const toolbar_open_file = createAction('TOOLBAR_OPEN_FILE');
 
 //DesignRight
 export const choose_component = createAction('CHOOSE_COMPONENT');
+export const attribute_change = createAction('ATTRIBUTE_CHANGE');
 
 
 //DesignLeft

@@ -50,7 +50,6 @@ export default class Index extends React.PureComponent<any, any> {
     };
 
     onSelect = (selectedKeys: any, info: any) => {
-        console.log('selected', selectedKeys, info);
         this.props.handleChooseNode(selectedKeys[0]);
     };
 
