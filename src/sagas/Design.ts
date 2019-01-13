@@ -15,16 +15,16 @@ function* loadData(action: any) {
 
 function addTreeNode(uiMeta: Array<any>, key: string, value: object): void {
     if (key === undefined) {
-        return uiMeta[0].children.push(value);
+        return uiMeta[0].props.children.push(value);
     }
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
-            if (!uiMeta[i].children) {
-                uiMeta[i]['children'] = [];
+            if (!uiMeta[i].props.children) {
+                uiMeta[i].props['children'] = [];
             }
-            uiMeta[i].children.push(value);
-        } else if (_.isArray(uiMeta[i].children)) {
-            addTreeNode(uiMeta[i].children, key, value);
+            uiMeta[i].props.children.push(value);
+        } else if (_.isArray(uiMeta[i].props.children)) {
+            addTreeNode(uiMeta[i].props.children, key, value);
         }
     }
 }
@@ -33,8 +33,8 @@ function getTreeNode(uiMeta: Array<any>, key: string): any {
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             return uiMeta[i];
-        } else if (_.isArray(uiMeta[i].children)) {
-            return getTreeNode(uiMeta[i].children, key);
+        } else if (_.isArray(uiMeta[i].props.children)) {
+            return getTreeNode(uiMeta[i].props.children, key);
         }
     }
     return {};
@@ -44,14 +44,10 @@ function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             Object.keys(data).forEach((key) => {
-                if (key === 'children') {
-                    uiMeta[i][key] = data[key].value;
-                } else {
-                    uiMeta[i].props[key] = data[key].value;
-                }
+                uiMeta[i].props[key] = data[key].value;
             });
-        } else if (_.isArray(uiMeta[i].children)) {
-            setTreeNode(uiMeta[i].children, key, data);
+        } else if (_.isArray(uiMeta[i].props.children)) {
+            setTreeNode(uiMeta[i].props.children, key, data);
         }
     }
 }
@@ -67,7 +63,7 @@ function* process(action: any) {
         if (action.type === 'CHOOSE_COMPONENT') {
             let meta = _.assign({}, action.payload);
             meta['key'] = uuid();
-            meta['props'] = {};
+            meta['props'] = {children: []};
             addTreeNode([Design.uiMeta], Design.currentNode, meta);
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }

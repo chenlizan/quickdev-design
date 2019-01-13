@@ -13,8 +13,9 @@ const initState: Design = {
         "namespace": "html",
         "type": "div",
         "key": "app-root",
-        "props": {},
-        "children": []
+        "props": {
+            "children": []
+        }
     }
 };
 

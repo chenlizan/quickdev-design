@@ -33,13 +33,13 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
 
     private generateReactElement(element: any): JSX.Element {
         const {uiProps = {}} = this.props;
-        const {namespace, type, id, props, children} = element;
+        const {namespace, type, id, props} = element;
         if (namespace === 'antd-mobile') {
             _.assign(props, {key: uuid()}, {ref: (node: any) => (this as any)[id] = node}, (uiProps as any)[id]);
-            return React.createElement(require('antd-mobile')[type], props, children);
+            return React.createElement(require('antd-mobile')[type], props, props.children);
         } else if (namespace === 'html') {
             _.assign(props, {key: uuid()}, {ref: (node: any) => (this as any)[id] = node});
-            return React.createElement(type, props, children);
+            return React.createElement(type, props, props.children);
         } else {
             return element;
         }
@@ -48,8 +48,8 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
     private generateComponent(uiMeta: Array<any>): Array<JSX.Element> {
         const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
-            if (uiMeta[i].children && Array.isArray(uiMeta[i].children)) {
-                uiMeta[i].children = this.generateComponent(uiMeta[i].children);
+            if (uiMeta[i].props.children && Array.isArray(uiMeta[i].props.children)) {
+                uiMeta[i].props.children = this.generateComponent(uiMeta[i].props.children);
             }
             element.push(this.generateReactElement(uiMeta[i]));
         }

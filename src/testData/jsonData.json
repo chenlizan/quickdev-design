@@ -1,52 +1,33 @@
 {
-  "namespace": "antd-mobile",
-  "type": "List",
-  "id": "list1",
+  "namespace": "html",
+  "type": "div",
+  "key": "app-root",
   "props": {
-    "chenlizan": 1
-  },
-  "children": [
-    {
-      "namespace": "antd-mobile",
-      "type": "InputItem",
-      "id": "InputItem1",
-      "children": "测试",
-      "props": {
-        "value": "not editable",
-        "editable": false
-      }
-    },
-    {
-      "namespace": "antd-mobile",
-      "type": "InputItem",
-      "props": {
-        "value": "editable"
-      }
-    },
-    {
-      "namespace": "html",
-      "type": "span",
-      "id": "span1",
-      "children": "测试测试",
-      "props": {}
-    },
-    {
-      "namespace": "antd-mobile",
-      "type": "DatePickerView",
-      "props": {
-        "mode": "year"
-      }
-    },
-    {
-      "namespace": "antd-mobile",
-      "type": "Button",
-      "id": "Button1",
-      "children": "测试按钮1",
-      "props": {
-        "style": {
-          "backgroundColor": "red"
+    "children": [
+      {
+        "type": "Button",
+        "namespace": "antd-mobile",
+        "key": "6a29c80d-450b-4aba-8872-a652caa033a3",
+        "props": {
+          "children": "ssss"
+        }
+      },
+      {
+        "type": "Button",
+        "namespace": "antd-mobile",
+        "key": "5c15d2b5-0395-4367-b8df-22409f8192f1",
+        "props": {
+          "children": []
+        }
+      },
+      {
+        "type": "Button",
+        "namespace": "antd-mobile",
+        "key": "0ba901c7-7c2d-4bef-866e-9bcb0d2af62f",
+        "props": {
+          "children": []
         }
       }
-    }
-  ]
+    ]
+  }
 }
