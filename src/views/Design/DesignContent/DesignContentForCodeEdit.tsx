@@ -21,8 +21,10 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
         if (this.containerElement) {
             this.editor = monaco.editor.create(this.containerElement.current as HTMLElement, {
                 value: jsonFormat(this.props.uiMeta),
-                language: "json",
                 automaticLayout: true,
+                contextmenu:false,
+                language: "json",
+                readOnly: true,
                 wordWrap: 'wordWrapColumn',
                 wordWrapMinified: true,
                 wrappingIndent: "indent"
