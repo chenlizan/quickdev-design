@@ -12,18 +12,18 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
         super(props);
     }
 
-    public findUI(id: string): React.ReactNode {
-        return (this as any)[id];
+    public findUI(uiKey: string): React.ReactNode {
+        return (this as any)[uiKey];
     }
 
-    public updateUI(id: string, props: any): void {
+    public updateUI(uiKey: string, props: any): void {
         const {uiMeta} = this.props;
         (function recursive(uiMeta: Array<any>) {
             for (let i = 0, len = uiMeta.length; i < len; i++) {
-                if (uiMeta[i].id === id) {
+                if (uiMeta[i].uiKey === uiKey) {
                     _.assign(uiMeta[i].props, props);
-                } else if (uiMeta[i].children && Array.isArray(uiMeta[i].children)) {
-                    recursive(uiMeta[i].children);
+                } else if (uiMeta[i].props.children && Array.isArray(uiMeta[i].props.children)) {
+                    recursive(uiMeta[i].props.children);
                 }
             }
         })([uiMeta]);
@@ -32,12 +32,12 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
 
     private generateReactElement(element: any): JSX.Element {
         const {uiProps = {}} = this.props;
-        const {namespace, type, id, key, props} = element;
+        const {namespace, type, uiKey: uiKey, key, props} = element;
         if (namespace === 'antd-mobile') {
-            _.assign(props, {key: key}, {ref: (node: any) => (this as any)[id] = node}, (uiProps as any)[id]);
+            _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node}, (uiProps as any)[uiKey]);
             return React.createElement(require('antd-mobile')[type], props, props.children);
         } else if (namespace === 'html') {
-            _.assign(props, {key: key}, {ref: (node: any) => (this as any)[id] = node});
+            _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node});
             return React.createElement(type, props, props.children);
         } else {
             return element;
