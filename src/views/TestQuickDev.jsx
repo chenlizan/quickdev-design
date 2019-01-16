@@ -1,11 +1,10 @@
 import * as _ from 'lodash';
-import GenerateView from '../components/GenerateView';
+import GenerateView from '../components/GenerateView/index.js';
 import * as styles from './TestQuickDev.less';
 
 const testData = require('../testData/jsonData');
 
 export default class TestQuickDev extends GenerateView {
-    // @ts-ignore
     constructor(props) {
         super(props);
     }
@@ -14,6 +13,10 @@ export default class TestQuickDev extends GenerateView {
         uiMeta: testData,
         uiProps: {}
     };
+
+    componentWillMount() {
+        _.assign(this.props.uiProps, this.uiPropsHandler);
+    }
 
     uiPropsHandler = {
         "Button1": {
@@ -25,8 +28,4 @@ export default class TestQuickDev extends GenerateView {
             }
         }
     };
-
-    componentWillMount() {
-        _.assign(this.props.uiProps, this.uiPropsHandler);
-    }
 }
