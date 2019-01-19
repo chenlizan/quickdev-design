@@ -4,6 +4,7 @@ import DesignContent from '../../views/Design/DesignContent';
 
 const mapStateToProps = (state: object) => {
     return {
+        uiCode: (state as any).Design.uiCode,
         uiMeta: (state as any).Design.uiMeta
     }
 };

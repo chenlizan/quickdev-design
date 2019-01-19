@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {ui_meta_data, ui_meta_props} from '../action/index';
+import {current_choose_node, ui_meta_data, ui_meta_props} from '../action/index';
 
 const getDesign = (state: { Design: any; }) => state.Design;
 
@@ -33,7 +33,7 @@ function getTreeNode(uiMeta: Array<any>, key: string): any {
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             return uiMeta[i];
-        } else if (_.isArray(uiMeta[i].props.children)) {
+        } else if (_.isArray(uiMeta[i].props.children) && uiMeta[i].props.children.length !== 0) {
             return getTreeNode(uiMeta[i].props.children, key);
         }
     }

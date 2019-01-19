@@ -4,7 +4,6 @@ import * as styles from "../../../stylesheets/Design.less";
 
 const jsonFormat = require("json-format");
 
-
 export default class DesignContentForCodeEdit extends React.PureComponent<any, any> {
     private __current_value: any;
     private readonly containerElement: React.RefObject<HTMLDivElement>;
@@ -17,14 +16,15 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
         this.editor = undefined;
     }
 
-    initMonaco = () => {
+    private initMonaco = (props: any) => {
+        const {jsonView, uiCode, uiMeta} = props;
         if (this.containerElement) {
             this.editor = monaco.editor.create(this.containerElement.current as HTMLElement, {
-                value: jsonFormat(this.props.uiMeta),
+                value: jsonView ? jsonFormat(uiMeta) : uiCode,
                 automaticLayout: true,
-                contextmenu:false,
-                language: "json",
-                readOnly: true,
+                contextmenu: !jsonView,
+                language: jsonView ? "json" : "javascript",
+                readOnly: jsonView,
                 wordWrap: 'wordWrapColumn',
                 wordWrapMinified: true,
                 wrappingIndent: "indent"
@@ -33,12 +33,24 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
     };
 
     componentDidMount(): void {
-        this.initMonaco();
+        this.initMonaco(this.props);
     }
 
     componentWillReceiveProps(nextProps: Readonly<any>, nextContext: any): void {
-        if (this.editor) {
+        if (this.props.codeView !== nextProps.codeView) {
+            if (this.editor) {
+                this.editor.dispose();
+            }
+            this.initMonaco(nextProps);
+        }
+        if (this.editor && nextProps.jsonView && this.props.uiMeta !== nextProps.uiMeta) {
             this.editor.setValue(jsonFormat(nextProps.uiMeta));
+        }
+    }
+
+    componentWillUnmount(): void {
+        if (this.editor) {
+            this.editor.dispose();
         }
     }
 

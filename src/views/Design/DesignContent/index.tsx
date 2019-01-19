@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from "react-dom";
 import {Checkbox, Menu, Dropdown, Icon} from 'antd';
 import {CheckboxChangeEvent} from "antd/lib/checkbox";
 import {ClickParam} from "antd/lib/menu";
@@ -10,12 +9,14 @@ import * as styles from "../../../stylesheets/Design.less";
 export default class Index extends React.Component<any, any> {
 
     displayName: "DesignContent" | undefined;
+    private thisNode: any;
 
     constructor(props: any) {
         super(props);
         this.state = {
             modeName: 'iPhone 5/SE',
             modeSize: {width: 320, height: 568},
+            codeView: false,
             jsonView: false
         };
     }
@@ -28,7 +29,13 @@ export default class Index extends React.Component<any, any> {
     };
 
     private onChangeForCheckBox = (e: CheckboxChangeEvent) => {
-        this.setState({jsonView: e.target.checked})
+
+        if ((e.target as any)["date-type"] === 'javascript') {
+            this.setState({codeView: e.target.checked, jsonView: false})
+        }
+        if ((e.target as any)["date-type"] === 'json') {
+            this.setState({jsonView: e.target.checked, codeView: false})
+        }
     };
 
     menu = (
@@ -46,28 +53,30 @@ export default class Index extends React.Component<any, any> {
     );
 
     render(): React.ReactNode {
-        const {uiMeta} = this.props;
-        const {jsonView, modeName, modeSize} = this.state;
-        const thisNode = ReactDOM.findDOMNode(this);
+        const {uiCode, uiMeta} = this.props;
+        const {codeView, jsonView, modeName, modeSize} = this.state;
         let codeEditHeight = 0;
-        if (jsonView && thisNode && thisNode.ownerDocument) {
-            const content = (thisNode as any).ownerDocument.querySelector('.ant-layout-content');
+        if ((codeView || jsonView) && this.thisNode && this.thisNode.ownerDocument) {
+            const content = this.thisNode.ownerDocument.querySelector('.ant-layout-content');
             content.style.overflow = 'hidden';
             codeEditHeight = content.clientHeight - 50;
-        } else if (thisNode && thisNode.ownerDocument) {
-            const content = (thisNode as any).ownerDocument.querySelector('.ant-layout-content');
+        } else if (this.thisNode && this.thisNode.ownerDocument) {
+            const content = this.thisNode.ownerDocument.querySelector('.ant-layout-content');
             content.style.overflow = '';
         }
         return (
-            <div>
+            <div ref={(node: any) => (this as any).thisNode = node}>
                 <Dropdown className={styles.design_content_mode} overlay={this.menu} trigger={['click']}>
                     <a>{modeName}<Icon type="down"/></a>
                 </Dropdown>
-                <Checkbox onChange={this.onChangeForCheckBox}
-                          className={styles.design_content_view}>JSON</Checkbox>
-                {jsonView ?
-                    <DesignContentForCodeEdit style={{height: codeEditHeight}} uiMeta={uiMeta}/> :
-                    <DesignContentForMobile modeSize={modeSize} uiMeta={uiMeta}/>
+                <Checkbox date-type="javascript" className={styles.design_content_view_javascript} checked={codeView}
+                          onChange={this.onChangeForCheckBox}>javascript</Checkbox>
+                <a/>
+                <Checkbox date-type="json" className={styles.design_content_view_json} checked={jsonView}
+                          onChange={this.onChangeForCheckBox}>json</Checkbox>
+                {(codeView || jsonView) ?
+                    <DesignContentForCodeEdit style={{height: codeEditHeight}} codeView={codeView} jsonView={jsonView} uiCode={uiCode} uiMeta={uiMeta}/> :
+                    <DesignContentForMobile modeSize={modeSize} uiCode={uiCode} uiMeta={uiMeta}/>
                 }
             </div>
         )

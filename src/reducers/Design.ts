@@ -2,6 +2,7 @@ import {handleActions} from "redux-actions";
 
 interface Design {
     currentNode?: any,
+    uiCode?: string,
     uiMeta?: object,
     currentProps?: object
 }
@@ -9,6 +10,7 @@ interface Design {
 const initState: Design = {
     currentNode: undefined,
     currentProps: {},
+    uiCode: "export default class Index extends GenerateView {}",
     uiMeta: {
         "namespace": "html",
         "type": "div",

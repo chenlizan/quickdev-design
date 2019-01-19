@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as uuid from 'uuid/v4';
 import {Tabs, Tree} from 'antd';
 
 const TabPane = Tabs.TabPane;
@@ -10,7 +9,7 @@ export default class Index extends React.PureComponent<any, any> {
 
     displayName: "DesignLeft" | undefined;
 
-    generateTreeNode = (uiMeta: Array<any>): Array<JSX.Element> => {
+    private generateTreeNode = (uiMeta: Array<any>): Array<JSX.Element> => {
         const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
             element.push(
@@ -63,7 +62,6 @@ export default class Index extends React.PureComponent<any, any> {
                         {treeNode}
                     </Tree>
                 </TabPane>
-                <TabPane tab="文件" key="2">Content of Tab Pane 2</TabPane>
             </Tabs>
         )
     }
