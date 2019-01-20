@@ -1,23 +1,22 @@
 import * as React from 'react';
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monaco from 'monaco-editor';
 import * as styles from "../../../stylesheets/Design.less";
 
 const jsonFormat = require("json-format");
 
 export default class DesignContentForCodeEdit extends React.PureComponent<any, any> {
-    private __current_value: any;
     private readonly containerElement: React.RefObject<HTMLDivElement>;
     private editor: monaco.editor.IStandaloneCodeEditor | undefined;
 
     constructor(props: Readonly<any>) {
         super(props);
-        this.__current_value = props.value;
         this.containerElement = React.createRef();
         this.editor = undefined;
     }
 
     private initMonaco = (props: any) => {
-        const {jsonView, uiCode, uiMeta} = props;
+        const _this = this;
+        const {jsonView, uiCode, uiMeta, onChange} = props;
         if (this.containerElement) {
             this.editor = monaco.editor.create(this.containerElement.current as HTMLElement, {
                 value: jsonView ? jsonFormat(uiMeta) : uiCode,
@@ -28,6 +27,9 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
                 wordWrap: 'wordWrapColumn',
                 wordWrapMinified: true,
                 wrappingIndent: "indent"
+            });
+            this.editor.onDidChangeModelContent(() => {
+                onChange((_this.editor as any).getValue());
             });
         }
     };

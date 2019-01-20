@@ -2,7 +2,7 @@ import {handleActions} from "redux-actions";
 
 interface Design {
     currentNode?: any,
-    uiCode?: string,
+    uiCode?: any,
     uiMeta?: object,
     currentProps?: object
 }
@@ -30,7 +30,10 @@ const reducer = handleActions<Design>({
         }),
         CURRENT_CHOOSE_NODE: (state, action) => ({
             ...state, currentNode: action.payload
-        })
+        }),
+        UI_SOURCE_CODE: (state, action) => ({
+            ...state, uiCode: action.payload
+        }),
     }, initState
 );
 

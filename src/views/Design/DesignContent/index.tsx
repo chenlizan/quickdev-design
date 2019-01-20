@@ -38,7 +38,11 @@ export default class Index extends React.Component<any, any> {
         }
     };
 
-    menu = (
+    private onChangeForCodeEdit = (e: string) => {
+        this.props.handleCodeChange(e)
+    };
+
+    private menu = (
         <Menu onClick={this.onClickForMenu}>
             <Menu.Item>
                 <a data-size={{width: 320, height: 568}}>iPhone 5/SE</a>
@@ -75,7 +79,9 @@ export default class Index extends React.Component<any, any> {
                 <Checkbox date-type="json" className={styles.design_content_view_json} checked={jsonView}
                           onChange={this.onChangeForCheckBox}>json</Checkbox>
                 {(codeView || jsonView) ?
-                    <DesignContentForCodeEdit style={{height: codeEditHeight}} codeView={codeView} jsonView={jsonView} uiCode={uiCode} uiMeta={uiMeta}/> :
+                    <DesignContentForCodeEdit onChange={this.onChangeForCodeEdit} style={{height: codeEditHeight}}
+                                              codeView={codeView} jsonView={jsonView} uiCode={uiCode}
+                                              uiMeta={uiMeta}/> :
                     <DesignContentForMobile modeSize={modeSize} uiCode={uiCode} uiMeta={uiMeta}/>
                 }
             </div>

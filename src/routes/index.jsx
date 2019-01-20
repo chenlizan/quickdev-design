@@ -21,12 +21,18 @@ const Design = Loadable({
     loading: () => null
 });
 
+const Preview = Loadable({
+    loader: () => import('../containers/Design/DesignPreview'),
+    loading: () => null
+});
+
 export const routes = (
     <HashRouter>
         <App>
             <Switch>
                 <Route path="/" exact component={Design}/>
                 <Route path="/design" component={Design}/>
+                <Route path="/preview" component={Preview}/>
                 <Route path="/test" component={TestQuickDev}/>
             </Switch>
         </App>

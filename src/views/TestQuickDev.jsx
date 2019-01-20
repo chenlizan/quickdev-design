@@ -20,7 +20,6 @@ export default class TestQuickDev extends GenerateView {
 
     uiPropsHandler = {
         "Button1": {
-            className: styles.button,
             onClick: () => {
                 console.log('onClick');
                 this.updateUI('Button1', {children: 'findUI'});

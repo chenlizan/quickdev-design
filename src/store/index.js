@@ -3,6 +3,7 @@
  */
 
 import {applyMiddleware, createStore, combineReducers, compose} from 'redux';
+import {persistStore, autoRehydrate} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import {initState, reducers} from '../reducers';
 import sagas from '../sagas/index';
@@ -13,8 +14,9 @@ export const configureStore = (preloadState) => {
     const store = createStore(
         combineReducers(reducers),
         preloadState || initState,
-        applyMiddleware(sagaMiddleware)
+        compose(applyMiddleware(sagaMiddleware), autoRehydrate())
     );
+    persistStore(store);
     sagaMiddleware.run(sagas);
-    return store
+    return store;
 };
