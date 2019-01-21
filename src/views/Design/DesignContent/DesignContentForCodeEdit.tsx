@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as monaco from 'monaco-editor';
 import * as styles from "../../../stylesheets/Design.less";
 
-const jsonFormat = require("json-format");
+import jsonFormat = require("json-format");
 
 export default class DesignContentForCodeEdit extends React.PureComponent<any, any> {
     private readonly containerElement: React.RefObject<HTMLDivElement>;

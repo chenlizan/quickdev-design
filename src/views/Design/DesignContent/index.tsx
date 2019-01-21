@@ -29,7 +29,6 @@ export default class Index extends React.Component<any, any> {
     };
 
     private onChangeForCheckBox = (e: CheckboxChangeEvent) => {
-
         if ((e.target as any)["date-type"] === 'javascript') {
             this.setState({codeView: e.target.checked, jsonView: false})
         }

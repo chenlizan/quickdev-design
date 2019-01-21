@@ -16,7 +16,8 @@ export default class Design extends React.PureComponent<any, any> {
         this.state = {
             leftWidth: 250,
             rightWidth: 250,
-        }
+        };
+        localStorage.removeItem('reduxPersist:Design');
     }
 
     handleDragLeft = (e: MouseEvent, data: DraggableData) => {

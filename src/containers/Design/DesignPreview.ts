@@ -11,6 +11,6 @@ const mapStateToProps = (state: object) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {}
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignPreview);

@@ -22,6 +22,9 @@ const initState: Design = {
 };
 
 const reducer = handleActions<Design>({
+        UI_SOURCE_CODE: (state, action) => ({
+            ...state, uiCode: action.payload
+        }),
         UI_META_DATA: (state, action) => ({
             ...state, uiMeta: action.payload
         }),
@@ -30,10 +33,7 @@ const reducer = handleActions<Design>({
         }),
         CURRENT_CHOOSE_NODE: (state, action) => ({
             ...state, currentNode: action.payload
-        }),
-        UI_SOURCE_CODE: (state, action) => ({
-            ...state, uiCode: action.payload
-        }),
+        })
     }, initState
 );
 

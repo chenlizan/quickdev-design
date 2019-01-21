@@ -3,7 +3,7 @@ import Scrollbars from 'react-custom-scrollbars';
 import * as styles from '../../../stylesheets/Design.less';
 
 export default class DesignContentForMobile extends React.PureComponent<any, any> {
-    private iframeElement: React.RefObject<any>;
+    private readonly iframeElement: React.RefObject<any>;
 
     constructor(props: Readonly<any>) {
         super(props);
