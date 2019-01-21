@@ -1,5 +1,3 @@
-declare var Babel: any;
-
 const React = require('react');
 const stripBom = require('strip-bom');
 const GenerateView = require('../../../components/GenerateView');
