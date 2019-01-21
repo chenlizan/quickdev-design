@@ -21,6 +21,3 @@ export const attribute_change = createAction('ATTRIBUTE_CHANGE');
 
 //DesignLeft
 export const current_choose_node = createAction('CURRENT_CHOOSE_NODE');
-
-//DesignContent
-export const code_change = createAction('CODE_CHANGE');
