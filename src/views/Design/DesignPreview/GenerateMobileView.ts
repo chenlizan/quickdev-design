@@ -16,7 +16,7 @@ const babelConfig = {
 
 const BabelGenerateView = Babel.transform(stripBom(GenerateView.default.toString()), babelConfig).code;
 
-export const BabelCompile = (uiCode: string) => {
+const BabelCompile = (uiCode: string) => {
     let reactObj = null;
     try {
         reactObj = eval(Babel.transform(stripBom(BabelGenerateView + uiCode), babelConfig).code);
@@ -25,3 +25,5 @@ export const BabelCompile = (uiCode: string) => {
     }
     return reactObj;
 };
+
+export default BabelCompile;
