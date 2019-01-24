@@ -1,7 +1,7 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignLeft from '../../views/Design/DesignLeft';
-import {current_choose_node} from '../../action/index';
+import {current_choose_node, drop_after_data} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
     return {
@@ -11,7 +11,8 @@ const mapStateToProps = (state: object) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        handleChooseNode: bindActionCreators(current_choose_node, dispatch)
+        handleChooseNode: bindActionCreators(current_choose_node, dispatch),
+        handleDropNode: bindActionCreators(drop_after_data, dispatch)
     }
 };
 

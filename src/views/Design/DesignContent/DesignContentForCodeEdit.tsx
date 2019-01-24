@@ -5,31 +5,47 @@ import * as styles from "../../../stylesheets/Design.less";
 import jsonFormat = require("json-format");
 
 export default class DesignContentForCodeEdit extends React.PureComponent<any, any> {
-    private readonly containerElement: React.RefObject<HTMLDivElement>;
-    private editor: monaco.editor.IStandaloneCodeEditor | undefined;
+    private readonly containerCode: React.RefObject<HTMLDivElement>;
+    private readonly containerJson: React.RefObject<HTMLDivElement>;
+    private editorCode: monaco.editor.IStandaloneCodeEditor | undefined;
+    private editorJson: monaco.editor.IStandaloneCodeEditor | undefined;
 
     constructor(props: Readonly<any>) {
         super(props);
-        this.containerElement = React.createRef();
-        this.editor = undefined;
+        this.containerCode = React.createRef();
+        this.containerJson = React.createRef();
+        this.editorCode = undefined;
+        this.editorJson = undefined;
     }
 
     private initMonaco = (props: any) => {
         const _this = this;
-        const {jsonView, uiCode, uiMeta, onChange} = props;
-        if (this.containerElement) {
-            this.editor = monaco.editor.create(this.containerElement.current as HTMLElement, {
-                value: jsonView ? jsonFormat(uiMeta) : uiCode,
+        const {uiCode, uiMeta, onChange} = props;
+        if (this.containerCode) {
+            this.editorCode = monaco.editor.create(this.containerCode.current as HTMLElement, {
+                value: uiCode,
                 automaticLayout: true,
-                contextmenu: !jsonView,
-                language: jsonView ? "json" : "javascript",
-                readOnly: jsonView,
+                contextmenu: true,
+                language: "javascript",
+                readOnly: false,
                 wordWrap: 'wordWrapColumn',
                 wordWrapMinified: true,
                 wrappingIndent: "indent"
             });
-            this.editor.onDidChangeModelContent(() => {
-                onChange((_this.editor as any).getValue());
+            this.editorCode.onDidChangeModelContent(() => {
+                onChange((_this.editorCode as any).getValue());
+            });
+        }
+        if (this.containerJson) {
+            this.editorJson = monaco.editor.create(this.containerJson.current as HTMLElement, {
+                value: jsonFormat(uiMeta),
+                automaticLayout: true,
+                contextmenu: true,
+                language: "json",
+                readOnly: true,
+                wordWrap: 'wordWrapColumn',
+                wordWrapMinified: true,
+                wrappingIndent: "indent"
             });
         }
     };
@@ -39,27 +55,32 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
     }
 
     componentWillReceiveProps(nextProps: Readonly<any>, nextContext: any): void {
-        if (this.props.codeView !== nextProps.codeView) {
-            if (this.editor) {
-                this.editor.dispose();
-            }
-            this.initMonaco(nextProps);
+        if (this.editorCode && nextProps.codeView && this.props.uiCode !== nextProps.uiCode) {
+            this.editorCode.setValue(nextProps.uiCode);
         }
-        if (this.editor && nextProps.jsonView && this.props.uiMeta !== nextProps.uiMeta) {
-            this.editor.setValue(jsonFormat(nextProps.uiMeta));
+        if (this.editorJson && nextProps.jsonView && this.props.uiMeta !== nextProps.uiMeta) {
+            this.editorJson.setValue(jsonFormat(nextProps.uiMeta));
         }
     }
 
     componentWillUnmount(): void {
-        if (this.editor) {
-            this.editor.dispose();
+        if (this.editorCode) {
+            this.editorCode.dispose();
+        }
+        if (this.editorJson) {
+            this.editorJson.dispose();
         }
     }
 
     render(): React.ReactNode {
+        const {codeView, jsonView, style} = this.props;
+        const hideStyle = {display: 'none'};
         return (
             <div>
-                <div className={styles.design_content_code} style={this.props.style} ref={this.containerElement}/>
+                <div className={styles.design_content_monaco} style={codeView ? style : hideStyle}
+                     ref={this.containerCode}/>
+                <div className={styles.design_content_monaco} style={jsonView ? style : hideStyle}
+                     ref={this.containerJson}/>
             </div>
         );
     }

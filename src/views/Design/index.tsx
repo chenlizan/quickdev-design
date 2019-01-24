@@ -13,11 +13,11 @@ export default class Design extends React.PureComponent<any, any> {
 
     constructor(props: Readonly<any>) {
         super(props);
+        localStorage.removeItem('reduxPersist:Design');
         this.state = {
             leftWidth: 250,
             rightWidth: 250,
         };
-        localStorage.removeItem('reduxPersist:Design');
     }
 
     handleDragLeft = (e: MouseEvent, data: DraggableData) => {
@@ -25,6 +25,7 @@ export default class Design extends React.PureComponent<any, any> {
             leftWidth: data.x
         });
     };
+
     handleDragRight = (e: MouseEvent, data: DraggableData) => {
         this.setState({
             rightWidth: data.x

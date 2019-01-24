@@ -70,6 +70,9 @@ function* process(action: any) {
         if (action.type === 'CURRENT_CHOOSE_NODE') {
             yield put(ui_meta_props(getTreeNode([Design.uiMeta], Design.currentNode)));
         }
+        if (action.type === 'DROP_AFTER_DATA') {
+            yield put(ui_meta_data(_.cloneDeep(action.payload)));
+        }
     } catch (e) {
         console.log(e);
     }
@@ -89,4 +92,8 @@ export function* ChooseComponent() {
 
 export function* ChooseNode() {
     yield takeEvery('CURRENT_CHOOSE_NODE', process);
+}
+
+export function* DropNode() {
+    yield takeEvery('DROP_AFTER_DATA', process);
 }

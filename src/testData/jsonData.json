@@ -10,7 +10,7 @@
         "key": "6a29c80d-450b-4aba-8872-a652caa033a3",
         "uiKey": "Button1",
         "props": {
-          "children": "ssss"
+          "children": ["ssss"]
         }
       },
       {

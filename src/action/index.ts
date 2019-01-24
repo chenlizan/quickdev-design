@@ -21,3 +21,4 @@ export const attribute_change = createAction('ATTRIBUTE_CHANGE');
 
 //DesignLeft
 export const current_choose_node = createAction('CURRENT_CHOOSE_NODE');
+export const drop_after_data = createAction('DROP_AFTER_DATA');

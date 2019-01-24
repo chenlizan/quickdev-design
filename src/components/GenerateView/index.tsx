@@ -22,7 +22,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
             for (let i = 0, len = uiMeta.length; i < len; i++) {
                 if (uiMeta[i].uiKey === uiKey) {
                     _.assign(uiMeta[i].props, props);
-                } else if (uiMeta[i].props.children && Array.isArray(uiMeta[i].props.children)) {
+                } else if (uiMeta[i].props && uiMeta[i].props.children) {
                     recursive(uiMeta[i].props.children);
                 }
             }
@@ -47,7 +47,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
     private generateComponent(uiMeta: Array<any>): Array<JSX.Element> {
         const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
-            if (uiMeta[i].props.children && Array.isArray(uiMeta[i].props.children)) {
+            if (uiMeta[i].props && uiMeta[i].props.children) {
                 uiMeta[i].props.children = this.generateComponent(uiMeta[i].props.children);
             }
             element.push(this.generateReactElement(uiMeta[i]));

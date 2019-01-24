@@ -48,10 +48,14 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const {namespace, type} = this.props.currentProps;
         let formItem = [<span key={uuid()}>无属性配置</span>];
         if (namespace && type) {
-            const propMeta = (AttributeConfig as any)[namespace][type];
-            if (propMeta) {
-                formItem = formItem.concat(this.generateFormItem(propMeta));
-                formItem.shift();
+            try {
+                const propMeta = (AttributeConfig as any)[namespace][type];
+                if (propMeta) {
+                    formItem = formItem.concat(this.generateFormItem(propMeta));
+                    formItem.shift();
+                }
+            } catch (e) {
+
             }
         }
         return (
