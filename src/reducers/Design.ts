@@ -10,7 +10,12 @@ interface Design {
 const initState: Design = {
     currentNode: undefined,
     currentProps: {},
-    uiCode: "export default class Index extends GenerateView {\n\n}",
+    uiCode: "export default class Index extends GenerateView {\n" +
+        "    static defaultProps = {\n" +
+        "        uiMeta: {},\n" +
+        "        uiProps: {}\n" +
+        "    };\n" +
+        "}",
     uiMeta: {
         "namespace": "html",
         "type": "div",
