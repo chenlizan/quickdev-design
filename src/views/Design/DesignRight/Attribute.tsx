@@ -75,11 +75,6 @@ export default Form.create<any>({
                     value: props.currentProps.props[key]
                 });
             });
-            if (_.isString(props.currentProps.children)) {
-                (fieldData as any)['children'] = Form.createFormField({
-                    value: props.currentProps.children
-                })
-            }
             return fieldData;
         }
     },

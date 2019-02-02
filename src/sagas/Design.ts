@@ -5,6 +5,7 @@ import {current_choose_node, ui_meta_data, ui_meta_props} from '../action/index'
 
 const getDesign = (state: { Design: any; }) => state.Design;
 
+
 function* loadData(action: any) {
     try {
         yield put(ui_meta_data(action.payload));
@@ -19,25 +20,11 @@ function addTreeNode(uiMeta: Array<any>, key: string, value: object): void {
     }
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
-            if (!uiMeta[i].props.children) {
-                uiMeta[i].props['children'] = [];
-            }
             uiMeta[i].props.children.push(value);
-        } else if (_.isArray(uiMeta[i].props.children)) {
+        } else if (uiMeta[i].props && uiMeta[i].props.children) {
             addTreeNode(uiMeta[i].props.children, key, value);
         }
     }
-}
-
-function getTreeNode(uiMeta: Array<any>, key: string): any {
-    for (let i = 0, len = uiMeta.length; i < len; i++) {
-        if (uiMeta[i].key === key) {
-            return uiMeta[i];
-        } else if (_.isArray(uiMeta[i].props.children) && uiMeta[i].props.children.length !== 0) {
-            return getTreeNode(uiMeta[i].props.children, key);
-        }
-    }
-    return {};
 }
 
 function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
@@ -46,8 +33,18 @@ function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
             Object.keys(data).forEach((key) => {
                 uiMeta[i].props[key] = data[key].value;
             });
-        } else if (_.isArray(uiMeta[i].props.children)) {
+        } else if (uiMeta[i].props && uiMeta[i].props.children) {
             setTreeNode(uiMeta[i].props.children, key, data);
+        }
+    }
+}
+
+function getTreeNode(uiMeta: Array<any>, key: string, result: Array<any>): void {
+    for (let i = 0, len = uiMeta.length; i < len; i++) {
+        if (uiMeta[i].key === key) {
+            result.push(uiMeta[i]);
+        } else if (uiMeta[i].props && uiMeta[i].props.children) {
+            getTreeNode(uiMeta[i].props.children, key, result);
         }
     }
 }
@@ -61,14 +58,14 @@ function* process(action: any) {
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }
         if (action.type === 'CHOOSE_COMPONENT') {
-            let meta = _.assign({}, action.payload);
-            meta['key'] = uuid();
-            meta['props'] = {children: []};
+            let meta = _.assign({}, action.payload, {key: uuid()}, {props: {children: []}});
             addTreeNode([Design.uiMeta], Design.currentNode, meta);
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }
         if (action.type === 'CURRENT_CHOOSE_NODE') {
-            yield put(ui_meta_props(getTreeNode([Design.uiMeta], Design.currentNode)));
+            const result: any[] | never[] = [];
+            getTreeNode([Design.uiMeta], Design.currentNode, result);
+            yield put(ui_meta_props(result[0]));
         }
         if (action.type === 'DROP_AFTER_DATA') {
             yield put(ui_meta_data(_.cloneDeep(action.payload)));
