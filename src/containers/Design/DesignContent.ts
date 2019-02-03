@@ -14,6 +14,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         handleCodeChange: bindActionCreators(ui_source_code, dispatch)
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignContent);

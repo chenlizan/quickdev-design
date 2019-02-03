@@ -38,6 +38,9 @@ const reducer = handleActions<Design>({
         }),
         CURRENT_CHOOSE_NODE: (state, action) => ({
             ...state, currentNode: action.payload
+        }),
+        RESET_STATE: (state, action) => ({
+            ...state, ...action.payload
         })
     }, initState
 );

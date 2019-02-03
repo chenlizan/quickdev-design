@@ -1,18 +1,9 @@
 import * as _ from 'lodash';
 import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {current_choose_node, ui_meta_data, ui_meta_props} from '../action/index';
+import {ui_meta_data, ui_meta_props, reset_state} from '../action/index';
 
 const getDesign = (state: { Design: any; }) => state.Design;
-
-
-function* loadData(action: any) {
-    try {
-        yield put(ui_meta_data(action.payload));
-    } catch (e) {
-        console.log(e);
-    }
-}
 
 function addTreeNode(uiMeta: Array<any>, key: string, value: object): void {
     if (key === undefined) {
@@ -49,6 +40,14 @@ function getTreeNode(uiMeta: Array<any>, key: string, result: Array<any>): void 
     }
 }
 
+function* loadData(action: any) {
+    try {
+        yield put(ui_meta_data(action.payload));
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 function* process(action: any) {
     try {
         const Design = yield select(getDesign);
@@ -76,7 +75,7 @@ function* process(action: any) {
 }
 
 export function* Open() {
-    yield takeEvery('TOOLBAR_OPEN_FILE', loadData);
+    yield takeEvery('OPEN_FILE', loadData);
 }
 
 export function* AttributeChange() {

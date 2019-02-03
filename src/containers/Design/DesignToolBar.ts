@@ -1,7 +1,7 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignToolBar from '../../views/Design/DesignToolBar';
-import {toolbar_open_file} from '../../action/index';
+import {open_file, reset_state} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
     return {}
@@ -9,7 +9,8 @@ const mapStateToProps = (state: object) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        handleOpenFile: bindActionCreators(toolbar_open_file, dispatch)
+        handleOpenFile: bindActionCreators(open_file, dispatch),
+        handleResetState: bindActionCreators(reset_state, dispatch)
     }
 };
 

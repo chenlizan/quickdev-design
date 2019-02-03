@@ -13,7 +13,6 @@ export default class Design extends React.PureComponent<any, any> {
 
     constructor(props: Readonly<any>) {
         super(props);
-        localStorage.removeItem('reduxPersist:Design');
         this.state = {
             leftWidth: 250,
             rightWidth: 250,

@@ -11,7 +11,8 @@ export const ui_source_code = createAction('UI_SOURCE_CODE');
 
 
 //DesignToolBar
-export const toolbar_open_file = createAction('TOOLBAR_OPEN_FILE');
+export const open_file = createAction('OPEN_FILE');
+export const reset_state = createAction('RESET_STATE');
 
 
 //DesignRight

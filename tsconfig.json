@@ -4,11 +4,7 @@
     "jsx": "react",
     "module": "commonjs",
     "strict": true,
-    "target": "es6",
-    "lib": [
-      "es5",
-      "dom"
-    ]
+    "target": "es6"
   },
   "exclude": [
     "node_modules"

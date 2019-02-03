@@ -3,5 +3,10 @@
     "id": "children",
     "label": "标签",
     "type": "Label"
+  },
+  {
+    "id": "type",
+    "label": "按钮类型",
+    "type": "Type"
   }
 ]
