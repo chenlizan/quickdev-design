@@ -22,7 +22,11 @@ function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             Object.keys(data).forEach((key) => {
-                uiMeta[i].props[key] = data[key].value;
+                if (data[key].value !== undefined) {
+                    uiMeta[i].props[key] = data[key].value;
+                } else {
+                    delete uiMeta[i].props[key];
+                }
             });
         } else if (uiMeta[i].props && uiMeta[i].props.children) {
             setTreeNode(uiMeta[i].props.children, key, data);

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Input} from 'antd';
 
+import * as styles from './assets/index.less';
+
 export default class Label extends React.PureComponent<any, any> {
 
     handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,9 +19,8 @@ export default class Label extends React.PureComponent<any, any> {
         return (
             <Input
                 {...this.props}
+                className={styles['attribute_field_label']}
                 onChange={this.handleOnChange}
-                placeholder="标签名称"
-                style={{border: 'none'}}
             />
         );
     }

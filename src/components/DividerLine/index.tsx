@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {addEvent, removeEvent} from './utils';
+import './assets/index.less';
 
 const omit = require('omit.js').default;
 
@@ -20,7 +21,7 @@ type DraggableEventHandler = (e: MouseEvent, data: DraggableData) => void;
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 interface DividerLineProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onDrag'> {
-    className?: string;
+    prefixCls?: string;
     orientation?: 'left' | 'right';
     onDrag?: DraggableEventHandler;
     style?: React.CSSProperties;
@@ -28,7 +29,9 @@ interface DividerLineProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'o
 
 export default class DividerLine extends React.PureComponent<DividerLineProps, any> {
 
-    static defaultProps: DividerLineProps;
+    static defaultProps = {
+        prefixCls: 'divider-line'
+    };
 
     componentWillUnmount(): void {
         const thisNode = ReactDOM.findDOMNode(this);
@@ -74,15 +77,21 @@ export default class DividerLine extends React.PureComponent<DividerLineProps, a
         this.handleDragStop(e);
     };
 
+    getDividerLineClassName() {
+        const {prefixCls} = this.props;
+        return classNames(prefixCls);
+    }
+
     render(): React.ReactNode {
         const {className} = this.props;
         const otherProps = omit(this.props, [
+            'prefixCls',
             'onDrag'
         ]);
         return (
             <div
                 {...otherProps}
-                className={classNames(className)}
+                className={classNames(this.getDividerLineClassName(), className)}
                 onMouseDown={this.onMouseDown}
                 onMouseUp={this.onMouseUp}
             />

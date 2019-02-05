@@ -11,7 +11,7 @@ export default class Index extends React.PureComponent<any, any> {
 
     handleChange = (data: any) => {
         this.props.handleAttributeChange(data);
-    }
+    };
 
     handleClick: ClickEventHandler = (e, data) => {
         this.props.handleChooseComponent(data);
