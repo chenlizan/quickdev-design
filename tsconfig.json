@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "outDir": "build/dist",
     "jsx": "react",
     "module": "commonjs",
+    "moduleResolution": "node",
     "strict": true,
     "target": "es6"
   },

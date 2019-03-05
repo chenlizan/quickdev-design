@@ -10,9 +10,9 @@ import sagas from '../sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
 
-export const configureStore = (preloadState) => {
+export const configureStore = (preloadState:any) => {
     const store = createStore(
-        combineReducers(reducers),
+        combineReducers<any>(reducers),
         preloadState || initState,
         compose(applyMiddleware(sagaMiddleware), autoRehydrate())
     );

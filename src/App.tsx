@@ -2,9 +2,9 @@
  * Created by chenlizan on 2017/6/18.
  */
 
-import React, {Component} from 'react';
+import * as React from 'react';
 
-class App extends Component {
+class App extends React.Component {
     render() {
         return (
             <div id="app">

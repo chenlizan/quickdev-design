@@ -105,5 +105,8 @@
     "last 4 versions",
     "Firefox ESR",
     "not ie < 9"
-  ]
+  ],
+  "dependencies": {
+    "@types/react-loadable": "^5.5.0"
+  }
 }
