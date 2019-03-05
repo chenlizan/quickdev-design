@@ -2,7 +2,7 @@
  * Created by chenlizan on 2017/6/18.
  */
 
-import React from 'react';
+import * as React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import Loadable from 'react-loadable';
 
@@ -11,10 +11,10 @@ const App = Loadable({
     loading: () => null
 });
 
-const TestQuickDev = Loadable({
-    loader: () => import('../views/TestQuickDev'),
-    loading: () => null
-});
+// const TestQuickDev = Loadable({
+//     loader: () => import('../views/TestQuickDev'),
+//     loading: () => null
+// });
 
 const Design = Loadable({
     loader: () => import('../views/Design'),
@@ -33,7 +33,7 @@ export const routes = (
                 <Route path="/" exact component={Design}/>
                 <Route path="/design" component={Design}/>
                 <Route path="/preview" component={Preview}/>
-                <Route path="/test" component={TestQuickDev}/>
+                {/*<Route path="/test" component={TestQuickDev}/>*/}
             </Switch>
         </App>
     </HashRouter>
