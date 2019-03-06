@@ -9,7 +9,6 @@ import {routes} from './routes/index'
 import {configureStore} from './store';
 import './assets/stylesheets/index.less'; //global style
 
-// @ts-ignore
 const store = configureStore();
 
 ReactDOM.render(

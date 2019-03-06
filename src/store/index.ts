@@ -10,7 +10,7 @@ import sagas from '../sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
 
-export const configureStore = (preloadState:any) => {
+export const configureStore = (preloadState?: any) => {
     const store = createStore(
         combineReducers<any>(reducers),
         preloadState || initState,

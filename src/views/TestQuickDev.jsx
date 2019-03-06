@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import GenerateView from '../components/GenerateView/index.js';
+import GenerateView from '../components/GenerateView/index';
 import * as styles from './TestQuickDev.less';
 
 const testData = require('../testData/jsonData');
