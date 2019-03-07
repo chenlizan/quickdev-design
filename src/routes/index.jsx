@@ -1,10 +1,6 @@
-/**
- * Created by chenlizan on 2017/6/18.
- */
-
 import * as React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-import * as Loadable from 'react-loadable';
+import Loadable from 'react-loadable';
 
 const App = Loadable({
     loader: () => import('../App'),

@@ -1,7 +1,3 @@
-/**
- * Created by chenlizan on 2017/6/18.
- */
-
 import {applyMiddleware, createStore, combineReducers, compose} from 'redux';
 import {persistStore, autoRehydrate} from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';

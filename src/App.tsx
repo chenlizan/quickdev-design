@@ -1,7 +1,3 @@
-/**
- * Created by chenlizan on 2017/6/18.
- */
-
 import * as React from 'react';
 
 class App extends React.Component {

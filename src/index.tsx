@@ -1,7 +1,3 @@
-/**
- * Created by chenlizan on 2017/8/12.
- */
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';

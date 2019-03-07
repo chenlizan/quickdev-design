@@ -1,7 +1,3 @@
-/**
- * Created by chenlizan on 2017/6/21.
- */
-
 import {createAction} from 'redux-actions';
 
 //Saga

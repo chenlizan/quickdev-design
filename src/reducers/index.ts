@@ -1,7 +1,3 @@
-/**
- * Created by chenlizan on 2018/5/4.
- */
-
 import Design from "./Design";
 
 export const initState = {
