@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
-import {Form} from 'antd';
+import {Form, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
 
 import AttributeConfig from './AttributeConfig';
@@ -29,6 +29,15 @@ const formItemLayout = {
     style: {marginBottom: 'initial'}
 };
 
+const formItemLabel = (configMeta: any) => (
+    <span>
+        {configMeta.label}&nbsp;
+        <Tooltip title={configMeta.label}>
+            <Icon type="info-circle"/>
+        </Tooltip>
+    </span>
+);
+
 class Attribute extends React.PureComponent<AttributeProps, any> {
 
     generateFormItem(configMeta: Array<any>): Array<JSX.Element> {
@@ -36,7 +45,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const element = [];
         for (let i = 0, len = configMeta.length; i < len; i++) {
             element.push(
-                <Form.Item key={i} {...formItemLayout} label={configMeta[i].label}>
+                <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])}>
                     {getFieldDecorator<string>(configMeta[i].id, {})(React.createElement((AttributeField as any)[configMeta[i].type]))}
                 </Form.Item>
             )

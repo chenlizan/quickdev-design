@@ -1,0 +1,32 @@
+[
+  {
+    "id": "children",
+    "label": "标签",
+    "type": "Label"
+  },
+  {
+    "id": "direction",
+    "label": "定位方向",
+    "type": "Select"
+  },
+  {
+    "id": "wrap",
+    "label": "子元素换行方式",
+    "type": "Select"
+  },
+  {
+    "id": "justify",
+    "label": "子元素对齐方式",
+    "type": "Select"
+  },
+  {
+    "id": "align",
+    "label": "子元素对齐方式",
+    "type": "Select"
+  },
+  {
+    "id": "align",
+    "label": "子元素对齐方式",
+    "type": "Select"
+  }
+]
