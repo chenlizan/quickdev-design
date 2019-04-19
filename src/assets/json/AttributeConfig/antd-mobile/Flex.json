@@ -6,27 +6,44 @@
   },
   {
     "id": "direction",
-    "label": "定位方向",
-    "type": "Select"
+    "label": "direction",
+    "description": "项目定位方向",
+    "type": "Select",
+    "props": {
+      "options": [
+        {
+          "label": "row",
+          "value": "row"
+        },
+        {
+          "label": "row-reverse",
+          "value": "row-reverse"
+        }
+      ]
+    }
   },
   {
     "id": "wrap",
-    "label": "子元素换行方式",
+    "label": "wrap",
+    "description": "子元素的换行方式",
     "type": "Select"
   },
   {
     "id": "justify",
-    "label": "子元素对齐方式",
+    "label": "justify",
+    "description": "子元素在主轴上的对齐方式",
     "type": "Select"
   },
   {
     "id": "align",
-    "label": "子元素对齐方式",
+    "label": "align",
+    "description": "子元素在交叉轴上的对齐方式",
     "type": "Select"
   },
   {
-    "id": "align",
-    "label": "子元素对齐方式",
+    "id": "alignContent",
+    "label": "alignContent",
+    "description": "有多根轴线时的对齐方式",
     "type": "Select"
   }
 ]

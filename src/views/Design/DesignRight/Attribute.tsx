@@ -21,7 +21,7 @@ export interface AttributeProps extends FormComponentProps {
 }
 
 const formItemLayout = {
-    labelCol: {span: 8, style: {backgroundColor: 'white', borderBottom: '1px solid silver'}},
+    labelCol: {span: 8, style: {height: 41, backgroundColor: 'white', borderBottom: '1px solid silver'}},
     wrapperCol: {
         span: 16,
         style: {backgroundColor: 'white', borderBottom: '1px solid silver', borderLeft: '1px solid silver'}
@@ -32,9 +32,11 @@ const formItemLayout = {
 const formItemLabel = (configMeta: any) => (
     <span>
         {configMeta.label}&nbsp;
-        <Tooltip title={configMeta.label}>
-            <Icon type="info-circle"/>
-        </Tooltip>
+        {configMeta.description ?
+            <Tooltip title={configMeta.description}>
+                <Icon type="info-circle"/>
+            </Tooltip> : null
+        }
     </span>
 );
 
@@ -46,7 +48,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         for (let i = 0, len = configMeta.length; i < len; i++) {
             element.push(
                 <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])}>
-                    {getFieldDecorator<string>(configMeta[i].id, {})(React.createElement((AttributeField as any)[configMeta[i].type]))}
+                    {getFieldDecorator<string>(configMeta[i].id, {})(React.createElement((AttributeField as any)[configMeta[i].type], configMeta[i].props || undefined))}
                 </Form.Item>
             )
         }
