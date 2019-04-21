@@ -31,7 +31,7 @@ const formItemLayout = {
 
 const formItemLabel = (configMeta: any) => (
     <span>
-        {configMeta.label}&nbsp;
+        {configMeta.label}&nbsp;&nbsp;
         {configMeta.description ?
             <Tooltip title={configMeta.description}>
                 <Icon type="info-circle"/>
@@ -46,9 +46,13 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const {getFieldDecorator} = this.props.form;
         const element = [];
         for (let i = 0, len = configMeta.length; i < len; i++) {
+            const {id, type} = configMeta[i];
+            const {initialValue, valuePropName} = configMeta[i].props;
             element.push(
-                <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])}>
-                    {getFieldDecorator<string>(configMeta[i].id, {})(React.createElement((AttributeField as any)[configMeta[i].type], configMeta[i].props || undefined))}
+                <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
+                    {getFieldDecorator<string>(id, {
+                        initialValue, valuePropName: valuePropName || 'value',
+                    })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
                 </Form.Item>
             )
         }

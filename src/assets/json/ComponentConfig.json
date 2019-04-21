@@ -9,12 +9,8 @@
           "type": "Flex"
         },
         {
-          "name": "WingBlank 布局",
-          "type": "WingBlank"
-        },
-        {
-          "name": "WingBlank 布局",
-          "type": "WingBlank"
+          "name": "Flex.Item 布局",
+          "type": "Flex.Item"
         }
       ]
     },
@@ -23,36 +19,8 @@
       "name": "Navigation 导航",
       "components": [
         {
-          "name": "Drawer 抽屉",
-          "type": "Drawer"
-        },
-        {
-          "name": "Menu 菜单",
-          "type": "Menu"
-        },
-        {
           "name": "NavBar 导航栏",
           "type": "NavBar"
-        },
-        {
-          "name": "Popover 导航栏",
-          "type": "Popover"
-        },
-        {
-          "name": "Pagination 分页器",
-          "type": "Pagination"
-        },
-        {
-          "name": "SegmentedControl 分段器",
-          "type": "SegmentedControl"
-        },
-        {
-          "name": "Tabs 标签页",
-          "type": "Tabs"
-        },
-        {
-          "name": "TabBar 标签栏",
-          "type": "TabBar"
         }
       ]
     },
@@ -65,64 +33,8 @@
           "type": "Button"
         },
         {
-          "name": "Checkbox 复选框",
-          "type": "Checkbox"
-        },
-        {
-          "name": "Calendar 日历",
-          "type": "Calendar"
-        },
-        {
-          "name": "DatePickerView 选择器",
-          "type": "DatePickerView"
-        },
-        {
-          "name": "DatePicker 日期选择",
-          "type": "DatePicker"
-        },
-        {
           "name": "InputItem 文本输入",
           "type": "InputItem"
-        },
-        {
-          "name": "ImagePicker 图片选择器",
-          "type": "ImagePicker"
-        },
-        {
-          "name": "PickerView 选择器",
-          "type": "PickerView"
-        },
-        {
-          "name": "Picker 选择器",
-          "type": "Picker"
-        },
-        {
-          "name": "Range 区域选择",
-          "type": "Range"
-        },
-        {
-          "name": "Radio 单选框",
-          "type": "Radio"
-        },
-        {
-          "name": "Switch 滑动开关",
-          "type": "Switch"
-        },
-        {
-          "name": "Stepper 步进器",
-          "type": "Stepper"
-        },
-        {
-          "name": "Slider 步进器",
-          "type": "Slider"
-        },
-        {
-          "name": "SearchBar 搜索栏",
-          "type": "SearchBar"
-        },
-        {
-          "name": "TextareaItem 多行输入",
-          "type": "TextareaItem"
         }
       ]
     },
@@ -131,44 +43,12 @@
       "name": "Data Display 数据展示",
       "components": [
         {
-          "name": "Accordion 手风琴",
-          "type": "Accordion"
-        },
-        {
-          "name": "Badge 徽标数",
-          "type": "Badge"
-        },
-        {
-          "name": "Carousel 走马灯",
-          "type": "Carousel"
-        },
-        {
           "name": "Card 卡片",
           "type": "Card"
         },
         {
-          "name": "Grid 宫格",
-          "type": "Grid"
-        },
-        {
-          "name": "Icon 图标",
-          "type": "Icon"
-        },
-        {
           "name": "List 列表",
           "type": "List"
-        },
-        {
-          "name": "NoticeBar 通告栏",
-          "type": "NoticeBar"
-        },
-        {
-          "name": "Steps 步骤条",
-          "type": "Steps"
-        },
-        {
-          "name": "Tag 标签",
-          "type": "Tag"
         }
       ]
     }

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {Input, Select} from 'antd';
+import {Select} from 'antd';
 import * as styles from './assets/index.less';
 
 const Option = Select.Option;
 
-export default class Label extends React.PureComponent<any, any> {
+export default class Index extends React.PureComponent<any, any> {
 
-    handleOnChange = (e: string) => {
-        this.props.onChange({target: {value: e === '' ? undefined : e}});
+    handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        this.props.onChange({target: {value: e.target.value === '' ? undefined : e}});
     };
 
     generateOption(configMeta: Array<any>): Array<JSX.Element> {
@@ -22,10 +22,10 @@ export default class Label extends React.PureComponent<any, any> {
 
     render(): React.ReactNode {
         return (
-            <Select {...this.props}
-                    className={styles['attribute_field_type']}
-                    defaultValue=""
-                    onChange={this.handleOnChange}
+            <Select
+                className={styles['attribute_field_select']}
+                onChange={this.handleOnChange}
+                value={this.props.value}
             >
                 {this.generateOption(this.props.options || [])}
             </Select>

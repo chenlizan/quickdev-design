@@ -1,9 +1,9 @@
-import Label from './Label';
-import Type from './Type';
+import Input from './Input';
 import Select from './Select';
+import Switch from './Switch';
 
 export default {
-    Label,
-    Type,
-    Select
+    Input,
+    Select,
+    Switch
 }

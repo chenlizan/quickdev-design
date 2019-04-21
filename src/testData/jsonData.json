@@ -5,28 +5,73 @@
   "props": {
     "children": [
       {
-        "type": "Button",
+        "type": "Flex",
         "namespace": "antd-mobile",
-        "key": "6a29c80d-450b-4aba-8872-a652caa033a3",
-        "uiKey": "Button1",
+        "key": "03fba746-5615-480b-909e-1effc139ee45",
         "props": {
-          "children": ["ssss"]
-        }
-      },
-      {
-        "type": "Button",
-        "namespace": "antd-mobile",
-        "key": "5c15d2b5-0395-4367-b8df-22409f8192f1",
-        "props": {
-          "children": []
-        }
-      },
-      {
-        "type": "Button",
-        "namespace": "antd-mobile",
-        "key": "0ba901c7-7c2d-4bef-866e-9bcb0d2af62f",
-        "props": {
-          "children": []
+          "children": [
+            {
+              "type": "Flex.Item",
+              "namespace": "antd-mobile",
+              "key": "ce9169ef-7d3c-47f8-8477-24384b3c0021",
+              "props": {
+                "children": [
+                  {
+                    "type": "Button",
+                    "namespace": "antd-mobile",
+                    "key": "11c38182-e5ac-4892-a064-03d343cd7a09",
+                    "props": {
+                      "children": [
+                        "AA"
+                      ],
+                      "type": "primary",
+                      "disabled": true
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Flex.Item",
+              "namespace": "antd-mobile",
+              "key": "b31e2e4f-73b4-4b7a-a3f5-9033dd51a4d7",
+              "props": {
+                "children": [
+                  {
+                    "type": "Button",
+                    "namespace": "antd-mobile",
+                    "key": "82bb3048-01db-455f-a9af-fe66ac6d3eb9",
+                    "props": {
+                      "children": [
+                        "BB"
+                      ],
+                      "type": "ghost"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Flex.Item",
+              "namespace": "antd-mobile",
+              "key": "276a9144-a0f5-457e-92b8-2391d60048ba",
+              "props": {
+                "children": [
+                  {
+                    "type": "Button",
+                    "namespace": "antd-mobile",
+                    "key": "c0b15f54-19c1-4418-9678-4e69976a1c91",
+                    "props": {
+                      "children": [
+                        "CC"
+                      ],
+                      "type": "warning"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
         }
       }
     ]

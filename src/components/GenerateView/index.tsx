@@ -34,8 +34,9 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
         const {uiProps = {}} = this.props;
         const {namespace, type, uiKey: uiKey, key, props} = element;
         if (namespace === 'antd-mobile') {
+            const typeNode = type.split('.');
             _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node}, (uiProps as any)[uiKey]);
-            return React.createElement(require('antd-mobile')[type], props, props.children);
+            return React.createElement(typeNode.length === 1 ? require('antd-mobile')[typeNode[0]] : require('antd-mobile')[typeNode[0]][typeNode[1]], props, props.children);
         } else if (namespace === 'html') {
             _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node});
             return React.createElement(type, props, props.children);
