@@ -8,8 +8,14 @@ export default class Index extends React.PureComponent<any, any> {
     displayName: "Button" | undefined;
 
     render(): React.ReactNode {
+        const {text} = this.props;
         return (
-            <Button></Button>
+            <div className={styles['attribute_field_button']}>
+                <Button
+                    type="primary">
+                    {text}
+                </Button>
+            </div>
         );
     }
 }

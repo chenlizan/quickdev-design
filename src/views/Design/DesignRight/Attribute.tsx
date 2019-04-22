@@ -59,7 +59,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             } else {
                 element.push(
                     <Form.Item key={i}>
-                        <Button type="primary" htmlType="submit">Submit</Button>
+                        {React.createElement((AttributeField as any)[type], configMeta[i].props)}
                     </Form.Item>
                 )
             }

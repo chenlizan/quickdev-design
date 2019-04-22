@@ -7,16 +7,28 @@
   }
 
   &_select {
-
     > div {
       border: none !important;
       box-shadow: none !important;
     }
-
   }
 
   &_switch {
     margin-left: 10px !important;
+  }
+
+  &_button {
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    button {
+      margin-top: 5px;
+      margin-right: 5px;
+      float: right;
+    }
   }
 
 }
