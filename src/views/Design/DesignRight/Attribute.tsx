@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
-import {Form, Icon, Tooltip} from 'antd';
+import {Form, Button, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
 
 import AttributeConfig from './AttributeConfig';
@@ -47,14 +47,22 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const element = [];
         for (let i = 0, len = configMeta.length; i < len; i++) {
             const {id, type} = configMeta[i];
-            const {initialValue, valuePropName} = configMeta[i].props;
-            element.push(
-                <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
-                    {getFieldDecorator<string>(id, {
-                        initialValue, valuePropName: valuePropName || 'value',
-                    })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
-                </Form.Item>
-            )
+            if (id !== '') {
+                const {initialValue, valuePropName} = configMeta[i].props;
+                element.push(
+                    <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
+                        {getFieldDecorator<string>(id, {
+                            initialValue, valuePropName: valuePropName || 'value',
+                        })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
+                    </Form.Item>
+                )
+            } else {
+                element.push(
+                    <Form.Item key={i}>
+                        <Button type="primary" htmlType="submit">Submit</Button>
+                    </Form.Item>
+                )
+            }
         }
         return element;
     }

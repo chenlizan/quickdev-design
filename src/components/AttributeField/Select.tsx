@@ -6,6 +6,8 @@ const Option = Select.Option;
 
 export default class Index extends React.PureComponent<any, any> {
 
+    displayName: "Select" | undefined;
+
     handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         this.props.onChange({target: {value: e.target.value === '' ? undefined : e}});
     };

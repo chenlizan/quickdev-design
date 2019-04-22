@@ -4,6 +4,8 @@ import * as styles from './assets/index.less';
 
 export default class Index extends React.PureComponent<any, any> {
 
+    displayName: "Switch" | undefined;
+
     handleOnChange = (checked: boolean, event: MouseEvent) => {
         this.props.onChange({target: {value: checked}});
     };
