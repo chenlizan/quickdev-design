@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Select} from 'antd';
+import Select, {SelectValue} from 'antd/lib/select';
 import * as styles from './assets/index.less';
 
 const Option = Select.Option;
@@ -8,8 +8,8 @@ export default class Index extends React.PureComponent<any, any> {
 
     displayName: "Select" | undefined;
 
-    handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        this.props.onChange({target: {value: e.target.value === '' ? undefined : e}});
+    handleOnChange = (e: SelectValue) => {
+        this.props.onChange({target: {value: e === '' ? undefined : e}});
     };
 
     generateOption(configMeta: Array<any>): Array<JSX.Element> {
