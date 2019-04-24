@@ -6,7 +6,6 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
@@ -59,7 +58,7 @@ const clientConfig = {
             },
             {
                 test: /\.(js|jsx)$/,
-                use: {
+                use: [{
                     loader: 'babel-loader',
                     options: {
                         presets: ['env', 'es2015', 'react', 'stage-0'],
@@ -70,14 +69,13 @@ const clientConfig = {
                             ]], 'lodash'
                         ]
                     }
-                }
+                }]
             },
             {
                 test: /\.css$/,
                 exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [{
+                use: [{loader: 'style-loader'},
+                    {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
@@ -95,22 +93,17 @@ const clientConfig = {
                             ]
                         }
                     }]
-                })
             },
             {
                 test: /\.css$/,
                 include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader']
-                })
+                use: [{loader: 'style-loader'}, {loader: 'css-loader'}]
             },
             {
                 test: /\.less$/,
                 exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [{
+                use: [{loader: 'style-loader'},
+                    {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
@@ -133,20 +126,17 @@ const clientConfig = {
                             javascriptEnabled: true
                         }
                     }]
-                })
             },
             {
                 test: /\.less/,
                 include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', {
+                use: [{loader: 'style-loader'},
+                    {loader: 'css-loader'}, {
                         loader: "less-loader",
                         options: {
                             javascriptEnabled: true
                         }
                     }]
-                })
             }
         ]
     },
@@ -162,15 +152,14 @@ const clientConfig = {
             manifest: require('./dll/vendor-manifest.json')
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('[name].[contenthash:5].css'),
         new HtmlWebpackPlugin({
             favicon: 'public/favicon.ico',
             template: 'public/index.html'
         }),
         new HtmlWebpackIncludeAssetsPlugin({assets: ['../dll/vendor.dll.js'], append: false}),
-        new MonacoWebpackPlugin({
-            languages: ['json', 'javascript', 'typescript']
-        }),
+        // new MonacoWebpackPlugin({
+        //     // languages: ['json', 'javascript', 'typescript']
+        // }),
         new OpenBrowserPlugin({url: `http://localhost:${PORT}`, browser: 'chrome'}),
         new ProgressBarPlugin()
     ],
