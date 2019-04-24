@@ -107,5 +107,5 @@ export default Form.create<any>({
     onValuesChange: (props, changedValues, allValues): void => {
         console.log(props);
     }
-})(Attribute)
+})(Attribute as any)
 

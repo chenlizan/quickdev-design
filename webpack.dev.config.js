@@ -13,7 +13,7 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-const PORT = 3000;
+const PORT = 4000;
 
 const clientConfig = {
     devServer: {
@@ -127,7 +127,12 @@ const clientConfig = {
                                 require('autoprefixer')({flexbox: 'no-2009'})
                             ]
                         }
-                    }, 'less-loader']
+                    }, {
+                        loader: "less-loader",
+                        options: {
+                            javascriptEnabled: true
+                        }
+                    }]
                 })
             },
             {
@@ -135,7 +140,12 @@ const clientConfig = {
                 include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'less-loader']
+                    use: ['css-loader', {
+                        loader: "less-loader",
+                        options: {
+                            javascriptEnabled: true
+                        }
+                    }]
                 })
             }
         ]

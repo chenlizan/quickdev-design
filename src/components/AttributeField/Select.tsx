@@ -1,8 +1,7 @@
 import * as React from 'react';
-import Select, {SelectValue} from 'antd/lib/select';
+import {Select} from 'antd';
+import {SelectValue} from 'antd/lib/select';
 import * as styles from './assets/index.less';
-
-const Option = Select.Option;
 
 export default class Index extends React.PureComponent<any, any> {
 
@@ -16,7 +15,7 @@ export default class Index extends React.PureComponent<any, any> {
         const element = [];
         for (let i = 0, len = configMeta.length; i < len; i++) {
             element.push(
-                <Option key={configMeta[i].value}>{configMeta[i].label}</Option>
+                <Select.Option key={configMeta[i].value}>{configMeta[i].label}</Select.Option>
             )
         }
         return element;
