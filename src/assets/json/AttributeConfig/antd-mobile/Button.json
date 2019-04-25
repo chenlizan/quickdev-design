@@ -63,6 +63,13 @@
     "id": "disabled",
     "label": "disabled",
     "description": "设置禁用",
+    "dependencies": {
+      "id": "dependencies1",
+      "label": "dependencies1",
+      "description": "dependencies",
+      "type": "Input",
+      "props": {}
+    },
     "type": "Switch",
     "props": {
       "initialValue": false,

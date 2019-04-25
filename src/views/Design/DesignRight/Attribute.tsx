@@ -43,11 +43,12 @@ const formItemLabel = (configMeta: any) => (
 class Attribute extends React.PureComponent<AttributeProps, any> {
 
     generateFormItem(configMeta: Array<any>): Array<JSX.Element> {
-        const {getFieldDecorator} = this.props.form;
+        const {getFieldDecorator, getFieldsValue} = this.props.form;
         const element = [];
+        const fieldsValue = getFieldsValue();
         for (let i = 0, len = configMeta.length; i < len; i++) {
-            const {id, type} = configMeta[i];
-            if (id !== '') {
+            const {dependencies, id, type} = configMeta[i];
+            if (id && type) {
                 const {initialValue, valuePropName} = configMeta[i].props;
                 element.push(
                     <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
@@ -63,6 +64,16 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
                     </Form.Item>
                 )
             }
+            if (dependencies && fieldsValue[id]) {
+                const {initialValue, valuePropName} = dependencies.props;
+                element.push(
+                    <Form.Item key={i} {...formItemLayout} label={formItemLabel(dependencies)} colon={false}>
+                        {getFieldDecorator<string>(dependencies.id, {
+                            initialValue, valuePropName: valuePropName || 'value',
+                        })(React.createElement((AttributeField as any)[dependencies.type], dependencies.props))}
+                    </Form.Item>
+                );
+            }
         }
         return element;
     }
@@ -71,14 +82,10 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const {namespace, type} = this.props.currentProps;
         let formItem = [<span key={uuid()}>无属性配置</span>];
         if (namespace && type) {
-            try {
-                const propMeta = (AttributeConfig as any)[namespace][type];
-                if (propMeta) {
-                    formItem = formItem.concat(this.generateFormItem(propMeta));
-                    formItem.shift();
-                }
-            } catch (e) {
-
+            const propMeta = (AttributeConfig as any)[namespace][type];
+            if (propMeta) {
+                formItem = formItem.concat(this.generateFormItem(propMeta));
+                formItem.shift();
             }
         }
         return (

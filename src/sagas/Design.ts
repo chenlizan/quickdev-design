@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {ui_meta_data, ui_meta_props, reset_state} from '../action/index';
+import {current_choose_node, ui_meta_data, ui_meta_props, reset_state} from '../action/index';
 
 const getDesign = (state: { Design: any; }) => state.Design;
 
@@ -59,6 +59,7 @@ function* process(action: any) {
             const meta = _.assign({}, action.payload);
             setTreeNode([Design.uiMeta], Design.currentNode, meta);
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
+            yield put(current_choose_node(Design.currentNode));
         }
         if (action.type === 'CHOOSE_COMPONENT') {
             let meta = _.assign({}, action.payload, {key: uuid()}, {props: {children: []}});

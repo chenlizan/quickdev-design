@@ -147,13 +147,10 @@
     }
   },
   {
-    "id": "",
-    "label": "",
     "description": "有多根轴线时的对齐方式",
     "type": "Button",
     "props": {
-      "text": "添加Flex.Item",
-      "onClick": {}
+      "text": "添加Flex.Item"
     }
   }
 ]

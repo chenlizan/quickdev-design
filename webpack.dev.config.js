@@ -5,6 +5,7 @@ const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plug
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 
 const PORT = 4000;
 
@@ -58,25 +59,24 @@ const clientConfig = {
             {
                 test: /\.css$/,
                 exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: [{
-                    loader: 'style-loader'
-                }, {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1,
-                        modules: true,
-                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                    }
-                }, {
-                    loader: require.resolve('postcss-loader'),
-                    options: {
-                        ident: 'postcss',
-                        plugins: [
-                            require('postcss-flexbugs-fixes'),
-                            require('autoprefixer')({flexbox: 'no-2009'})
-                        ]
-                    }
-                }]
+                use: [{loader: 'style-loader'},
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                            getLocalIdent: getCSSModuleLocalIdent
+                        }
+                    }, {
+                        loader: require.resolve('postcss-loader'),
+                        options: {
+                            ident: 'postcss',
+                            plugins: [
+                                require('postcss-flexbugs-fixes'),
+                                require('autoprefixer')({flexbox: 'no-2009'})
+                            ]
+                        }
+                    }]
             },
             {
                 test: /\.css$/,
@@ -86,38 +86,36 @@ const clientConfig = {
             {
                 test: /\.less$/,
                 exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: [{
-                    loader: 'style-loader'
-                }, {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 1,
-                        modules: true,
-                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                    }
-                }, {
-                    loader: require.resolve('postcss-loader'),
-                    options: {
-                        ident: 'postcss',
-                        plugins: [
-                            require('postcss-flexbugs-fixes'),
-                            require('autoprefixer')({flexbox: 'no-2009'})
-                        ]
-                    }
-                }, {
-                    loader: "less-loader",
-                    options: {javascriptEnabled: true}
-                }]
+                use: [{loader: 'style-loader'},
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                            getLocalIdent: getCSSModuleLocalIdent
+                        }
+                    }, {
+                        loader: require.resolve('postcss-loader'),
+                        options: {
+                            ident: 'postcss',
+                            plugins: [
+                                require('postcss-flexbugs-fixes'),
+                                require('autoprefixer')({flexbox: 'no-2009'})
+                            ]
+                        }
+                    }, {
+                        loader: "less-loader",
+                        options: {javascriptEnabled: true}
+                    }]
             },
             {
                 test: /\.less/,
                 include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
-                use: [{
-                    loader: 'style-loader'
-                }, {loader: 'css-loader'}, {
-                    loader: "less-loader",
-                    options: {javascriptEnabled: true}
-                }]
+                use: [{loader: 'style-loader'}, {loader: 'css-loader'},
+                    {
+                        loader: "less-loader",
+                        options: {javascriptEnabled: true}
+                    }]
             }
         ]
     },
