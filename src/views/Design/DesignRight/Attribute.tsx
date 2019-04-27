@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
-import {Form, Button, Icon, Tooltip} from 'antd';
+import {Form, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
-
-import AttributeConfig from './AttributeConfig';
+import AttributeConfig from '../../../assets/json/AttributeConfig';
 import AttributeField from '../../../components/AttributeField';
 
 interface PropData {

@@ -1,0 +1,54 @@
+[
+  {
+    "namespace": "antd-mobile",
+    "name": "Layout 布局",
+    "components": [
+      {
+        "name": "Flex 布局",
+        "type": "Flex"
+      },
+      {
+        "name": "Flex.Item 布局",
+        "type": "Flex.Item"
+      }
+    ]
+  },
+  {
+    "namespace": "antd-mobile",
+    "name": "Navigation 导航",
+    "components": [
+      {
+        "name": "NavBar 导航栏",
+        "type": "NavBar"
+      }
+    ]
+  },
+  {
+    "namespace": "antd-mobile",
+    "name": "Data Entry 数据录入",
+    "components": [
+      {
+        "name": "Button 按钮",
+        "type": "Button"
+      },
+      {
+        "name": "InputItem 文本输入",
+        "type": "InputItem"
+      }
+    ]
+  },
+  {
+    "namespace": "antd-mobile",
+    "name": "Data Display 数据展示",
+    "components": [
+      {
+        "name": "Card 卡片",
+        "type": "Card"
+      },
+      {
+        "name": "List 列表",
+        "type": "List"
+      }
+    ]
+  }
+]

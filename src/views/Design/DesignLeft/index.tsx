@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Tabs, Tree} from 'antd';
+import * as styles from "../../../stylesheets/Design.less";
 
 const TabPane = Tabs.TabPane;
 const {TreeNode} = Tree;
@@ -83,6 +84,10 @@ export default class Index extends React.PureComponent<any, any> {
         handleDropNode(data[0]);
     };
 
+    onDragOver = (info: any) => {
+
+    };
+
     onSelect = (selectedKeys: any, info: any) => {
         this.props.handleChooseNode(selectedKeys[0]);
     };
@@ -91,9 +96,10 @@ export default class Index extends React.PureComponent<any, any> {
         const {uiMeta} = this.props;
         const treeNode = this.generateTreeNode([uiMeta]);
         return (
-            <Tabs {...this.props} defaultActiveKey="1" tabPosition="bottom">
+            <Tabs className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="视图" key="1">
-                    <Tree defaultExpandAll draggable showLine onDrop={this.onDrop} onSelect={this.onSelect}>
+                    <Tree defaultExpandAll draggable showLine onDrop={this.onDrop} onDragOver={this.onDragOver}
+                          onSelect={this.onSelect}>
                         {treeNode}
                     </Tree>
                 </TabPane>

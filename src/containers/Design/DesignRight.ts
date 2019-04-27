@@ -4,7 +4,9 @@ import DesignRight from '../../views/Design/DesignRight';
 import {attribute_change, choose_component} from '../../action/index';
 
 const mapStateToProps = (state: object) => {
-    return {}
+    return {
+        currentProps: (state as any).Design.currentProps
+    }
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => {

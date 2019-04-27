@@ -40,7 +40,7 @@ export default class Design extends React.PureComponent<any, any> {
                 </Header>
                 <Layout>
                     <Sider width={leftWidth}>
-                        <DesignLeft className={styles.design_left}/>
+                        <DesignLeft/>
                     </Sider>
                     <DivideLine orientation="left" onDrag={this.handleDragLeft}></DivideLine>
                     <Content>
@@ -48,7 +48,7 @@ export default class Design extends React.PureComponent<any, any> {
                     </Content>
                     <DivideLine orientation="right" onDrag={this.handleDragRight}></DivideLine>
                     <Sider width={rightWidth}>
-                        <DesignRight className={styles.design_right}/>
+                        <DesignRight/>
                     </Sider>
                 </Layout>
                 <Footer className={styles.design_footer}></Footer>

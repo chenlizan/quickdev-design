@@ -1,0 +1,15 @@
+{
+  "antd-mobile": {
+    "Button": [],
+    "Flex": [
+      {
+        "antd-mobile": "Flex.Item"
+      }
+    ],
+    "Flex.Item": [
+      {
+        "antd-mobile": "Button"
+      }
+    ]
+  }
+}

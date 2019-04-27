@@ -1,15 +1,23 @@
+import * as _ from 'lodash';
 import * as React from 'react';
 import {Collapse, Button} from 'antd';
 import * as uuid from 'uuid/v4';
+import {componentList, componentRelation} from '../../../assets/json/ComponentConig';
 
-const configMeta = require('../../../assets/json/ComponentConfig.json').group;
 const Panel = Collapse.Panel;
+
+interface PropData {
+    key: string,
+    namespace: string,
+    type: string
+}
 
 type ClickData = { namespace: string, type: string }
 
 export type ClickEventHandler = (e: MouseEvent, data: ClickData) => void;
 
 interface ComponentProps {
+    currentProps: PropData
     onClick?: ClickEventHandler
 }
 
@@ -22,18 +30,30 @@ export default class Component extends React.PureComponent <ComponentProps, any>
         }
     };
 
-    generateChild(configMeta: Array<any>, namespace: string): Array<JSX.Element> {
+    getButtonDisabled(element: PropData): boolean {
+        const {namespace, type} = this.props.currentProps;
+        const predicate = {} as any;
+        predicate[element.namespace] = element.type;
+        if (namespace && type && _.find(componentRelation[namespace][type], predicate) === undefined) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    generateChild(componentList: Array<any>, namespace: string): Array<JSX.Element> {
         const element = [];
-        for (let i = 0, len = configMeta.length; i < len; i++) {
+        for (let i = 0, len = componentList.length; i < len; i++) {
             element.push(
                 <Button
-                    data-type={configMeta[i].type}
+                    data-type={componentList[i].type}
                     data-namespace={namespace}
                     key={uuid()}
                     onClick={this.handleClick}
                     style={{marginBottom: 5, marginRight: 5}}
+                    disabled={this.getButtonDisabled({namespace, type: componentList[i].type} as PropData)}
                 >
-                    {configMeta[i].name}
+                    {componentList[i].name}
                 </Button>
             )
         }
@@ -42,10 +62,10 @@ export default class Component extends React.PureComponent <ComponentProps, any>
 
     generatePanel(): Array<JSX.Element> {
         const element = [];
-        for (let i = 0, len = configMeta.length; i < len; i++) {
+        for (let i = 0, len = componentList.length; i < len; i++) {
             element.push(
-                <Panel header={configMeta[i].name} key={uuid()}>
-                    {this.generateChild(configMeta[i].components, configMeta[i].namespace)}
+                <Panel header={componentList[i].name} key={i.toString()}>
+                    {this.generateChild(componentList[i].components, componentList[i].namespace)}
                 </Panel>
             )
         }
