@@ -114,4 +114,3 @@ export default Form.create<any>({
         console.log(props);
     }
 })(Attribute as any)
-

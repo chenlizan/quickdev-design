@@ -1,14 +1,16 @@
 import {handleActions} from "redux-actions";
 
 interface Design {
-    currentNode?: any,
+    chooseNode?: any,
+    dropNode?: any,
     uiCode?: any,
     uiMeta?: object,
     currentProps?: object
 }
 
 const initState: Design = {
-    currentNode: undefined,
+    chooseNode: undefined,
+    dropNode: undefined,
     currentProps: {},
     uiCode: "export default class Index extends GenerateView {\n" +
         "    static defaultProps = {\n" +
@@ -37,7 +39,10 @@ const reducer = handleActions<Design>({
             ...state, currentProps: action.payload
         }),
         CURRENT_CHOOSE_NODE: (state, action) => ({
-            ...state, currentNode: action.payload
+            ...state, chooseNode: action.payload
+        }),
+        DROP_NODE_DATA: (state, action) => ({
+            ...state, dropNode: action.payload
         }),
         RESET_STATE: (state, action) => ({
             ...state, ...action.payload

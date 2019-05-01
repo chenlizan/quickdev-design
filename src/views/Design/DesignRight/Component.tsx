@@ -31,10 +31,10 @@ export default class Component extends React.PureComponent <ComponentProps, any>
     };
 
     getButtonDisabled(element: PropData): boolean {
-        const {namespace, type} = this.props.currentProps;
+        const {currentProps} = this.props;
         const predicate = {} as any;
         predicate[element.namespace] = element.type;
-        if (namespace && type && _.find(componentRelation[namespace][type], predicate) === undefined) {
+        if (currentProps && currentProps.namespace && currentProps.type && _.find(componentRelation[currentProps.namespace][currentProps.type], predicate) === undefined) {
             return true;
         } else {
             return false;

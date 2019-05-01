@@ -4,6 +4,9 @@
     "Flex": [
       {
         "antd-mobile": "Flex.Item"
+      },
+      {
+        "antd-mobile": "Button"
       }
     ],
     "Flex.Item": [

@@ -1,22 +1,51 @@
 import * as React from 'react';
 import {Tabs, Tree} from 'antd';
+import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
+import {componentRelation} from "../../../assets/json/ComponentConig";
 import * as styles from "../../../stylesheets/Design.less";
+import * as _ from "lodash";
+
 
 const TabPane = Tabs.TabPane;
 const {TreeNode} = Tree;
 
-type cb = (item: object, index: number, arr: Array<any>) => void;
+
+interface PropData {
+    key: string,
+    namespace: string,
+    type: string
+}
 
 export default class Index extends React.PureComponent<any, any> {
 
     displayName: "DesignLeft" | undefined;
+
+    private getTreeNodeDisabled = (element: PropData): boolean => {
+        const {dropNode} = this.props;
+        if (dropNode && dropNode.namespace && dropNode.type) {
+            const predicate = {} as any;
+            predicate[dropNode.namespace] = dropNode.type;
+            if (componentRelation[element.namespace] && componentRelation[element.namespace][element.type] && _.find(componentRelation[element.namespace][element.type], predicate) === undefined) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    };
 
     private generateTreeNode = (uiMeta: Array<any>): Array<JSX.Element> => {
         const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
             if (uiMeta[i].type) {
                 element.push(
-                    <TreeNode title={uiMeta[i].key === 'app-root' ? '' : uiMeta[i].type} key={uiMeta[i].key}>
+                    <TreeNode key={uiMeta[i].key} disabled={this.getTreeNodeDisabled(uiMeta[i])}
+                              title={uiMeta[i].key === 'app-root' ? '' :
+                                  <ContextMenuTrigger id="contextmenu" holdToDisplay={-1}>
+                                      {uiMeta[i].type}
+                                  </ContextMenuTrigger>}
+                    >
                         {(uiMeta[i].props && uiMeta[i].props.children) ? this.generateTreeNode(uiMeta[i].props.children) : null}
                     </TreeNode>
                 )
@@ -25,85 +54,57 @@ export default class Index extends React.PureComponent<any, any> {
         return element;
     };
 
-    onDrop = (info: any) => {
-        const {uiMeta, handleDropNode} = this.props;
-        const dropKey = info.node.props.eventKey;
-        const dragKey = info.dragNode.props.eventKey;
-        const dropPos = info.node.props.pos.split('-');
-        const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
-
-        const loop = (data: Array<any>, key: string, callback: cb) => {
-            data.forEach((item, index, arr) => {
-                if (item.key === key) {
-                    return callback(item, index, arr);
-                }
-                if (item.props && item.props.children) {
-                    return loop(item.props.children, key, callback);
-                }
-            });
-        };
-        const data = [uiMeta];
-
-        // Find dragObject
-        let dragObj: object = {};
-        loop(data, dragKey, (item, index, arr) => {
-            arr.splice(index, 1);
-            dragObj = item;
-        });
-
-        if (!info.dropToGap) {
-            // Drop on the content
-            loop(data, dropKey, (item: any) => {
-                item.props.children = item.props.children || [];
-                // where to insert 示例添加到尾部，可以是随意位置
-                item.props.children.push(dragObj);
-            });
-        } else if (
-            (info.node.props.children || []).length > 0 // Has children
-            && info.node.props.expanded // Is expanded
-            && dropPosition === 1 // On the bottom gap
-        ) {
-            loop(data, dropKey, (item: any) => {
-                item.props.children = item.props.children || [];
-                // where to insert 示例添加到尾部，可以是随意位置
-                item.props.children.unshift(dragObj);
-            });
-        } else {
-            let ar: Array<any> = [];
-            let i: number = 0;
-            loop(data, dropKey, (item, index, arr) => {
-                ar = arr;
-                i = index;
-            });
-            if (dropPosition === -1) {
-                ar.splice(i, 0, dragObj);
-            } else {
-                ar.splice(i + 1, 0, dragObj);
-            }
-        }
-        handleDropNode(data[0]);
+    handleClick = (e: React.MouseEvent<HTMLDivElement>, data: object) => {
+        console.log((data as any).foo);
     };
 
-    onDragOver = (info: any) => {
-
-    };
-
-    onSelect = (selectedKeys: any, info: any) => {
+    handleSelect = (selectedKeys: any, info: any) => {
         this.props.handleChooseNode(selectedKeys[0]);
+    };
+
+    handleDragStart = (info: any) => {
+        const {handleDropNode} = this.props;
+        handleDropNode(info.node.props.eventKey);
+    };
+
+    handleDragEnd = (info: any) => {
+        const {handleDropNode} = this.props;
+        handleDropNode(undefined);
+    };
+
+    handleDrop = (info: any) => {
+        const {handleDropBeforeData} = this.props;
+        handleDropBeforeData(info);
     };
 
     render(): React.ReactNode {
         const {uiMeta} = this.props;
         const treeNode = this.generateTreeNode([uiMeta]);
         return (
-            <Tabs className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
-                <TabPane tab="视图" key="1">
-                    <Tree defaultExpandAll draggable showLine onDrop={this.onDrop} onDragOver={this.onDragOver}
-                          onSelect={this.onSelect}>
-                        {treeNode}
-                    </Tree>
-                </TabPane>
-            </Tabs>
+            <div className={styles.design_left}>
+                <Tabs defaultActiveKey="1" tabPosition="bottom">
+                    <TabPane tab="视图" key="1">
+                        <Tree defaultExpandAll draggable showLine onDragStart={this.handleDragStart}
+                              onDragEnd={this.handleDragEnd}
+                              onDrop={this.handleDrop}
+                              onSelect={this.handleSelect}>
+                            {treeNode}
+                        </Tree>
+                    </TabPane>
+                </Tabs>
+                <ContextMenu id="contextmenu">
+                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+                        删除
+                    </MenuItem>
+                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+                        待定1
+                    </MenuItem>
+                    <MenuItem divider/>
+                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+                        待定2
+                    </MenuItem>
+                </ContextMenu>
+            </div>
         )
     }
 }

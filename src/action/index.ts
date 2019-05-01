@@ -18,4 +18,6 @@ export const attribute_change = createAction('ATTRIBUTE_CHANGE');
 
 //DesignLeft
 export const current_choose_node = createAction('CURRENT_CHOOSE_NODE');
-export const drop_after_data = createAction('DROP_AFTER_DATA');
+export const current_drop_node = createAction('CURRENT_DROP_NODE');
+export const drop_node_data = createAction('DROP_NODE_DATA');
+export const drop_before_data = createAction('DROP_BEFORE_DATA');

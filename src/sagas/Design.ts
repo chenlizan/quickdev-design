@@ -1,7 +1,9 @@
 import * as _ from 'lodash';
 import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {current_choose_node, ui_meta_data, ui_meta_props, reset_state} from '../action/index';
+import {current_choose_node, drop_node_data, ui_meta_data, ui_meta_props} from '../action/index';
+
+type cb = (item: object, index: number, arr: Array<any>) => void;
 
 const getDesign = (state: { Design: any; }) => state.Design;
 
@@ -44,6 +46,64 @@ function getTreeNode(uiMeta: Array<any>, key: string, result: Array<any>): void 
     }
 }
 
+function layoutTreeNode(info: any, uiMeta: Array<any>): Array<any> {
+    const dropKey = info.node.props.eventKey;
+    const dragKey = info.dragNode.props.eventKey;
+    const dropPos = info.node.props.pos.split('-');
+    const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
+    const loop = (data: Array<any>, key: string, callback: cb) => {
+        data.forEach((item, index, arr) => {
+            if (item.key === key) {
+                return callback(item, index, arr);
+            }
+            if (item.props && item.props.children) {
+                return loop(item.props.children, key, callback);
+            }
+        });
+    };
+    const data = [uiMeta];
+
+    // Find dragObject
+    let dragObj: object = {};
+    loop(data, dragKey, (item, index, arr) => {
+        arr.splice(index, 1);
+        dragObj = item;
+    });
+
+    if (!info.dropToGap) {
+        // Drop on the content
+        loop(data, dropKey, (item: any) => {
+            item.props.children = item.props.children || [];
+            // where to insert 示例添加到尾部，可以是随意位置
+            item.props.children.push(dragObj);
+        });
+    } else if (
+        (info.node.props.children || []).length > 0 // Has children
+        && info.node.props.expanded // Is expanded
+        && dropPosition === 1 // On the bottom gap
+    ) {
+        loop(data, dropKey, (item: any) => {
+            item.props.children = item.props.children || [];
+            // where to insert 示例添加到尾部，可以是随意位置
+            item.props.children.unshift(dragObj);
+        });
+    } else {
+        let ar: Array<any> = [];
+        let i: number = 0;
+        loop(data, dropKey, (item, index, arr) => {
+            ar = arr;
+            i = index;
+        });
+        if (dropPosition === -1) {
+            ar.splice(i, 0, dragObj);
+        } else {
+            ar.splice(i + 1, 0, dragObj);
+        }
+    }
+
+    return data[0];
+}
+
 function* loadData(action: any) {
     try {
         yield put(ui_meta_data(action.payload));
@@ -57,22 +117,29 @@ function* process(action: any) {
         const Design = yield select(getDesign);
         if (action.type === 'ATTRIBUTE_CHANGE') {
             const meta = _.assign({}, action.payload);
-            setTreeNode([Design.uiMeta], Design.currentNode, meta);
+            setTreeNode([Design.uiMeta], Design.chooseNode, meta);
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
-            yield put(current_choose_node(Design.currentNode));
+            yield put(current_choose_node(Design.chooseNode));
         }
         if (action.type === 'CHOOSE_COMPONENT') {
             let meta = _.assign({}, action.payload, {key: uuid()}, {props: {children: []}});
-            addTreeNode([Design.uiMeta], Design.currentNode, meta);
+            addTreeNode([Design.uiMeta], Design.chooseNode, meta);
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }
         if (action.type === 'CURRENT_CHOOSE_NODE') {
             const result: any[] | never[] = [];
-            getTreeNode([Design.uiMeta], Design.currentNode, result);
+            getTreeNode([Design.uiMeta], Design.chooseNode, result);
             yield put(ui_meta_props(result[0]));
         }
-        if (action.type === 'DROP_AFTER_DATA') {
-            yield put(ui_meta_data(_.cloneDeep(action.payload)));
+        if (action.type === 'CURRENT_DROP_NODE') {
+            const result: any[] | never[] = [];
+            getTreeNode([Design.uiMeta], action.payload, result);
+            yield put(drop_node_data(result[0]));
+        }
+        if (action.type === 'DROP_BEFORE_DATA') {
+            const uiMeta = yield call(layoutTreeNode, action.payload, Design.uiMeta);
+            yield put(ui_meta_data(_.cloneDeep(uiMeta)));
+            yield put(drop_node_data(undefined));
         }
     } catch (e) {
         console.log(e);
@@ -96,5 +163,9 @@ export function* ChooseNode() {
 }
 
 export function* DropNode() {
-    yield takeEvery('DROP_AFTER_DATA', process);
+    yield takeEvery('CURRENT_DROP_NODE', process);
+}
+
+export function* DropBeforeNode() {
+    yield takeEvery('DROP_BEFORE_DATA', process);
 }
