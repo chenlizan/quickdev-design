@@ -74,7 +74,9 @@ export default class Index extends React.PureComponent<any, any> {
 
     handleDrop = (info: any) => {
         const {handleDropBeforeData} = this.props;
-        handleDropBeforeData(info);
+        if (!info.node.props.disabled) {
+            handleDropBeforeData(info);
+        }
     };
 
     render(): React.ReactNode {
