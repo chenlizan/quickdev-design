@@ -1,9 +1,9 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {render} from 'enzyme';
 
 import Button from '../src/components/AttributeField/Button';
 
-test('Jest-React-TypeScript 尝试运行', () => {
-    const renderer = shallow(<Button text="hello world"/>);
-    expect(renderer.text()).toEqual('hello world')
-})
+test('AttributeField_Button', () => {
+    const renderer = render(<Button text="hello world"/>);
+    expect(renderer.find('button span').text()).toEqual('hello world')
+});
