@@ -41,6 +41,9 @@ const reducer = handleActions<Design>({
         CURRENT_CHOOSE_NODE: (state, action) => ({
             ...state, chooseNode: action.payload
         }),
+        CURRENT_DELETE_NODE: (state, action) => ({
+            ...state, deleteNode: action.payload
+        }),
         DROP_NODE_DATA: (state, action) => ({
             ...state, dropNode: action.payload
         }),

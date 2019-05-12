@@ -1,6 +1,6 @@
 {
   "name": "quickdev-mobile",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "",
   "scripts": {
     "inst": "npm install",
@@ -46,7 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "antd": "^3.16.6",
-    "antd-mobile": "2.2.11",
+    "antd-mobile": "^2.2.13",
     "autoprefixer": "^9.4.5",
     "axios": "^0.18.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -77,7 +77,7 @@
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "lodash": "^4.17.11",
-    "monaco-editor": "^0.16.2",
+    "monaco-editor": "^0.17.0",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "omit.js": "^1.0.2",
     "open-browser-webpack-plugin": "0.0.5",

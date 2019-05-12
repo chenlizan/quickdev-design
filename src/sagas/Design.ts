@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {current_choose_node, drop_node_data, ui_meta_data, ui_meta_props} from '../action/index';
+import {current_choose_node, drop_node_data, ui_meta_data, ui_meta_props} from '../action';
 
 type cb = (item: object, index: number, arr: Array<any>) => void;
 
@@ -14,8 +14,21 @@ function addTreeNode(uiMeta: Array<any>, key: string, value: object): void {
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             uiMeta[i].props.children.push(value);
+            break;
         } else if (uiMeta[i].props && uiMeta[i].props.children) {
             addTreeNode(uiMeta[i].props.children, key, value);
+        }
+    }
+}
+
+function deleteTreeNode(uiMeta: Array<any>, key: string): void {
+    for (let i = 0, len = uiMeta.length; i < len; i++) {
+        if (uiMeta[i].key === key) {
+            uiMeta.splice(i, 1);
+            --i;
+            break;
+        } else if (uiMeta[i].props && uiMeta[i].props.children) {
+            deleteTreeNode(uiMeta[i].props.children, key);
         }
     }
 }
@@ -30,6 +43,7 @@ function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
                     delete uiMeta[i].props[key];
                 }
             });
+            break;
         } else if (uiMeta[i].props && uiMeta[i].props.children) {
             setTreeNode(uiMeta[i].props.children, key, data);
         }
@@ -40,6 +54,7 @@ function getTreeNode(uiMeta: Array<any>, key: string, result: Array<any>): void 
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             result.push(uiMeta[i]);
+            break;
         } else if (uiMeta[i].props && uiMeta[i].props.children) {
             getTreeNode(uiMeta[i].props.children, key, result);
         }
@@ -131,6 +146,10 @@ function* process(action: any) {
             getTreeNode([Design.uiMeta], Design.chooseNode, result);
             yield put(ui_meta_props(result[0]));
         }
+        if (action.type === 'CURRENT_DELETE_NODE') {
+            deleteTreeNode([Design.uiMeta], Design.deleteNode);
+            yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
+        }
         if (action.type === 'CURRENT_DROP_NODE') {
             const result: any[] | never[] = [];
             getTreeNode([Design.uiMeta], action.payload, result);
@@ -160,6 +179,10 @@ export function* ChooseComponent() {
 
 export function* ChooseNode() {
     yield takeEvery('CURRENT_CHOOSE_NODE', process);
+}
+
+export function* DeleteNode() {
+    yield takeEvery('CURRENT_DELETE_NODE', process);
 }
 
 export function* DropNode() {

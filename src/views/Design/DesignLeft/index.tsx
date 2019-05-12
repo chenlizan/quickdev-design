@@ -5,10 +5,8 @@ import {componentRelation} from "../../../assets/json/ComponentConig";
 import * as styles from "../../../stylesheets/Design.less";
 import * as _ from "lodash";
 
-
 const TabPane = Tabs.TabPane;
 const {TreeNode} = Tree;
-
 
 interface PropData {
     key: string,
@@ -42,7 +40,7 @@ export default class Index extends React.PureComponent<any, any> {
                 element.push(
                     <TreeNode key={uiMeta[i].key} disabled={this.getTreeNodeDisabled(uiMeta[i])}
                               title={uiMeta[i].key === 'app-root' ? '' :
-                                  <ContextMenuTrigger id="contextmenu" holdToDisplay={-1}>
+                                  <ContextMenuTrigger id="contextmenu" holdToDisplay={-1} collect={() => uiMeta[i]}>
                                       {uiMeta[i].type}
                                   </ContextMenuTrigger>}
                     >
@@ -54,8 +52,8 @@ export default class Index extends React.PureComponent<any, any> {
         return element;
     };
 
-    handleClick = (e: React.MouseEvent<HTMLDivElement>, data: object) => {
-        console.log((data as any).foo);
+    handleDeleteClick = (e: React.MouseEvent<HTMLDivElement>, data: object) => {
+        this.props.handleDeleteNode((data as any).key);
     };
 
     handleSelect = (selectedKeys: any, info: any) => {
@@ -95,15 +93,12 @@ export default class Index extends React.PureComponent<any, any> {
                     </TabPane>
                 </Tabs>
                 <ContextMenu id="contextmenu">
-                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+                    <MenuItem onClick={this.handleDeleteClick}>
                         删除
                     </MenuItem>
-                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-                        待定1
-                    </MenuItem>
                     <MenuItem divider/>
-                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-                        待定2
+                    <MenuItem>
+                        编辑
                     </MenuItem>
                 </ContextMenu>
             </div>
