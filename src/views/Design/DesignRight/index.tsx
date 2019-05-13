@@ -27,7 +27,7 @@ export default class Index extends React.PureComponent<any, any> {
                     <Component currentProps={currentProps} onClick={this.handleClick}/>
                 </TabPane>
                 <TabPane tab="属性" key="2">
-                    <Attribute currentProps={currentProps} onChange={this.handleChange}/>
+                    <Attribute currentProps={currentProps} onChange={this.handleChange} onClick={this.handleClick}/>
                 </TabPane>
                 <TabPane tab="样式" key="3">
                 </TabPane>

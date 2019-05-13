@@ -97,7 +97,7 @@ export default class Index extends React.PureComponent<any, any> {
                         删除
                     </MenuItem>
                     <MenuItem divider/>
-                    <MenuItem>
+                    <MenuItem disabled>
                         编辑
                     </MenuItem>
                 </ContextMenu>

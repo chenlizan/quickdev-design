@@ -5,6 +5,7 @@ import {Form, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
 import AttributeConfig from '../../../assets/json/AttributeConfig';
 import AttributeField from '../../../components/AttributeField';
+import {ClickEventHandler} from "./Component";
 
 interface PropData {
     key: string,
@@ -12,10 +13,15 @@ interface PropData {
     type: string
 }
 
+
+type ClickData = { namespace: string, type: string }
+
+export type ClickEventHandler = (e: MouseEvent, data: ClickData) => void;
 export type ChangeEventHandler = (data: any) => void;
 
 export interface AttributeProps extends FormComponentProps {
     currentProps: PropData,
+    onClick?: ClickEventHandler,
     onChange?: ChangeEventHandler
 }
 
@@ -59,7 +65,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             } else {
                 element.push(
                     <Form.Item key={i}>
-                        {React.createElement((AttributeField as any)[type], configMeta[i].props)}
+                        {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, {onClick: this.handleClick}))}
                     </Form.Item>
                 )
             }
@@ -76,6 +82,14 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         }
         return element;
     }
+
+    handleClick = (e: any): void => {
+        console.log('handleClick');
+        const {onClick} = this.props;
+        if (onClick) {
+            onClick(e, e.currentTarget.dataset);
+        }
+    };
 
     render(): React.ReactNode {
         const {namespace, type} = this.props.currentProps;

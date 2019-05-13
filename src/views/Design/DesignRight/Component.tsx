@@ -23,13 +23,6 @@ interface ComponentProps {
 
 export default class Component extends React.PureComponent <ComponentProps, any> {
 
-    handleClick = (e: any): void => {
-        const {onClick} = this.props;
-        if (onClick) {
-            onClick(e, e.currentTarget.dataset);
-        }
-    };
-
     getButtonDisabled(element: PropData): boolean {
         const {currentProps} = this.props;
         const predicate = {} as any;
@@ -71,6 +64,13 @@ export default class Component extends React.PureComponent <ComponentProps, any>
         }
         return element;
     }
+
+    handleClick = (e: any): void => {
+        const {onClick} = this.props;
+        if (onClick) {
+            onClick(e, e.currentTarget.dataset);
+        }
+    };
 
     render(): React.ReactNode {
         return (

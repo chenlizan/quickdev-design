@@ -6,10 +6,6 @@
       {
         "name": "Flex 布局",
         "type": "Flex"
-      },
-      {
-        "name": "Flex.Item 布局",
-        "type": "Flex.Item"
       }
     ]
   },
