@@ -3,18 +3,9 @@ import * as React from 'react';
 import {Collapse, Button} from 'antd';
 import * as uuid from 'uuid/v4';
 import {componentList, componentRelation} from '../../../assets/json/ComponentConig';
+import {ClickEventHandler, PropData} from './PropsType';
 
 const Panel = Collapse.Panel;
-
-interface PropData {
-    key: string,
-    namespace: string,
-    type: string
-}
-
-type ClickData = { namespace: string, type: string }
-
-export type ClickEventHandler = (e: MouseEvent, data: ClickData) => void;
 
 interface ComponentProps {
     currentProps: PropData

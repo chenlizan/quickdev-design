@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Tabs} from 'antd';
-// import Attribute from '../../../containers/Design/DesignRightAttribute';
 import Attribute from './Attribute';
-import Component, {ClickEventHandler} from './Component';
+import Component from './Component';
+import {ClickEventHandler} from './PropsType';
 import * as styles from '../../../stylesheets/Design.less';
 
 const TabPane = Tabs.TabPane;

@@ -5,21 +5,9 @@ import {Form, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
 import AttributeConfig from '../../../assets/json/AttributeConfig';
 import AttributeField from '../../../components/AttributeField';
-import {ClickEventHandler} from "./Component";
+import {ClickEventHandler, ChangeEventHandler, PropData} from './PropsType';
 
-interface PropData {
-    key: string,
-    namespace: string,
-    type: string
-}
-
-
-type ClickData = { namespace: string, type: string }
-
-export type ClickEventHandler = (e: MouseEvent, data: ClickData) => void;
-export type ChangeEventHandler = (data: any) => void;
-
-export interface AttributeProps extends FormComponentProps {
+interface AttributeProps extends FormComponentProps {
     currentProps: PropData,
     onClick?: ClickEventHandler,
     onChange?: ChangeEventHandler
