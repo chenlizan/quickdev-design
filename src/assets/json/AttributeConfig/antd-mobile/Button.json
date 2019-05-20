@@ -2,7 +2,7 @@
   {
     "id": "uiKey",
     "label": "uiKey",
-    "description": "元素的ref 属性",
+    "description": "元素的ref属性",
     "type": "Input",
     "props": {}
   },
