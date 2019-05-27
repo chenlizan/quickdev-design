@@ -80,10 +80,10 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
     };
 
     render(): React.ReactNode {
-        const {namespace, type} = this.props.currentProps;
+        const {currentProps} = this.props;
         let formItem = [<span key={uuid()}>无属性配置</span>];
-        if (namespace && type) {
-            const propMeta = (AttributeConfig as any)[namespace][type];
+        if (currentProps && currentProps.namespace && currentProps.type) {
+            const propMeta = (AttributeConfig as any)[currentProps.namespace][currentProps.type];
             if (propMeta) {
                 formItem = formItem.concat(this.generateFormItem(propMeta));
                 formItem.shift();
@@ -99,7 +99,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
 
 export default Form.create<any>({
     mapPropsToFields: props => {
-        if (_.isObject(props.currentProps.props)) {
+        if (props.currentProps && _.isObject(props.currentProps.props)) {
             const fieldData = {};
             Object.keys(props.currentProps.props).forEach((key) => {
                 (fieldData as any)[key] = Form.createFormField({
@@ -111,8 +111,5 @@ export default Form.create<any>({
     },
     onFieldsChange: (props, fields) => {
         props.onChange(fields);
-    },
-    onValuesChange: (props, changedValues, allValues): void => {
-        console.log(props);
     }
 })(Attribute as any)
