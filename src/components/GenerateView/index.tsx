@@ -32,11 +32,19 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
 
     private generateReactElement(element: any): JSX.Element {
         const {uiProps = {}} = this.props;
-        const {namespace, type, uiKey: uiKey, key, props} = element;
-        if (namespace === 'antd-mobile') {
+        const {namespace, type, key, uiKey, props} = element;
+        if (namespace === 'antd') {
+            const typeNode = type.split('.');
+            _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node}, (uiProps as any)[uiKey]);
+            return React.createElement(typeNode.length === 1 ? require('antd')[typeNode[0]] : require('antd')[typeNode[0]][typeNode[1]], props, props.children);
+        } else if (namespace === 'antd-mobile') {
             const typeNode = type.split('.');
             _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node}, (uiProps as any)[uiKey]);
             return React.createElement(typeNode.length === 1 ? require('antd-mobile')[typeNode[0]] : require('antd-mobile')[typeNode[0]][typeNode[1]], props, props.children);
+        } else if (namespace === 'quickdev-lib-test') {
+            const typeNode = type.split('.');
+            _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node}, (uiProps as any)[uiKey]);
+            return React.createElement(typeNode.length === 1 ? require('quickdev-lib-test')[typeNode[0]] : require('quickdev-lib-test')[typeNode[0]][typeNode[1]], props, props.children);
         } else if (namespace === 'html') {
             _.assign(props, {key: key}, {ref: (node: any) => (this as any)[uiKey] = node});
             return React.createElement(type, props, props.children);

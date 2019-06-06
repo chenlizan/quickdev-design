@@ -3,9 +3,11 @@ import * as uuid from 'uuid/v4';
 import {call, put, select, takeEvery} from 'redux-saga/effects';
 import {current_choose_node, drop_node_data, ui_meta_data, ui_meta_props} from '../action';
 
+const omit = require('omit.js').default;
+const getDesign = (state: { Design: any; }) => state.Design;
+
 type cb = (item: object, index: number, arr: Array<any>) => void;
 
-const getDesign = (state: { Design: any; }) => state.Design;
 
 function addTreeNode(uiMeta: Array<any>, key: string, value: object): void {
     if (key === undefined) {
@@ -37,7 +39,9 @@ function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
     for (let i = 0, len = uiMeta.length; i < len; i++) {
         if (uiMeta[i].key === key) {
             Object.keys(data).forEach((key) => {
-                if (data[key].value !== undefined) {
+                if (data[key].value !== undefined && key === 'uiKey') {
+                    uiMeta[i][key] = data[key].value;
+                } else if (data[key].value !== undefined) {
                     uiMeta[i].props[key] = data[key].value;
                 } else {
                     delete uiMeta[i].props[key];
@@ -127,6 +131,24 @@ function* loadData(action: any) {
     }
 }
 
+function layoutData(uiMeta: Array<any>, data: Array<any>): void {
+    for (let i = 0, len = uiMeta.length; i < len; i++) {
+        const match = _.find(data, {i: uiMeta[i].key});
+        if (match) {
+            uiMeta[i].props = _.assign(uiMeta[i].props, {
+                x: match.x,
+                y: match.y,
+                w: match.w,
+                h: match.h,
+                isDraggable: match.isDraggable === undefined ? true : match.isDraggable,
+                isResizable: match.isResizable === undefined ? true : match.isResizable
+            });
+        } else if (uiMeta[i].props && uiMeta[i].props.children) {
+            layoutData(uiMeta[i].props.children, data);
+        }
+    }
+}
+
 function* process(action: any) {
     try {
         const Design = yield select(getDesign);
@@ -137,7 +159,9 @@ function* process(action: any) {
             yield put(current_choose_node(Design.chooseNode));
         }
         if (action.type === 'CHOOSE_COMPONENT') {
-            let meta = _.assign({}, action.payload, {key: uuid()}, {props: {children: []}});
+            const {namespace, type} = action.payload;
+            const otherProps = omit(action.payload, ['namespace', 'type']);
+            let meta = _.assign({}, {namespace: namespace}, {type: type}, {key: uuid()}, {props: {children: [], ...otherProps}});
             addTreeNode([Design.uiMeta], Design.chooseNode, meta);
             yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }
@@ -159,6 +183,10 @@ function* process(action: any) {
             const uiMeta = yield call(layoutTreeNode, action.payload, Design.uiMeta);
             yield put(ui_meta_data(_.cloneDeep(uiMeta)));
             yield put(drop_node_data(undefined));
+        }
+        if (action.type === 'UI_LAYOUT_CHANGE') {
+            layoutData([Design.uiMeta], action.payload);
+            yield put(ui_meta_data(_.cloneDeep(Design.uiMeta)));
         }
     } catch (e) {
         console.log(e);
@@ -191,4 +219,8 @@ export function* DropNode() {
 
 export function* DropBeforeNode() {
     yield takeEvery('DROP_BEFORE_DATA', process);
+}
+
+export function* LayoutChange() {
+    yield takeEvery('UI_LAYOUT_CHANGE', process);
 }

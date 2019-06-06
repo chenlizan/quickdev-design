@@ -137,14 +137,17 @@ const clientConfig = {
         }),
         new HtmlWebpackIncludeAssetsPlugin({assets: ['../dll/vendor.dll.js'], append: false}),
         new MonacoWebpackPlugin({
-            languages: ['json', 'javascript', 'typescript']
+            languages: ['json', 'javascript']
         }),
         new OpenBrowserPlugin({url: `http://localhost:${PORT}`, browser: 'chrome'}),
         new ProgressBarPlugin()
     ],
     node: {
+        module: 'empty',
         dgram: 'empty',
+        dns: 'mock',
         fs: 'empty',
+        http2: 'empty',
         net: 'empty',
         tls: 'empty',
         child_process: 'empty'

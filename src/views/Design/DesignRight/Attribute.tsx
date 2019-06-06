@@ -71,11 +71,10 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         return element;
     }
 
-    handleClick = (e: any): void => {
-        console.log('handleClick');
+    handleClick: ClickEventHandler = (e, data) => {
         const {onClick} = this.props;
         if (onClick) {
-            onClick(e, e.currentTarget.dataset);
+            onClick(e, data);
         }
     };
 
@@ -106,6 +105,11 @@ export default Form.create<any>({
                     value: props.currentProps.props[key]
                 });
             });
+            if (props.currentProps.uiKey) {
+                (fieldData as any)['uiKey'] = Form.createFormField({
+                    value: props.currentProps.uiKey
+                });
+            }
             return fieldData;
         }
     },
