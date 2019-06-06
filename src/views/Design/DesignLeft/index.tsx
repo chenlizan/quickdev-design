@@ -84,7 +84,7 @@ export default class Index extends React.PureComponent<any, any> {
             <div className={styles.design_left}>
                 <Tabs defaultActiveKey="1" tabPosition="bottom">
                     <TabPane tab="视图" key="1">
-                        <Tree defaultExpandAll draggable showLine onDragStart={this.handleDragStart}
+                        <Tree blockNode defaultExpandAll draggable showLine onDragStart={this.handleDragStart}
                               onDragEnd={this.handleDragEnd}
                               onDrop={this.handleDrop}
                               onSelect={this.handleSelect}>

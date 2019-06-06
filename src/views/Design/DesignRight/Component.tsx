@@ -18,10 +18,10 @@ export default class Component extends React.PureComponent <ComponentProps, any>
         const {currentProps} = this.props;
         const predicate = {} as any;
         predicate[element.namespace] = element.type;
-        if (currentProps && currentProps.namespace && currentProps.type && _.find(componentRelation[currentProps.namespace][currentProps.type], predicate) === undefined) {
-            return true;
-        } else {
+        if (currentProps && currentProps.namespace && currentProps.type && _.find(componentRelation[currentProps.namespace][currentProps.type], predicate) !== undefined) {
             return false;
+        } else {
+            return true;
         }
     }
 
