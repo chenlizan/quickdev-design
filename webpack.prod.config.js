@@ -8,7 +8,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const config = require('./config');
@@ -54,8 +53,7 @@ const clientConfig = {
             }),
         ],
         splitChunks: {
-            chunks: 'all',
-            name: false
+            chunks: 'all'
         },
         runtimeChunk: true,
     },
@@ -198,7 +196,6 @@ const clientConfig = {
             template: 'public/index.html',
             minify: false
         }),
-        new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),
         new MiniCssExtractPlugin({
             filename: 'static/css/[name].css',
             chunkFilename: 'static/css/[name].[chunkhash:5].chunk.css'

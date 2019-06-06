@@ -120,25 +120,28 @@ const clientConfig = {
         ]
     },
     resolve: {
+        alias: {
+            'quickdev-lib-test': path.resolve('src/components')
+        },
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
     },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
-        new webpack.DllReferencePlugin({
-            context: path.join(__dirname, '.', 'dll'),
-            manifest: require('./dll/vendor-manifest.json')
-        }),
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             favicon: 'public/favicon.ico',
             template: 'public/index.html'
+        }),
+        new webpack.DllReferencePlugin({
+            context: path.join(__dirname, '.', 'dll'),
+            manifest: require('./dll/vendor-manifest.json')
         }),
         new HtmlWebpackIncludeAssetsPlugin({assets: ['../dll/vendor.dll.js'], append: false}),
         new MonacoWebpackPlugin({
             languages: ['json', 'javascript']
         }),
+        new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({url: `http://localhost:${PORT}`, browser: 'chrome'}),
         new ProgressBarPlugin()
     ],
