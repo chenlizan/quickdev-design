@@ -72,13 +72,13 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
     }
 
     render(): React.ReactNode {
-        const {codeView, jsonView, style} = this.props;
+        const {currentView, style} = this.props;
         const hideStyle = {display: 'none'};
         return (
             <div>
-                <div className={styles.design_content_monaco} style={codeView ? style : hideStyle}
+                <div className={styles.design_content_monaco} style={currentView === 'code' ? style : hideStyle}
                      ref={this.containerCode}/>
-                <div className={styles.design_content_monaco} style={jsonView ? style : hideStyle}
+                <div className={styles.design_content_monaco} style={currentView === 'json' ? style : hideStyle}
                      ref={this.containerJson}/>
             </div>
         );

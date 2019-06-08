@@ -6,19 +6,19 @@ import DropZone from 'react-dropzone'
 const parseJson = require('parse-json');
 const stripBom = require('strip-bom');
 
-export interface DropzoneProps {
+export interface OpenProps {
     onChange?: (value?: object) => void
 }
 
-export default class Dropzone extends React.Component<DropzoneProps, any> {
+export default class Open extends React.Component<OpenProps, any> {
 
-    static defaultProps: DropzoneProps;
+    static defaultProps: OpenProps;
 
     static propTypes = {
         onChange: PropTypes.func
     };
 
-    constructor(props: Readonly<DropzoneProps>) {
+    constructor(props: Readonly<OpenProps>) {
         super(props)
     }
 

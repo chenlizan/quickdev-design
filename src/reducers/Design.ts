@@ -5,13 +5,15 @@ interface Design {
     dropNode?: any,
     uiCode?: any,
     uiMeta?: object,
-    currentProps?: object
+    currentProps?: object,
+    currentView?: any
 }
 
 const initState: Design = {
     chooseNode: undefined,
     dropNode: undefined,
     currentProps: {},
+    currentView: "",
     uiCode: "export default class Index extends GenerateView {\n" +
         "    static defaultProps = {\n" +
         "        uiMeta: {},\n" +
@@ -46,6 +48,9 @@ const reducer = handleActions<Design>({
         }),
         DROP_NODE_DATA: (state, action) => ({
             ...state, dropNode: action.payload
+        }),
+        CURRENT_VIEW: (state, action) => ({
+            ...state, currentView: action.payload
         }),
         RESET_STATE: (state, action) => ({
             ...state, ...action.payload

@@ -63,7 +63,7 @@ const clientConfig = {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 1,
+                            importLoaders: 2,
                             modules: true,
                             getLocalIdent: getCSSModuleLocalIdent
                         }
@@ -90,7 +90,7 @@ const clientConfig = {
                     {
                         loader: 'css-loader',
                         options: {
-                            importLoaders: 1,
+                            importLoaders: 2,
                             modules: true,
                             getLocalIdent: getCSSModuleLocalIdent
                         }

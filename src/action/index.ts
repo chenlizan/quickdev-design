@@ -9,6 +9,7 @@ export const ui_source_code = createAction('UI_SOURCE_CODE');
 //DesignToolBar
 export const open_file = createAction('OPEN_FILE');
 export const reset_state = createAction('RESET_STATE');
+export const current_view = createAction('CURRENT_VIEW');
 
 
 //DesignRight

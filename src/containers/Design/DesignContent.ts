@@ -6,7 +6,8 @@ import {ui_source_code} from '../../action/index';
 const mapStateToProps = (state: object) => {
     return {
         uiCode: (state as any).Design.uiCode,
-        uiMeta: (state as any).Design.uiMeta
+        uiMeta: (state as any).Design.uiMeta,
+        currentView: (state as any).Design.currentView
     }
 };
 
