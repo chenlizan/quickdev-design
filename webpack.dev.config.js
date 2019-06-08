@@ -130,7 +130,6 @@ const clientConfig = {
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
         new HtmlWebpackPlugin({
-            favicon: 'public/favicon.ico',
             template: 'public/index.html'
         }),
         new webpack.DllReferencePlugin({

@@ -1,4 +1,7 @@
 export default {
+    "html": {
+        "div": []
+    },
     "antd-mobile": {
         "Button": require('./antd-mobile/Button.json'),
         "Flex": require('./antd-mobile/Flex.json'),

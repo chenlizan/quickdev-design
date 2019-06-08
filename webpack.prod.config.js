@@ -191,7 +191,6 @@ const clientConfig = {
             'process.env': {NODE_ENV: JSON.stringify('production')}
         }),
         new HtmlWebpackPlugin({
-            favicon: 'public/favicon.ico',
             filename: 'index.html',
             template: 'public/index.html',
             minify: false

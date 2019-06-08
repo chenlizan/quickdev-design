@@ -1,4 +1,14 @@
 {
+  "html": {
+    "div": [
+      {
+        "antd-mobile": "Flex"
+      },
+      {
+        "antd-mobile": "Button"
+      }
+    ]
+  },
   "antd-mobile": {
     "Button": [],
     "Flex": [

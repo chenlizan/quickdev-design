@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types';
+import {Button} from "antd";
 import DropZone from 'react-dropzone'
 
 const parseJson = require('parse-json');
@@ -34,12 +35,11 @@ export default class Dropzone extends React.Component<DropzoneProps, any> {
 
     render() {
         return (
-            <DropZone accept="application/json,text/javascript" multiple={false} onDrop={this.onDrop}>
+            <DropZone accept="application/json,text/javascript" multiple={false} noDrag={false} onDrop={this.onDrop}>
                 {({getRootProps, getInputProps}) => (
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>将文件拖至此处，或单击选择文件</p>
-                    </div>
+                    <Button {...getRootProps()}>
+                        <input {...getInputProps()}/>Open
+                    </Button>
                 )}
             </DropZone>
         )

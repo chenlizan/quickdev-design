@@ -150,8 +150,8 @@
     "description": "Flex.Item 组件",
     "type": "Button",
     "props": {
-      "data-type": "Flex.Item",
-      "data-namespace": "antd-mobile",
+      "type": "Flex.Item",
+      "namespace": "antd-mobile",
       "text": "添加Flex.Item"
     }
   }
