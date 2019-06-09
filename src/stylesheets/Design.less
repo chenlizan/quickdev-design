@@ -22,10 +22,22 @@
         transform: translateX(-50%);
       }
 
-      &_user {
+      &_right {
         position: absolute;
-        margin-top: 12px;
         right: 2%;
+
+        > button {
+          margin-right: 15px;
+        }
+
+        > span {
+          margin-left: 15px;
+        }
+
+        > button:focus {
+          color: rgba(0, 0, 0, 0.65);
+          border-color: white;
+        }
       }
     }
   }
