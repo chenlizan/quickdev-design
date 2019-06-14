@@ -200,7 +200,7 @@ const clientConfig = {
             chunkFilename: 'static/css/[name].[chunkhash:5].chunk.css'
         }),
         new MonacoWebpackPlugin({
-            languages: ['json']
+            languages: ['json', 'javascript']
         }),
         new BundleAnalyzerPlugin(),
         new ProgressBarPlugin()
