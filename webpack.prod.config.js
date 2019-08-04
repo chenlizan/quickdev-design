@@ -98,7 +98,9 @@ const clientConfig = {
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: config.publicPath
+                        publicPath: (resourcePath, context) => {
+                            return path.relative(path.dirname(resourcePath), context) + '../../';
+                        }
                     }
                 }, {
                     loader: 'css-loader',
@@ -124,7 +126,9 @@ const clientConfig = {
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: config.publicPath
+                        publicPath: (resourcePath, context) => {
+                            return path.relative(path.dirname(resourcePath), context) + '../../';
+                        }
                     }
                 }, {
                     loader: 'css-loader'
@@ -136,7 +140,9 @@ const clientConfig = {
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: config.publicPath
+                        publicPath: (resourcePath, context) => {
+                            return path.relative(path.dirname(resourcePath), context) + '../../';
+                        }
                     }
                 }, {
                     loader: 'css-loader',
@@ -165,7 +171,9 @@ const clientConfig = {
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: config.publicPath
+                        publicPath: (resourcePath, context) => {
+                            return path.relative(path.dirname(resourcePath), context) + '../../';
+                        }
                     }
                 }, {
                     loader: 'css-loader'
