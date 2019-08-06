@@ -24,10 +24,10 @@ function addTreeNode(uiMeta: Array<any>, key: string, value: object): void {
 }
 
 function deleteTreeNode(uiMeta: Array<any>, key: string): void {
-    for (let i = 0, len = uiMeta.length; i < len; i++) {
+    for (let i = 0; i < uiMeta.length; i++) {
         if (uiMeta[i].key === key) {
             uiMeta.splice(i, 1);
-            --i;
+            i--;
             break;
         } else if (uiMeta[i].props && uiMeta[i].props.children) {
             deleteTreeNode(uiMeta[i].props.children, key);
