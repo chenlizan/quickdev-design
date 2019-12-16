@@ -11,7 +11,6 @@
     line-height: 48px;
 
     &_toolbar {
-
       > button {
         margin-right: 15px;
       }
@@ -72,7 +71,7 @@
       text-align: center;
     }
 
-    [class ^= "ant-tree-switcher"] {
+    [class^="ant-tree-switcher"] {
       background-color: lightgrey !important;
     }
 
@@ -81,7 +80,6 @@
         border-left-color: #888 !important;
       }
     }
-
   }
 
   &_right {
@@ -127,19 +125,19 @@
     &_mode {
       position: absolute;
       display: inline-block;
-      margin: -40px 10px 0px;
+      margin: -40px 10px 0;
     }
 
     &_view_javascript {
       position: absolute;
       display: inline-block;
-      margin: -40px 150px 0px;
+      margin: -40px 150px 0;
     }
 
     &_view_json {
       position: absolute;
       display: inline-block;
-      margin: -40px 250px 0px;
+      margin: -40px 250px 0;
     }
 
     &_monaco {
@@ -147,25 +145,23 @@
     }
 
     &_mobile {
-      border: 40px solid #DDD;
-      border-width: 55px 7px;
-      border-radius: 40px;
       margin: 50px auto;
       overflow: hidden;
-      transition: all 0.5s ease;
-
+      border: 40px solid #ddd;
+      border-width: 55px 7px;
+      border-radius: 40px;
+      box-shadow: 0 3px 0 #bbb, 0 4px 0 #bbb, 0 5px 0 #bbb, 0 7px 0 #bbb, 0 10px 20px #666;
       transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-      box-shadow: 0px 3px 0 #BBB, 0px 4px 0 #BBB, 0px 5px 0 #BBB, 0px 7px 0 #BBB, 0px 10px 20px #666;
-
+      transition: all 0.5s ease;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
 
       iframe {
-        border: 0;
         width: 100%;
         height: 100%;
+        border: 0;
       }
     }
   }

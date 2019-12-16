@@ -6,10 +6,12 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 const PORT = 4000;
 
 const clientConfig = {
+    mode: 'development',
     devServer: {
         port: PORT,
         historyApiFallback: true
@@ -30,10 +32,11 @@ const clientConfig = {
                     options: {
                         presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
                         plugins: [
-                            '@babel/plugin-syntax-dynamic-import',
+                            ['@babel/plugin-proposal-decorators', {'legacy': true}],
+                            ['@babel/plugin-proposal-class-properties', {'loose': true}],
                             ['import', {'libraryName': 'antd', 'style': 'css'}, 'ant'],
                             ['import', {'libraryName': 'antd-mobile', 'style': 'css'}, 'ant-mobile'],
-                            'lodash'
+                            ['lodash']
                         ]
                     }
                 }]
@@ -54,7 +57,7 @@ const clientConfig = {
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-                use: [{loader: 'file-loader',}]
+                use: [{loader: 'file-loader'}]
             },
             {
                 test: /\.css$/,
@@ -64,8 +67,9 @@ const clientConfig = {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
-                            modules: true,
-                            getLocalIdent: getCSSModuleLocalIdent
+                            modules: {
+                                getLocalIdent: getCSSModuleLocalIdent
+                            }
                         }
                     }, {
                         loader: require.resolve('postcss-loader'),
@@ -91,8 +95,9 @@ const clientConfig = {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 2,
-                            modules: true,
-                            getLocalIdent: getCSSModuleLocalIdent
+                            modules: {
+                                getLocalIdent: getCSSModuleLocalIdent
+                            }
                         }
                     }, {
                         loader: require.resolve('postcss-loader'),
@@ -104,7 +109,7 @@ const clientConfig = {
                             ]
                         }
                     }, {
-                        loader: "less-loader",
+                        loader: 'less-loader',
                         options: {javascriptEnabled: true}
                     }]
             },
@@ -113,7 +118,7 @@ const clientConfig = {
                 include: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src/assets')],
                 use: [{loader: 'style-loader'}, {loader: 'css-loader'},
                     {
-                        loader: "less-loader",
+                        loader: 'less-loader',
                         options: {javascriptEnabled: true}
                     }]
             }
@@ -140,6 +145,7 @@ const clientConfig = {
         new MonacoWebpackPlugin({
             languages: ['json', 'javascript']
         }),
+        new StylelintPlugin({configFile: '.stylelintrc', files: '**/*.(c|le)ss', fix: true}),
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({url: `http://localhost:${PORT}`, browser: 'chrome'}),
         new ProgressBarPlugin()

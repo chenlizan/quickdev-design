@@ -1,6 +1,7 @@
 const isWsl = require('is-wsl');
 const path = require('path');
 const webpack = require('webpack');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
@@ -13,6 +14,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const config = require('./config');
 
 const clientConfig = {
+    mode: 'production',
     entry: ['@babel/polyfill', path.resolve(__dirname, 'src/index')],
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -66,10 +68,11 @@ const clientConfig = {
                     options: {
                         presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
                         plugins: [
-                            '@babel/plugin-syntax-dynamic-import',
+                            ['@babel/plugin-proposal-decorators', {'legacy': true}],
+                            ['@babel/plugin-proposal-class-properties', {'loose': true}],
                             ['import', {'libraryName': 'antd', 'style': 'css'}, 'ant'],
                             ['import', {'libraryName': 'antd-mobile', 'style': 'css'}, 'ant-mobile'],
-                            'lodash'
+                            ['lodash']
                         ]
                     }
                 }]
@@ -90,7 +93,7 @@ const clientConfig = {
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-                use: [{loader: 'file-loader',}]
+                use: [{loader: 'file-loader'}]
             },
             {
                 test: /\.css$/,
@@ -106,8 +109,9 @@ const clientConfig = {
                     loader: 'css-loader',
                     options: {
                         importLoaders: 1,
-                        modules: true,
-                        getLocalIdent: getCSSModuleLocalIdent
+                        modules: {
+                            getLocalIdent: getCSSModuleLocalIdent
+                        }
                     }
                 }, {
                     loader: require.resolve('postcss-loader'),
@@ -148,8 +152,9 @@ const clientConfig = {
                     loader: 'css-loader',
                     options: {
                         importLoaders: 2,
-                        modules: true,
-                        getLocalIdent: getCSSModuleLocalIdent
+                        modules: {
+                            getLocalIdent: getCSSModuleLocalIdent
+                        }
                     }
                 }, {
                     loader: require.resolve('postcss-loader'),
@@ -161,7 +166,7 @@ const clientConfig = {
                         ]
                     }
                 }, {
-                    loader: "less-loader",
+                    loader: 'less-loader',
                     options: {javascriptEnabled: true}
                 }]
             },
@@ -178,7 +183,7 @@ const clientConfig = {
                 }, {
                     loader: 'css-loader'
                 }, {
-                    loader: "less-loader",
+                    loader: 'less-loader',
                     options: {javascriptEnabled: true}
                 }]
             },
@@ -198,6 +203,7 @@ const clientConfig = {
         new webpack.DefinePlugin({
             'process.env': {NODE_ENV: JSON.stringify('production')}
         }),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'public/index.html',
@@ -210,7 +216,9 @@ const clientConfig = {
         new MonacoWebpackPlugin({
             languages: ['json', 'javascript']
         }),
-        new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static'
+        }),
         new ProgressBarPlugin()
     ],
     node: {

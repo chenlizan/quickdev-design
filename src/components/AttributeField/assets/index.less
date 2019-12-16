@@ -1,7 +1,6 @@
 @attribute_field: attribute_field;
 
 .@{attribute_field} {
-
   &_input {
     border: none !important;
   }
@@ -22,17 +21,16 @@
   }
 
   &_button {
-    &:after {
-      content: '';
+    &::after {
       display: table;
       clear: both;
+      content: '';
     }
 
     button {
+      float: right;
       margin-top: 5px;
       margin-right: 5px;
-      float: right;
     }
   }
-
 }
