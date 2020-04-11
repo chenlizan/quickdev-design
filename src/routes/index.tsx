@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-import Loadable from 'react-loadable';
+import * as Loadable from 'react-loadable';
 
 const App = Loadable({
     loader: () => import('../App'),

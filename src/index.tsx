@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {routes} from './routes/index'
+import {routes} from './routes'
 import {configureStore} from './store';
 import './assets/stylesheets/index.less'; //global style
 
