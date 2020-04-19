@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import * as Loadable from 'react-loadable';
+import Account from './Account';
 
 const App = Loadable({
     loader: () => import('../App'),
@@ -24,6 +25,7 @@ export const routes = (
                 <Route path="/" exact component={Design}/>
                 <Route path="/design" component={Design}/>
                 <Route path="/preview" component={Preview}/>
+                {Account}
             </Switch>
         </App>
     </HashRouter>

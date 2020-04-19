@@ -17,6 +17,15 @@
       "at-rules",
       "less-mixins"
     ],
-    "plugin/rational-order": true
+    "plugin/rational-order": true,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "global",
+          "local"
+        ]
+      }
+    ]
   }
 }
