@@ -14,7 +14,7 @@ const initState: Design = {
     dropNode: undefined,
     currentProps: {},
     currentView: "",
-    uiCode: "export default class Index extends GenerateView {\n" +
+    uiCode: "class Index extends GenerateView {\n" +
         "    static defaultProps = {\n" +
         "        uiMeta: {},\n" +
         "        uiProps: {}\n" +

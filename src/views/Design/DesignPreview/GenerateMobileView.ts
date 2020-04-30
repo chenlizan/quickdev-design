@@ -1,3 +1,4 @@
+const Babel = require('@babel/standalone');
 const React = require('react');
 const stripBom = require('strip-bom');
 const GenerateView = require('../../../components/GenerateView');
@@ -5,13 +6,12 @@ const GenerateView = require('../../../components/GenerateView');
 const babelConfig = {
     ast: false,
     babelrc: false,
-    presets: [
-        "es2015",
-        "react",
-        "stage-0"
+    presets: ['env', 'react'],
+    plugins: [
+        ['proposal-class-properties']
     ],
     sourceMap: false,
-    sourceType: "module"
+    sourceType: "script"
 };
 
 const BabelGenerateView = Babel.transform(stripBom(GenerateView.default.toString()), babelConfig).code;
