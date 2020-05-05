@@ -1,7 +1,8 @@
 const Babel = require('@babel/standalone');
 const React = require('react');
 const stripBom = require('strip-bom');
-const GenerateView = require('../../../components/GenerateView');
+const GenerateView = process.env.NODE_ENV === 'production' ? require('quickdev-lib/lib/GenerateView').default : require('../../../components/GenerateView').default;
+
 
 const babelConfig = {
     ast: false,
@@ -14,12 +15,10 @@ const babelConfig = {
     sourceType: "script"
 };
 
-const BabelGenerateView = Babel.transform(stripBom(GenerateView.default.toString()), babelConfig).code;
-
 const BabelCompile = (uiCode: string) => {
     let reactObj = null;
     try {
-        reactObj = eval(Babel.transform(stripBom(BabelGenerateView + uiCode), babelConfig).code);
+        reactObj = eval(Babel.transform(stripBom(uiCode), babelConfig).code);
     } catch (err) {
         console.log(err);
     }

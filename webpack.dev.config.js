@@ -8,7 +8,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
-const PORT = 4000;
+const PORT = 4001;
 
 const clientConfig = {
     mode: 'development',
