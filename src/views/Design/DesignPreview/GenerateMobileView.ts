@@ -1,8 +1,10 @@
 const Babel = require('@babel/standalone');
 const React = require('react');
+const ReactDOM = require('react-dom');
 const stripBom = require('strip-bom');
+const antd = require('antd');
+const antdMobile = require('antd-mobile');
 const GenerateView = process.env.NODE_ENV === 'production' ? require('quickdev-lib/lib/GenerateView').default : require('../../../components/GenerateView').default;
-
 
 const babelConfig = {
     ast: false,
@@ -20,7 +22,7 @@ const BabelCompile = (uiCode: string) => {
     try {
         reactObj = eval(Babel.transform(stripBom(uiCode), babelConfig).code);
     } catch (err) {
-        console.log(err);
+        console.error(err.message);
     }
     return reactObj;
 };
