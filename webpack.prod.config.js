@@ -213,9 +213,7 @@ const clientConfig = {
             filename: 'static/css/[name].css',
             chunkFilename: 'static/css/[name].[chunkhash:5].chunk.css'
         }),
-        new MonacoWebpackPlugin({
-            languages: ['json', 'javascript']
-        }),
+        new MonacoWebpackPlugin(),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static'
         }),

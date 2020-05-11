@@ -1,10 +1,10 @@
 import * as React from 'react';
-import GenerateMobileView from './GenerateMobileView'
+import GenerateViewSandbox from './GenerateViewSandbox'
 
 export default class DesignPreview extends React.PureComponent<any, any> {
 
     render(): React.ReactNode {
         const {uiCode, uiMeta} = this.props;
-        return React.createElement(GenerateMobileView(uiCode), {uiMeta: uiMeta});
+        return React.createElement(GenerateViewSandbox(uiCode), {uiMeta: uiMeta});
     }
 }
