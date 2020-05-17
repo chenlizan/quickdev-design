@@ -130,6 +130,9 @@ const clientConfig = {
         },
         extensions: ['.ts', '.tsx', '.js', '.json', '.jsx']
     },
+    externals: {
+        'quickdev-lib': 'quickdev'
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')

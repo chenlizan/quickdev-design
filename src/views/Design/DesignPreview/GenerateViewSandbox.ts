@@ -4,7 +4,7 @@ const ReactDOM = require('react-dom');
 const stripBom = require('strip-bom');
 const antd = require('antd');
 const antdMobile = require('antd-mobile');
-const GenerateView = process.env.NODE_ENV === 'production' ? require('quickdev-lib/lib/GenerateView').default : require('../../../components/GenerateView').default;
+const GenerateView = require('../../../components/GenerateView').default;
 
 const babelConfig = {
     ast: false,

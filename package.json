@@ -83,7 +83,6 @@
     "postcss-loader": "^3.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
     "prop-types": "^15.7.2",
-    "quickdev-lib": "git+https://github.com/chenlizan/quickdev-lib.git",
     "react": "^16.12.0",
     "react-contextmenu": "^2.13.0",
     "react-custom-scrollbars": "^4.2.1",
