@@ -10,7 +10,29 @@ body {
   height: 100%;
 }
 
+.react-resizable-handle {
+  position: absolute;
+  z-index: 1;
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+
+  &-ne {
+    top: 0;
+    right: 0;
+  }
+
+  &-nw {
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    border-right: 1px dotted;
+    border-left: 1px dotted;
+  }
+}
+
 @import '~antd/dist/antd.less';
 @import '~antd-mobile/dist/antd-mobile.less';
 @import './react-contextmenu.css';
-@import '../../components/DividerLine/assets/index.less';

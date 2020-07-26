@@ -33,7 +33,7 @@ export default class Index extends React.PureComponent<any, any> {
         }
     };
 
-    private generateTreeNode = (uiMeta: Array<any>): Array<JSX.Element> => {
+    private generateTreeNode = (uiMeta: Array<any>): React.ReactElement[] => {
         const element = [];
         for (let i = 0, len = uiMeta.length; i < len; i++) {
             if (uiMeta[i].type) {
@@ -44,7 +44,7 @@ export default class Index extends React.PureComponent<any, any> {
                                       {uiMeta[i].type}
                                   </ContextMenuTrigger>}
                     >
-                        {(uiMeta[i].props && uiMeta[i].props.children) ? this.generateTreeNode(uiMeta[i].props.children) : null}
+                        {(uiMeta[i].props && uiMeta[i].props.children) ? this.generateTreeNode(uiMeta[i].props.children) : null as any}
                     </TreeNode>
                 )
             }

@@ -50,14 +50,14 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
                         })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
                     </Form.Item>
                 )
-            } else {
+            } else { //no binging
                 element.push(
                     <Form.Item key={i}>
                         {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, {onClick: this.handleClick}))}
                     </Form.Item>
                 )
             }
-            if (dependencies && fieldsValue[id]) {
+            if (dependencies && fieldsValue[id]) { //附属属性
                 const {initialValue, valuePropName} = dependencies.props;
                 element.push(
                     <Form.Item key={i} {...formItemLayout} label={formItemLabel(dependencies)} colon={false}>
