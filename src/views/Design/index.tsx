@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Layout} from 'antd';
-import {Resizable, ResizeCallbackData} from 'react-resizable';
 import DesignContent from '../../containers/Design/DesignContent';
 import DesignToolBar from '../../containers/Design/DesignToolBar';
 import DesignLeft from '../../containers/Design/DesignLeft';
@@ -20,15 +19,15 @@ export default class Design extends React.PureComponent<any, any> {
         };
     }
 
-    handleDragLeft = (e: React.SyntheticEvent, data: ResizeCallbackData) => {
+    handleDragLeft = (e: MouseEvent, data: DraggableData) => {
         this.setState({
-            leftWidth: data.size.width
+            leftWidth: data.x
         });
     };
 
-    handleDragRight = (e: React.SyntheticEvent, data: ResizeCallbackData) => {
+    handleDragRight = (e: MouseEvent, data: DraggableData) => {
         this.setState({
-            rightWidth: data.size.width
+            rightWidth: data.x
         });
     };
 
@@ -40,21 +39,17 @@ export default class Design extends React.PureComponent<any, any> {
                     <DesignToolBar/>
                 </Header>
                 <Layout>
-                    <Resizable axis="x" width={leftWidth} height={0} resizeHandles={['ne']} onResize={this.handleDragLeft}>
-                        <Sider width={leftWidth}>
-                            <DesignLeft/>
-                        </Sider>
-                    </Resizable>
-                    {/*<DivideLine orientation="left" onDrag={this.handleDragLeft}></DivideLine>*/}
+                    <Sider width={leftWidth}>
+                        <DesignLeft/>
+                    </Sider>
+                    <DivideLine orientation="left" onDrag={this.handleDragLeft}></DivideLine>
                     <Content>
                         <DesignContent/>
                     </Content>
-                    {/*<DivideLine orientation="right" onDrag={this.handleDragRight}></DivideLine>*/}
-                    <Resizable axis="x" width={rightWidth} height={0} resizeHandles={['nw']} onResize={this.handleDragRight}>
-                        <Sider width={rightWidth}>
-                            <DesignRight/>
-                        </Sider>
-                    </Resizable>
+                    <DivideLine orientation="right" onDrag={this.handleDragRight}></DivideLine>
+                    <Sider width={rightWidth}>
+                        <DesignRight/>
+                    </Sider>
                 </Layout>
                 <Footer className={styles.design_footer}></Footer>
             </div>
