@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Scrollbars from 'react-custom-scrollbars';
+import DesignPreview from '../../../containers/Design/DesignPreview';
 import * as styles from '../../../stylesheets/Design.less';
 
 export default class DesignContentForMobile extends React.PureComponent<any, any> {
@@ -11,14 +12,14 @@ export default class DesignContentForMobile extends React.PureComponent<any, any
     }
 
     render(): React.ReactNode {
-        const {modeSize} = this.props;
+        const {boostMode, modeSize} = this.props;
         if (this.iframeElement.current) {
             this.iframeElement.current.contentWindow.location.reload(true);
         }
         return (
             <div>
                 <Scrollbars autoHide className={styles.design_content_mobile} style={modeSize}>
-                    <iframe ref={this.iframeElement} src="#/preview"/>
+                    {boostMode ? <iframe ref={this.iframeElement} src="#/preview"/> : <DesignPreview/>}
                 </Scrollbars>
             </div>
         );

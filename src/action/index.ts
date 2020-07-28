@@ -9,13 +9,13 @@ export const ui_source_code = createAction('UI_SOURCE_CODE');
 //DesignToolBar
 export const open_file = createAction('OPEN_FILE');
 export const reset_state = createAction('RESET_STATE');
+export const boost_mode = createAction('BOOST_MODE');
 export const current_view = createAction('CURRENT_VIEW');
 
 
 //DesignRight
-export const choose_component = createAction('CHOOSE_COMPONENT');
 export const attribute_change = createAction('ATTRIBUTE_CHANGE');
-
+export const choose_component = createAction('CHOOSE_COMPONENT');
 
 //DesignLeft
 export const current_choose_node = createAction('CURRENT_CHOOSE_NODE');

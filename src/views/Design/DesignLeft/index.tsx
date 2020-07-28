@@ -1,9 +1,9 @@
+import * as _ from "lodash";
 import * as React from 'react';
 import {Tabs, Tree} from 'antd';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import {componentRelation} from "../../../assets/json/ComponentConig";
 import * as styles from "../../../stylesheets/Design.less";
-import * as _ from "lodash";
 
 const TabPane = Tabs.TabPane;
 const {TreeNode} = Tree;
