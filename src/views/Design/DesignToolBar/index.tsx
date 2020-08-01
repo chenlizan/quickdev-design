@@ -31,7 +31,7 @@ export default class Index extends React.PureComponent<any, any> {
                 <Radio.Group className={styles.design_header_toolbar_mode} defaultValue="view" buttonStyle="solid"
                              onChange={this.handleOnChange}>
                     <Radio.Button value="view">View</Radio.Button>
-                    <Radio.Button value="code">Code</Radio.Button>
+                    <Radio.Button value="code" disabled={!boostMode}>Code</Radio.Button>
                     <Radio.Button value="json">Json</Radio.Button>
                 </Radio.Group>
                 <div className={styles.design_header_toolbar_right}>

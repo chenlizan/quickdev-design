@@ -53,9 +53,13 @@
     height: 100%;
     background-color: lightgrey;
 
-    [class="ant-tabs ant-tabs-bottom ant-tabs-line"],
     [class="ant-tabs-content ant-tabs-content-animated ant-tabs-bottom-content"] {
+      flex: 1;
+    }
+
+    [class="ant-tabs-tabpane ant-tabs-tabpane-active"] {
       height: 100%;
+      overflow-y: auto;
     }
 
     [class="ant-tabs-nav ant-tabs-nav-animated"] {
@@ -64,6 +68,10 @@
       > div {
         display: flex;
       }
+    }
+
+    [class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"] {
+      display: none !important;
     }
 
     [role="tab"] {
@@ -99,10 +107,6 @@
       overflow-y: auto;
     }
 
-    [class="ant-collapse-item"] {
-      background-color: lightgrey;
-    }
-
     [class="ant-tabs-nav ant-tabs-nav-animated"] {
       width: 100%;
 
@@ -119,6 +123,10 @@
       flex: 1;
       margin: initial;
       text-align: center;
+    }
+
+    [class="ant-collapse-item"] {
+      background-color: lightgrey;
     }
   }
 

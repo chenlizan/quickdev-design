@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import * as React from 'react';
 import {Tabs, Tree} from 'antd';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
-import {componentRelation} from "../../../assets/json/ComponentConig";
+import {componentRelation} from "../../../componentConfig";
 import * as styles from "../../../stylesheets/Design.less";
 
 const TabPane = Tabs.TabPane;
@@ -80,29 +80,27 @@ export default class Index extends React.PureComponent<any, any> {
     render(): React.ReactNode {
         const {uiMeta} = this.props;
         const treeNode = this.generateTreeNode([uiMeta]);
-        return (
-            <div className={styles.design_left}>
-                <Tabs defaultActiveKey="1" tabPosition="bottom">
-                    <TabPane tab="视图" key="1">
-                        <Tree blockNode defaultExpandAll draggable showLine
-                              onDragStart={this.handleDragStart}
-                              onDragEnd={this.handleDragEnd}
-                              onDrop={this.handleDrop}
-                              onSelect={this.handleSelect}>
-                            {treeNode}
-                        </Tree>
-                    </TabPane>
-                </Tabs>
-                <ContextMenu id="contextmenu">
-                    <MenuItem onClick={this.handleDeleteClick}>
-                        删除
-                    </MenuItem>
-                    <MenuItem divider/>
-                    <MenuItem disabled>
-                        编辑
-                    </MenuItem>
-                </ContextMenu>
-            </div>
-        )
+        return ([
+            <Tabs className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
+                <TabPane tab="视图大纲" key="1">
+                    <Tree blockNode defaultExpandAll draggable showLine
+                          onDragStart={this.handleDragStart}
+                          onDragEnd={this.handleDragEnd}
+                          onDrop={this.handleDrop}
+                          onSelect={this.handleSelect}>
+                        {treeNode}
+                    </Tree>
+                </TabPane>
+            </Tabs>,
+            <ContextMenu id="contextmenu">
+                <MenuItem onClick={this.handleDeleteClick}>
+                    删除
+                </MenuItem>
+                <MenuItem divider/>
+                <MenuItem disabled>
+                    编辑
+                </MenuItem>
+            </ContextMenu>
+        ])
     }
 }

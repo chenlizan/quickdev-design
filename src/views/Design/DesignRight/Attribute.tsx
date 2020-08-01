@@ -3,8 +3,8 @@ import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
 import {Form, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
-import AttributeConfig from '../../../assets/json/AttributeConfig';
-import AttributeField from '../../../components/AttributeField';
+import AttributeConfig from '../../../componentConfig/AttributeConfig';
+import AttributeField from '../../../componentConfig/AttributeField';
 import {ClickEventHandler, ChangeEventHandler, PropData} from './PropsType';
 
 interface AttributeProps extends FormComponentProps {
@@ -100,9 +100,11 @@ export default Form.create<any>({
     mapPropsToFields: props => {
         if (props.currentProps && _.isObject(props.currentProps.props)) {
             const fieldData = {};
+            const propMeta = (AttributeConfig as any)[props.currentProps.namespace][props.currentProps.type];
             Object.keys(props.currentProps.props).forEach((key) => {
+                const propMetaItem = _.find(propMeta, {id: key});
                 (fieldData as any)[key] = Form.createFormField({
-                    value: props.currentProps.props[key]
+                    value: propMetaItem && propMetaItem.toFields ? propMetaItem.toFields(props.currentProps.props[key]) : props.currentProps.props[key]
                 });
             });
             if (props.currentProps.uiKey) {
@@ -114,6 +116,12 @@ export default Form.create<any>({
         }
     },
     onFieldsChange: (props, fields) => {
-        props.onChange(fields);
+        const propMeta = (AttributeConfig as any)[props.currentProps.namespace][props.currentProps.type];
+        const propMetaItem = _.find(propMeta, {id: Object.keys(fields)[0]});
+        if (propMetaItem.onFieldsChange) {
+            props.onChange(propMetaItem.onFieldsChange(fields));
+        } else {
+            props.onChange(fields);
+        }
     }
 })(Attribute as any)
