@@ -54,10 +54,10 @@ export default class DesignContentForCodeEdit extends React.PureComponent<any, a
     }
 
     componentWillReceiveProps(nextProps: Readonly<any>, nextContext: any): void {
-        if (this.editorCode && nextProps.codeView && this.props.uiCode !== nextProps.uiCode) {
+        if (this.editorCode && this.props.uiCode !== nextProps.uiCode) {
             this.editorCode.setValue(nextProps.uiCode);
         }
-        if (this.editorJson && nextProps.jsonView && this.props.uiMeta !== nextProps.uiMeta) {
+        if (this.editorJson && this.props.uiMeta !== nextProps.uiMeta) {
             this.editorJson.setValue(jsonFormat(nextProps.uiMeta));
         }
     }

@@ -36,12 +36,13 @@ const formItemLabel = (configMeta: any) => (
 class Attribute extends React.PureComponent<AttributeProps, any> {
 
     generateFormItem(configMeta: Array<any>): Array<JSX.Element> {
-        const {getFieldDecorator, getFieldsValue} = this.props.form;
+        const {currentProps, form} = this.props;
+        const {getFieldDecorator, getFieldsValue} = form;
         const element = [];
         const fieldsValue = getFieldsValue();
         for (let i = 0, len = configMeta.length; i < len; i++) {
-            const {dependencies, id, type} = configMeta[i];
-            if (id && type) {
+            const {Association, id, label, type} = configMeta[i];
+            if (id && label) {
                 const {initialValue, valuePropName} = configMeta[i].props;
                 element.push(
                     <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
@@ -57,15 +58,14 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
                     </Form.Item>
                 )
             }
-            if (dependencies && fieldsValue[id]) { //附属属性
-                const {initialValue, valuePropName} = dependencies.props;
-                element.push(
-                    <Form.Item key={i} {...formItemLayout} label={formItemLabel(dependencies)} colon={false}>
-                        {getFieldDecorator<string>(dependencies.id, {
-                            initialValue, valuePropName: valuePropName || 'value',
-                        })(React.createElement((AttributeField as any)[dependencies.type], dependencies.props))}
-                    </Form.Item>
-                );
+            if (Association && fieldsValue[id]) { //associated attributes
+                this.generateFormItem(_.isBoolean(fieldsValue[id]) ? Association["true"] : Association[fieldsValue[id]]).forEach((item) => {
+                    element.push(item);
+                });
+            } else if (Association && (currentProps as any).props[id]) {
+                this.generateFormItem(_.isBoolean((currentProps as any).props[id]) ? Association["true"] : Association[(currentProps as any).props[id]]).forEach((item) => {
+                    element.push(item);
+                });
             }
         }
         return element;

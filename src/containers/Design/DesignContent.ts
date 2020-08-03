@@ -8,6 +8,7 @@ const mapStateToProps = (state: object) => {
         uiCode: (state as any).Design.uiCode,
         uiMeta: (state as any).Design.uiMeta,
         boostMode: (state as any).Design.boostMode,
+        currentProps: (state as any).Design.currentProps,
         currentView: (state as any).Design.currentView
     }
 };

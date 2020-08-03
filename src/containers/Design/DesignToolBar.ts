@@ -5,7 +5,8 @@ import {boost_mode, current_view, open_file, reset_state} from '../../action';
 
 const mapStateToProps = (state: object) => {
     return {
-        boostMode: (state as any).Design.boostMode
+        boostMode: (state as any).Design.boostMode,
+        currentView: (state as any).Design.currentView
     }
 };
 

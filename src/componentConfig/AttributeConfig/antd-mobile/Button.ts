@@ -39,12 +39,7 @@ export = [
                 }
             ]
         },
-        "toFields": (value: any) => {
-            return value;
-        },
-        "onFieldsChange": (fields: any) => {
-            return fields;
-        }
+
     },
     {
         "id": "size",
@@ -69,17 +64,34 @@ export = [
         "id": "disabled",
         "label": "disabled",
         "description": "设置禁用",
-        "dependencies": {
-            "id": "dependencies1",
-            "label": "dependencies1",
-            "description": "dependencies",
-            "type": "Input",
-            "props": {}
+        "Association": {
+            "true": [
+                {
+                    "id": "association",
+                    "label": "关联属性",
+                    "description": "association",
+                    "type": "Input",
+                    "props": {}
+                },
+                {
+                    "description": "association",
+                    "type": "Button",
+                    "props": {
+                        "text": "添加属性"
+                    }
+                },
+            ]
         },
         "type": "Switch",
         "props": {
             "initialValue": false,
             "valuePropName": "checked"
+        },
+        "toFields": (value: any) => {
+            return value;
+        },
+        "onFieldsChange": (fields: any) => {
+            return fields;
         }
     }
 ]

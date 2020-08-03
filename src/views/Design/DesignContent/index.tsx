@@ -44,7 +44,7 @@ export default class Index extends React.Component<any, any> {
     );
 
     render(): React.ReactNode {
-        const {boostMode, currentView, uiCode, uiMeta} = this.props;
+        const {boostMode, currentProps, currentView, uiCode, uiMeta} = this.props;
         const {modeName, modeSize} = this.state;
         let codeEditHeight = 0;
         if ((currentView === 'code' || currentView === 'json') && this.thisNode && this.thisNode.ownerDocument) {
@@ -59,10 +59,11 @@ export default class Index extends React.Component<any, any> {
             <div ref={(node: any) => (this as any).thisNode = node}>
                 {(currentView === 'code' || currentView === 'json') ?
                     <DesignContentForCodeEdit onChange={this.onChangeForCodeEdit} style={{height: codeEditHeight}}
-                                              currentView={currentView} uiCode={uiCode} uiMeta={uiMeta}/>
+                                              currentView={currentView} uiCode={uiCode} uiMeta={currentProps}/>
                     : [<Dropdown key="0" className={styles.design_content_mode} overlay={this.menu} trigger={['click']}>
                         <a>{modeName}<Icon type="down"/></a></Dropdown>,
-                        <DesignContentForMobile key="1" boostMode={boostMode} modeSize={modeSize} uiCode={uiCode} uiMeta={uiMeta}/>]
+                        <DesignContentForMobile key="1" boostMode={boostMode} modeSize={modeSize} uiCode={uiCode}
+                                                uiMeta={uiMeta}/>]
                 }
             </div>
         )

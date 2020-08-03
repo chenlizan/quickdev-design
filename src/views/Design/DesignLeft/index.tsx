@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import * as uuid from 'uuid/v4';
 import * as React from 'react';
 import {Tabs, Tree} from 'antd';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
@@ -81,7 +82,7 @@ export default class Index extends React.PureComponent<any, any> {
         const {uiMeta} = this.props;
         const treeNode = this.generateTreeNode([uiMeta]);
         return ([
-            <Tabs className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
+            <Tabs key={uuid()} className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="视图大纲" key="1">
                     <Tree blockNode defaultExpandAll draggable showLine
                           onDragStart={this.handleDragStart}
@@ -92,13 +93,13 @@ export default class Index extends React.PureComponent<any, any> {
                     </Tree>
                 </TabPane>
             </Tabs>,
-            <ContextMenu id="contextmenu">
+            <ContextMenu key={uuid()} id="contextmenu">
                 <MenuItem onClick={this.handleDeleteClick}>
                     删除
                 </MenuItem>
                 <MenuItem divider/>
                 <MenuItem disabled>
-                    编辑
+                    查看
                 </MenuItem>
             </ContextMenu>
         ])
