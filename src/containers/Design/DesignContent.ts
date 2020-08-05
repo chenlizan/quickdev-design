@@ -1,7 +1,7 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignContent from '../../views/Design/DesignContent';
-import {ui_source_code} from '../../action/index';
+import {ui_source_code} from '../../action';
 
 const mapStateToProps = (state: object) => {
     return {

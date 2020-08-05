@@ -1,7 +1,7 @@
 import {bindActionCreators, Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import DesignRight from '../../views/Design/DesignRight';
-import {attribute_change, choose_component} from '../../action/index';
+import {attribute_change, choose_component} from '../../action';
 
 const mapStateToProps = (state: object) => {
     return {
