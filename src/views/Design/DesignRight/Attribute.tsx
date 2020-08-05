@@ -45,7 +45,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             if (id && label) {
                 const {initialValue, valuePropName} = configMeta[i].props;
                 element.push(
-                    <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
+                    <Form.Item key={uuid()} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
                         {getFieldDecorator<string>(id, {
                             initialValue, valuePropName: valuePropName || 'value',
                         })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
@@ -53,7 +53,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
                 )
             } else { //no binging
                 element.push(
-                    <Form.Item key={i}>
+                    <Form.Item key={uuid()}>
                         {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, {onClick: this.handleClick}))}
                     </Form.Item>
                 )

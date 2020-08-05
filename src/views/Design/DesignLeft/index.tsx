@@ -81,27 +81,29 @@ export default class Index extends React.PureComponent<any, any> {
     render(): React.ReactNode {
         const {uiMeta} = this.props;
         const treeNode = this.generateTreeNode([uiMeta]);
-        return ([
-            <Tabs key={uuid()} className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
-                <TabPane tab="视图大纲" key="1">
-                    <Tree blockNode defaultExpandAll draggable showLine
-                          onDragStart={this.handleDragStart}
-                          onDragEnd={this.handleDragEnd}
-                          onDrop={this.handleDrop}
-                          onSelect={this.handleSelect}>
-                        {treeNode}
-                    </Tree>
-                </TabPane>
-            </Tabs>,
-            <ContextMenu key={uuid()} id="contextmenu">
-                <MenuItem onClick={this.handleDeleteClick}>
-                    删除
-                </MenuItem>
-                <MenuItem divider/>
-                <MenuItem disabled>
-                    查看
-                </MenuItem>
-            </ContextMenu>
-        ])
+        return (
+            <>
+                <Tabs className={styles.design_left} defaultActiveKey="1" tabPosition="bottom">
+                    <TabPane tab="视图大纲" key="1">
+                        <Tree blockNode defaultExpandAll draggable showLine
+                              onDragStart={this.handleDragStart}
+                              onDragEnd={this.handleDragEnd}
+                              onDrop={this.handleDrop}
+                              onSelect={this.handleSelect}>
+                            {treeNode}
+                        </Tree>
+                    </TabPane>
+                </Tabs>
+                <ContextMenu id="contextmenu">
+                    <MenuItem onClick={this.handleDeleteClick}>
+                        删除
+                    </MenuItem>
+                    <MenuItem divider/>
+                    <MenuItem disabled>
+                        查看
+                    </MenuItem>
+                </ContextMenu>
+            </>
+        )
     }
 }
