@@ -6,6 +6,12 @@
       },
       {
         "antd-mobile": "Button"
+      },
+      {
+        "antd-mobile": "WingBlank"
+      },
+      {
+        "antd-mobile": "WhiteSpace"
       }
     ]
   },
@@ -13,15 +19,23 @@
     "Button": [],
     "Flex": [
       {
-        "antd-mobile": "Flex.Item"
+        "antd-mobile": "Button"
       },
       {
-        "antd-mobile": "Button"
+        "antd-mobile": "Flex.Item"
       }
     ],
     "Flex.Item": [
       {
         "antd-mobile": "Button"
+      }
+    ],
+    "WingBlank": [
+      {
+        "antd-mobile": "Button"
+      },
+      {
+        "antd-mobile": "Flex"
       }
     ]
   }

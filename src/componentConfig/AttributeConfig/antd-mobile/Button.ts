@@ -93,5 +93,25 @@ export = [
         "onFieldsChange": (fields: any) => {
             return fields;
         }
-    }
+    },
+    {
+        "id": "inline",
+        "label": "inline",
+        "description": "是否设置为行内按钮",
+        "type": "Switch",
+        "props": {
+            "initialValue": false,
+            "valuePropName": "checked"
+        },
+    },
+    {
+        "id": "loading",
+        "label": "loading",
+        "description": "设置按钮载入状态",
+        "type": "Switch",
+        "props": {
+            "initialValue": false,
+            "valuePropName": "checked"
+        },
+    },
 ]

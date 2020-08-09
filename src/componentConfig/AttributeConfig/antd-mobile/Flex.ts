@@ -1,5 +1,12 @@
 export = [
     {
+        "id": "uiKey",
+        "label": "uiKey",
+        "description": "元素的ref属性",
+        "type": "Input",
+        "props": {}
+    },
+    {
         "id": "direction",
         "label": "direction",
         "description": "项目定位方向",
