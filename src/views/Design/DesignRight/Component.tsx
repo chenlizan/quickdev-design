@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as React from 'react';
 import {Collapse, Button} from 'antd';
 import * as uuid from 'uuid/v4';
-import {componentList, componentRelation} from '../../../componentConfig';
+import {componentList, componentRelation} from '../../../../designConfig';
 import {ClickEventHandler, PropData} from './PropsType';
 
 const Panel = Collapse.Panel;

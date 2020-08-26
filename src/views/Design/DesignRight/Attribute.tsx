@@ -3,8 +3,8 @@ import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
 import {Form, Icon, Tooltip} from 'antd';
 import {FormComponentProps} from 'antd/lib/form';
-import AttributeConfig from '../../../componentConfig/AttributeConfig';
-import AttributeField from '../../../componentConfig/AttributeField';
+import AttributeConfig from '../../../../designConfig/AttributeConfig';
+import AttributeField from '../../../../designConfig/AttributeField';
 import {ClickEventHandler, ChangeEventHandler, PropData} from './PropsType';
 
 interface AttributeProps extends FormComponentProps {
@@ -45,7 +45,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             if (id && label) {
                 const {initialValue, valuePropName} = configMeta[i].props;
                 element.push(
-                    <Form.Item key={uuid()} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
+                    <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
                         {getFieldDecorator<string>(id, {
                             initialValue, valuePropName: valuePropName || 'value',
                         })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
@@ -53,7 +53,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
                 )
             } else { //no binging
                 element.push(
-                    <Form.Item key={uuid()}>
+                    <Form.Item key={i}>
                         {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, {onClick: this.handleClick}))}
                     </Form.Item>
                 )

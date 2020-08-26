@@ -1,9 +1,8 @@
 import * as _ from "lodash";
-import * as uuid from 'uuid/v4';
 import * as React from 'react';
 import {Tabs, Tree} from 'antd';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
-import {componentRelation} from "../../../componentConfig";
+import {componentRelation} from "../../../../designConfig";
 import * as styles from "../../../stylesheets/Design.less";
 
 const TabPane = Tabs.TabPane;

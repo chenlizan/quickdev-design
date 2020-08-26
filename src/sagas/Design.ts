@@ -44,6 +44,7 @@ function setTreeNode(uiMeta: Array<any>, key: string, data: any): void {
                 } else if (data[key].value !== undefined) {
                     uiMeta[i].props[key] = data[key].value;
                 } else {
+                    delete uiMeta[i][key];
                     delete uiMeta[i].props[key];
                 }
             });
