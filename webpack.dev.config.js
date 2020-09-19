@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -144,7 +144,7 @@ const clientConfig = {
             context: path.join(__dirname, '.', 'dll'),
             manifest: require('./dll/vendor-manifest.json')
         }),
-        new HtmlWebpackIncludeAssetsPlugin({assets: ['../dll/vendor.dll.js'], append: false}),
+        new HtmlWebpackTagsPlugin({scripts: '../dll/vendor.dll.js', append: false}),
         new MonacoWebpackPlugin(),
         new StylelintPlugin({configFile: '.stylelintrc', files: '**/*.(c|le)ss', fix: true}),
         new webpack.HotModuleReplacementPlugin(),
