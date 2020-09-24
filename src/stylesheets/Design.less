@@ -12,15 +12,15 @@
     background-color: #5c5c5c;
 
     &_toolbar {
-      > button {
-        margin-right: 15px;
-      }
-
       &_mode {
         position: absolute;
         left: 50%;
         line-height: inherit;
         transform: translateX(-50%);
+
+        > label {
+          vertical-align: middle;
+        }
       }
 
       &_right {
@@ -33,11 +33,6 @@
 
         > span {
           margin-left: 15px;
-        }
-
-        > button:focus {
-          color: rgba(0, 0, 0, 0.65);
-          border-color: white;
         }
       }
     }
@@ -54,42 +49,59 @@
     height: 100%;
     background-color: lightgrey;
 
-    [class="ant-tabs-content ant-tabs-content-animated ant-tabs-bottom-content"] {
-      flex: 1;
-    }
-
-    [class="ant-tabs-tabpane ant-tabs-tabpane-active"] {
+    [class="ant-tabs-content ant-tabs-content-bottom"],
+    [class="ant-tree ant-tree-icon-hide ant-tree-block-node ant-tree-show-line"] {
       height: 100%;
-      overflow-y: auto;
     }
 
-    [class="ant-tabs-nav ant-tabs-nav-animated"] {
-      width: 100%;
+    [class="ant-tabs-nav"] {
+      margin-top: 0;
 
-      > div {
-        display: flex;
+      [class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"] {
+        display: none;
       }
     }
 
-    [class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"] {
-      display: none !important;
-    }
+    //[class="ant-tree"] {
+    //  height: 100%;
+    //}
 
-    [role="tab"] {
-      flex: 1;
-      margin: initial;
-      text-align: center;
-    }
-
-    [class^="ant-tree-switcher"] {
-      background-color: lightgrey !important;
-    }
-
-    [class="ant-tree-treenode-switcher-open"] {
-      ::before {
-        border-left-color: #888 !important;
-      }
-    }
+    //[class="ant-tabs-content ant-tabs-content-animated ant-tabs-bottom-content"] {
+    //  flex: 1;
+    //}
+    //
+    //[class="ant-tabs-tabpane ant-tabs-tabpane-active"] {
+    //  height: 100%;
+    //  overflow-y: auto;
+    //}
+    //
+    //[class="ant-tabs-nav ant-tabs-nav-animated"] {
+    //  width: 100%;
+    //
+    //  > div {
+    //    display: flex;
+    //  }
+    //}
+    //
+    //[class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"] {
+    //  display: none !important;
+    //}
+    //
+    //[role="tab"] {
+    //  flex: 1;
+    //  margin: initial;
+    //  text-align: center;
+    //}
+    //
+    //[class^="ant-tree-switcher"] {
+    //  background-color: lightgrey !important;
+    //}
+    //
+    //[class="ant-tree-treenode-switcher-open"] {
+    //  ::before {
+    //    border-left-color: #888 !important;
+    //  }
+    //}
   }
 
   &_right {
