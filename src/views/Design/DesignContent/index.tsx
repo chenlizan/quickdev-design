@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Menu, Dropdown, Icon} from 'antd';
-import {ClickParam} from "antd/lib/menu";
+import {Menu, Dropdown} from 'antd';
+// import {ClickParam} from "antd/lib/menu";
+import { DownOutlined } from '@ant-design/icons';
 import DesignContentForCodeEdit from './DesignContentForCodeEdit';
 import DesignContentForMobile from './DesignContentForMobile';
 import * as styles from "../../../stylesheets/Design.less";
@@ -18,7 +19,7 @@ export default class Index extends React.Component<any, any> {
         };
     }
 
-    private onClickForMenu = (e: ClickParam) => {
+    private onClickForMenu = (e:any) => {
         (this as any).setState({
             modeName: e.item.props.children.props.children,
             modeSize: e.item.props.children.props['data-size']
@@ -61,7 +62,7 @@ export default class Index extends React.Component<any, any> {
                     <DesignContentForCodeEdit onChange={this.onChangeForCodeEdit} style={{height: codeEditHeight}}
                                               currentView={currentView} uiCode={uiCode} uiMeta={currentProps}/>
                     : [<Dropdown key="0" className={styles.design_content_mode} overlay={this.menu} trigger={['click']}>
-                        <a>{modeName}<Icon type="down"/></a></Dropdown>,
+                        <a>{modeName}<DownOutlined /></a></Dropdown>,
                         <DesignContentForMobile key="1" boostMode={boostMode} modeSize={modeSize} uiCode={uiCode}
                                                 uiMeta={uiMeta}/>]
                 }
