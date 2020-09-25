@@ -44,8 +44,8 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
         const element = [];
         const fieldsValue = getFieldsValue();
         for (let i = 0, len = configMeta.length; i < len; i++) {
-            const {Association, id, label, type} = configMeta[i];
-            if (id && label) {
+            const {association, id, label, type} = configMeta[i];
+            if (association && (fieldsValue[association.id] === association["condition"] || (currentProps as any).props[association.id] === association["condition"])) {
                 const {initialValue, valuePropName} = configMeta[i].props;
                 element.push(
                     <LegacyForm.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
@@ -54,21 +54,21 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
                         })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
                     </LegacyForm.Item>
                 )
-            } else { //no binging
+            } else if (!association && type !== 'Button') {
+                const {initialValue, valuePropName} = configMeta[i].props;
+                element.push(
+                    <LegacyForm.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
+                        {getFieldDecorator<string>(id, {
+                            initialValue, valuePropName: valuePropName || 'value',
+                        })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
+                    </LegacyForm.Item>
+                )
+            } else if (type === 'Button') { //no binging
                 element.push(
                     <LegacyForm.Item key={i}>
                         {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, {onClick: this.handleClick}))}
                     </LegacyForm.Item>
                 )
-            }
-            if (Association && fieldsValue[id]) { //associated attributes
-                this.generateFormItem(_.isBoolean(fieldsValue[id]) ? Association["true"] : Association[fieldsValue[id]]).forEach((item) => {
-                    element.push(item);
-                });
-            } else if (Association && (currentProps as any).props[id]) {
-                this.generateFormItem(_.isBoolean((currentProps as any).props[id]) ? Association["true"] : Association[(currentProps as any).props[id]]).forEach((item) => {
-                    element.push(item);
-                });
             }
         }
         return element;

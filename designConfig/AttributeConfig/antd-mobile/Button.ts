@@ -64,17 +64,6 @@ export = [
         "id": "disabled",
         "label": "disabled",
         "description": "设置禁用",
-        "Association": {
-            "true": [
-                {
-                    "id": "association",
-                    "label": "关联属性",
-                    "description": "association",
-                    "type": "Input",
-                    "props": {}
-                }
-            ]
-        },
         "type": "Switch",
         "props": {
             "initialValue": false,
@@ -107,4 +96,15 @@ export = [
             "valuePropName": "checked"
         },
     },
+    {
+        "id": "color",
+        "label": "关联属性（颜色）",
+        "description": "association",
+        "type": "Color",
+        "props": {},
+        "association": {
+            "id": "loading",
+            "condition": true
+        }
+    }
 ]
