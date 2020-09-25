@@ -145,7 +145,7 @@ const clientConfig = {
             manifest: require('./dll/vendor-manifest.json')
         }),
         new HtmlWebpackTagsPlugin({scripts: '../dll/vendor.dll.js', append: false}),
-        new MonacoWebpackPlugin(),
+        new MonacoWebpackPlugin({languages: ['javascript', 'json']}),
         new StylelintPlugin({configFile: '.stylelintrc', files: '**/*.(c|le)ss', fix: true}),
         new webpack.HotModuleReplacementPlugin(),
         new OpenBrowserPlugin({url: `http://localhost:${PORT}`, browser: 'chrome'}),

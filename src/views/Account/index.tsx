@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Button, Carousel, Icon, Input, Tooltip} from 'antd';
+import {Button, Carousel, Input} from 'antd/lib';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import * as styles from '../../stylesheets/Account.less';
 
 export default class Design extends React.PureComponent<any, any> {
@@ -13,11 +14,11 @@ export default class Design extends React.PureComponent<any, any> {
                         <div className={styles.account_form_login_input}>
                             <Input
                                 placeholder="Username" size="large"
-                                prefix={<Icon type="user"/>}
+                                prefix={<UserOutlined/>}
                             />
                             <Input
                                 placeholder="Password" size="large"
-                                prefix={<Icon type="lock"/>}
+                                prefix={<LockOutlined/>}
                             />
                             <Button className={styles.account_form_login_submit}>Sign in</Button>
                         </div>

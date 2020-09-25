@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {Avatar, Button, message, Radio, Switch} from "antd";
+import {Avatar, Button, message, Radio, Switch} from 'antd';
+import {UserOutlined} from '@ant-design/icons';
 import {RadioChangeEvent} from 'antd/lib/radio';
-import {SwitchChangeEventHandler} from "antd/lib/switch";
+import {SwitchChangeEventHandler} from 'antd/lib/switch';
 import Open, {OpenProps} from './Open';
 import * as styles from '../../../stylesheets/Design.less';
 
@@ -36,7 +37,7 @@ export default class Index extends React.PureComponent<any, any> {
                     <Switch defaultChecked={boostMode} size="small" onChange={this.handleSwitchOnChange}/>
                     <Open onChange={(value): OpenProps => this.props.handleOpenFile(value)}/>
                     <Button onClick={() => message.success('Save to clipboard')}>Save</Button>
-                    <Avatar shape="square" size="small" icon="user"/>
+                    <Avatar shape="square" size="small" icon={<UserOutlined/>}/>
                 </div>
             </div>
         );

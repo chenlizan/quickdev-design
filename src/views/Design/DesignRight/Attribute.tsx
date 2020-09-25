@@ -1,11 +1,14 @@
 import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
-import {Form, Icon, Tooltip} from 'antd';
-import {FormComponentProps} from 'antd/lib/form';
+import {Tooltip} from 'antd';
+import {InfoCircleOutlined} from '@ant-design/icons';
+import {Form as LegacyForm} from '@ant-design/compatible';
+import {FormComponentProps} from '@ant-design/compatible/lib/form';
 import AttributeConfig from '../../../../designConfig/AttributeConfig';
 import AttributeField from '../../../../designConfig/AttributeField';
 import {ClickEventHandler, ChangeEventHandler, PropData} from './PropsType';
+
 
 interface AttributeProps extends FormComponentProps {
     currentProps: PropData,
@@ -27,7 +30,7 @@ const formItemLabel = (configMeta: any) => (
         {configMeta.label}&nbsp;&nbsp;
         {configMeta.description ?
             <Tooltip title={configMeta.description}>
-                <Icon type="info-circle"/>
+                <InfoCircleOutlined/>
             </Tooltip> : null
         }
     </span>
@@ -45,17 +48,17 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             if (id && label) {
                 const {initialValue, valuePropName} = configMeta[i].props;
                 element.push(
-                    <Form.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
+                    <LegacyForm.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
                         {getFieldDecorator<string>(id, {
                             initialValue, valuePropName: valuePropName || 'value',
                         })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
-                    </Form.Item>
+                    </LegacyForm.Item>
                 )
             } else { //no binging
                 element.push(
-                    <Form.Item key={i}>
+                    <LegacyForm.Item key={i}>
                         {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, {onClick: this.handleClick}))}
-                    </Form.Item>
+                    </LegacyForm.Item>
                 )
             }
             if (Association && fieldsValue[id]) { //associated attributes
@@ -89,26 +92,26 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             }
         }
         return (
-            <Form>
+            <LegacyForm>
                 {formItem}
-            </Form>
+            </LegacyForm>
         );
     }
 }
 
-export default Form.create<any>({
+export default LegacyForm.create<any>({
     mapPropsToFields: props => {
         if (props.currentProps && _.isObject(props.currentProps.props)) {
             const fieldData = {};
             const propMeta = (AttributeConfig as any)[props.currentProps.namespace][props.currentProps.type];
             Object.keys(props.currentProps.props).forEach((key) => {
                 const propMetaItem = _.find(propMeta, {id: key});
-                (fieldData as any)[key] = Form.createFormField({
+                (fieldData as any)[key] = LegacyForm.createFormField({
                     value: propMetaItem && propMetaItem.toFields ? propMetaItem.toFields(props.currentProps.props[key]) : props.currentProps.props[key]
                 });
             });
             if (props.currentProps.uiKey) {
-                (fieldData as any)['uiKey'] = Form.createFormField({
+                (fieldData as any)['uiKey'] = LegacyForm.createFormField({
                     value: props.currentProps.uiKey
                 });
             }
