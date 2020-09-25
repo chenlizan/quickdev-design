@@ -15,7 +15,7 @@ export default class Index extends React.PureComponent<any, any> {
         const element = [];
         for (let i = 0, len = configMeta.length; i < len; i++) {
             element.push(
-                <Select.Option key={configMeta[i].value}>{configMeta[i].label}</Select.Option>
+                <Select.Option value={configMeta[i].value}>{configMeta[i].label}</Select.Option>
             )
         }
         return element;

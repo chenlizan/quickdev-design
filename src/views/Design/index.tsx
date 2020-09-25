@@ -44,7 +44,7 @@ export default class Design extends React.PureComponent<any, any> {
                     </Sider>
                     <DivideLine orientation="left" onDrag={this.handleDragLeft}></DivideLine>
                     <Content>
-                        {/*<DesignContent/>*/}
+                        <DesignContent/>
                     </Content>
                     <DivideLine orientation="right" onDrag={this.handleDragRight}></DivideLine>
                     <Sider width={rightWidth}>

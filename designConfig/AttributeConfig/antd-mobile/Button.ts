@@ -72,14 +72,7 @@ export = [
                     "description": "association",
                     "type": "Input",
                     "props": {}
-                },
-                {
-                    "description": "association",
-                    "type": "Button",
-                    "props": {
-                        "text": "添加属性"
-                    }
-                },
+                }
             ]
         },
         "type": "Switch",

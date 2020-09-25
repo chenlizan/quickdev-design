@@ -1,6 +1,6 @@
 {
   "name": "quickdev-design",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "",
   "scripts": {
     "inst": "npm install",
@@ -83,6 +83,7 @@
     "progress-bar-webpack-plugin": "^1.12.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-color": "^2.18.1",
     "react-contextmenu": "^2.13.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dev-utils": "^10.0.0",
@@ -107,7 +108,7 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.9.7",
     "typings-for-css-modules-loader": "^1.7.0",
-    "uuid": "^3.3.3",
+    "uuid": "^3.4.0",
     "webpack": "^4.44.1",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",

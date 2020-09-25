@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as uuid from 'uuid/v4';
 import * as _ from 'lodash';
 import {Tooltip} from 'antd';
+import {InfoCircleOutlined} from '@ant-design/icons';
 import {Form as LegacyForm} from '@ant-design/compatible';
 import {FormComponentProps} from '@ant-design/compatible/lib/form';
 import AttributeConfig from '../../../../designConfig/AttributeConfig';
@@ -27,11 +28,11 @@ const formItemLayout = {
 const formItemLabel = (configMeta: any) => (
     <span>
         {configMeta.label}&nbsp;&nbsp;
-        {/*{configMeta.description ?*/}
-        {/*    <Tooltip title={configMeta.description}>*/}
-        {/*        <Icon type="info-circle"/>*/}
-        {/*    </Tooltip> : null*/}
-        {/*}*/}
+        {configMeta.description ?
+            <Tooltip title={configMeta.description}>
+                <InfoCircleOutlined/>
+            </Tooltip> : null
+        }
     </span>
 );
 

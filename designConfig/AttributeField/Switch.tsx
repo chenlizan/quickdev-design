@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Icon, Switch} from 'antd';
+import {Switch} from 'antd';
+import {CloseOutlined, CheckOutlined} from '@ant-design/icons';
 import * as styles from './assets/index.less';
 
 export default class Index extends React.PureComponent<any, any> {
@@ -14,10 +15,11 @@ export default class Index extends React.PureComponent<any, any> {
         return (
             <Switch
                 className={styles['attribute_field_switch']}
-                checkedChildren={<Icon type="check"/>}
-                unCheckedChildren={<Icon type="close"/>}
+                checkedChildren={<CheckOutlined/>}
+                unCheckedChildren={<CloseOutlined/>}
                 onChange={this.handleOnChange}
                 checked={this.props.checked}
+                size="small"
             />
         );
     }

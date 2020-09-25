@@ -22,7 +22,7 @@ export default class Index extends React.PureComponent<any, any> {
     render(): React.ReactNode {
         const {currentProps} = this.props;
         return (
-            <Tabs className={styles.design_right} defaultActiveKey="1" tabPosition="bottom">
+            <Tabs className={styles.design_right} centered defaultActiveKey="1" tabPosition="bottom">
                 <TabPane tab="部件" key="1">
                     <Component currentProps={currentProps} onClick={this.handleClick}/>
                 </TabPane>
