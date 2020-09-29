@@ -59,39 +59,24 @@ body {
 
         :global {
           .ant-input-affix-wrapper {
-            border-bottom: 1px solid #fffffff3;
-
-            &:hover .ant-input {
-              border: 0 solid transparent;
-            }
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid #fff3;
+            border-radius: 0;
+            box-shadow: none;
 
             .ant-input-prefix {
-              i {
-                margin-bottom: -5px;
+              svg {
+                width: 2rem;
+                height: 2rem;
                 color: white;
-
-                svg {
-                  width: 2rem;
-                  height: 2rem;
-                }
               }
             }
 
             .ant-input {
+              padding-left: 1.5rem;
               color: white;
               background: transparent;
-              border: 0 solid transparent;
-
-              &:not(:first-child) {
-                padding-bottom: 0;
-                padding-left: 40px;
-              }
-
-              &:focus,
-              &:hover {
-                border: 0 solid transparent;
-                box-shadow: none;
-              }
 
               &::placeholder {
                 color: #ffffff4d;
