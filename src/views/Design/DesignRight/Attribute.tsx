@@ -6,7 +6,7 @@ import {InfoCircleOutlined} from '@ant-design/icons';
 import {Form as LegacyForm} from '@ant-design/compatible';
 import {FormComponentProps} from '@ant-design/compatible/lib/form';
 import AttributeConfig from '../../../../designConfig/AttributeConfig';
-import AttributeField from '../../../../designConfig/AttributeField';
+import AttributeField from '../../../components/AttributeField';
 import {ClickEventHandler, ChangeEventHandler, PropData} from './PropsType';
 
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Tabs} from 'antd';
 import Attribute from './Attribute';
 import Component from './Component';
+import BoxModel from '../../../components/StyleField/common/BoxModel';
 import {ClickEventHandler} from './PropsType';
 import * as styles from '../../../stylesheets/Design.less';
 
@@ -30,6 +31,7 @@ export default class Index extends React.PureComponent<any, any> {
                     <Attribute currentProps={currentProps} onChange={this.handleChange} onClick={this.handleClick}/>
                 </TabPane>
                 <TabPane tab="样式" key="3">
+                    <BoxModel name="" value="" keys={['top', 'right', 'bottom', 'left', 'center']} disabled={false}/>
                 </TabPane>
             </Tabs>
         )

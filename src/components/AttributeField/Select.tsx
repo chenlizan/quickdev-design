@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Select} from 'antd';
-import {SelectValue} from 'antd/lib/select';
+import Select, {SelectValue} from 'antd/lib/select';
 import * as styles from './assets/index.less';
+
 
 export default class Index extends React.PureComponent<any, any> {
 

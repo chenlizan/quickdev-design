@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {Input, Popover} from 'antd';
+import Input from 'antd/lib/input';
+import Popover from 'antd/lib/popover';
 import {ColorResult, ChromePicker} from 'react-color';
 import * as styles from './assets/index.less';
+
 
 export default class Index extends React.PureComponent<any, any> {
 

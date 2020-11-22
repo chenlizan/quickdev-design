@@ -1,20 +1,20 @@
 import * as React from 'react';
-import {InputNumber} from 'antd';
-
+import Input from 'antd/lib/input';
 import * as styles from './assets/index.less';
+
 
 export default class Index extends React.PureComponent<any, any> {
 
-    displayName: "InputNumber" | undefined;
+    displayName: "Input" | undefined;
 
-    handleOnChange = (value: number | undefined | string) => {
-        this.props.onChange({target: {value: value === '' ? undefined : value}});
+    handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.onChange({target: {value: e.target.value === '' ? undefined : e.target.value}});
     };
 
     render(): React.ReactNode {
         return (
-            <InputNumber
-                className={styles['attribute_field_inputnumber']}
+            <Input
+                className={styles['attribute_field_input']}
                 onChange={this.handleOnChange}
                 value={this.props.value}
             />

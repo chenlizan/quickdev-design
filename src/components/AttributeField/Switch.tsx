@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {Switch} from 'antd';
+import Switch from 'antd/lib/switch';
 import {CloseOutlined, CheckOutlined} from '@ant-design/icons';
 import * as styles from './assets/index.less';
+
 
 export default class Index extends React.PureComponent<any, any> {
 

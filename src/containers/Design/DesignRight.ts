@@ -14,6 +14,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         handleAttributeChange: bindActionCreators(attribute_change, dispatch),
         handleChooseComponent: bindActionCreators(choose_component, dispatch)
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignRight);
