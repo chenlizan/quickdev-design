@@ -21,9 +21,7 @@
                     "namespace": "antd-mobile",
                     "key": "11c38182-e5ac-4892-a064-03d343cd7a09",
                     "props": {
-                      "children": [
-                        "AA"
-                      ],
+                      "children": ["AA"],
                       "type": "primary",
                       "disabled": true
                     }
@@ -42,9 +40,7 @@
                     "namespace": "antd-mobile",
                     "key": "82bb3048-01db-455f-a9af-fe66ac6d3eb9",
                     "props": {
-                      "children": [
-                        "BB"
-                      ],
+                      "children": ["BB"],
                       "type": "ghost"
                     }
                   }
@@ -62,9 +58,7 @@
                     "namespace": "antd-mobile",
                     "key": "c0b15f54-19c1-4418-9678-4e69976a1c91",
                     "props": {
-                      "children": [
-                        "CC"
-                      ],
+                      "children": ["CC"],
                       "type": "warning"
                     }
                   }

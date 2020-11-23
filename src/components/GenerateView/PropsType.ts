@@ -1,3 +1,3 @@
 export interface GenerateViewPropsType {
-    uiMeta: object
+  uiMeta: object;
 }

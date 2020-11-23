@@ -1,17 +1,16 @@
-import classNames from 'classnames';
-import React, { MouseEventHandler, useRef } from 'react';
-import { findDOMNode } from 'react-dom';
-import { Button } from 'antd';
-import { DragOutlined, MenuOutlined } from '@ant-design/icons';
-import { addEvent, removeEvent } from './utils';
+import classNames from "classnames";
+import React, { MouseEventHandler, useRef } from "react";
+import { findDOMNode } from "react-dom";
+import { Button } from "antd";
+import { DragOutlined, MenuOutlined } from "@ant-design/icons";
+import { addEvent, removeEvent } from "./utils";
 
-function noop() {
-}
+function noop() {}
 
 const eventsFor = {
-  start: 'mousedown',
-  move: 'mousemove',
-  stop: 'mouseup',
+  start: "mousedown",
+  move: "mousemove",
+  stop: "mouseup",
 };
 
 interface ToolBarProps {
@@ -27,7 +26,7 @@ const ToolBar: React.FC<ToolBarProps> = ({ onClick = noop }) => {
   };
 
   const handleDragStart: MouseEventHandler<HTMLElement> = (e) => {
-    const thisNode = findDOMNode(document.querySelector('.overlay'));
+    const thisNode = findDOMNode(document.querySelector(".overlay"));
     if (thisNode) {
       addEvent(thisNode, eventsFor.move, handleDrag);
       addEvent(thisNode, eventsFor.stop, handleDragStop);
@@ -35,7 +34,7 @@ const ToolBar: React.FC<ToolBarProps> = ({ onClick = noop }) => {
   };
 
   const handleDragStop: MouseEventHandler<HTMLElement> = (e) => {
-    const thisNode = findDOMNode(document.querySelector('.overlay'));
+    const thisNode = findDOMNode(document.querySelector(".overlay"));
     if (thisNode) {
       removeEvent(thisNode, eventsFor.move, handleDrag);
       removeEvent(thisNode, eventsFor.stop, handleDragStop);
@@ -47,20 +46,33 @@ const ToolBar: React.FC<ToolBarProps> = ({ onClick = noop }) => {
   };
 
   const onMouseDown: MouseEventHandler<HTMLElement> = (e) => {
-    console.log('onMouseDown');
+    console.log("onMouseDown");
     handleDragStart(e);
   };
 
   const onMouseUp: MouseEventHandler<HTMLElement> = (e) => {
-    console.log('onMouseUp');
+    console.log("onMouseUp");
     handleDragStop(e);
   };
 
   return (
-    <div className={classNames('toolbar')} ref={toolBarEl}>
-      <Button icon={<MenuOutlined/>} size='small' type='primary' value='Menu' onClick={handleClick}/>
-      <Button icon={<DragOutlined/>} size='small' type='primary' value='Drag' onClick={handleClick}
-              onMouseDown={onMouseDown} onMouseUp={onMouseUp}/>
+    <div className={classNames("toolbar")} ref={toolBarEl}>
+      <Button
+        icon={<MenuOutlined />}
+        size="small"
+        type="primary"
+        value="Menu"
+        onClick={handleClick}
+      />
+      <Button
+        icon={<DragOutlined />}
+        size="small"
+        type="primary"
+        value="Drag"
+        onClick={handleClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+      />
     </div>
   );
 };

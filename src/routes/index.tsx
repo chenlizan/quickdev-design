@@ -1,32 +1,32 @@
-import * as React from 'react';
-import {HashRouter, Route, Switch} from 'react-router-dom';
-import * as Loadable from 'react-loadable';
-import Account from './Account';
+import * as React from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import * as Loadable from "react-loadable";
+import Account from "./Account";
 
 const App = Loadable({
-    loader: () => import('../App'),
-    loading: () => null
+  loader: () => import("../App"),
+  loading: () => null,
 });
 
 const Design = Loadable({
-    loader: () => import('../views/Design'),
-    loading: () => null
+  loader: () => import("../views/Design"),
+  loading: () => null,
 });
 
 const Preview = Loadable({
-    loader: () => import('../containers/Design/DesignPreview'),
-    loading: () => null
+  loader: () => import("../containers/Design/DesignPreview"),
+  loading: () => null,
 });
 
 export const routes = (
-    <HashRouter>
-        <App>
-            <Switch>
-                <Route path="/" exact component={Design}/>
-                <Route path="/design" component={Design}/>
-                <Route path="/preview" component={Preview}/>
-                {Account}
-            </Switch>
-        </App>
-    </HashRouter>
+  <HashRouter>
+    <App>
+      <Switch>
+        <Route path="/" exact component={Design} />
+        <Route path="/design" component={Design} />
+        <Route path="/preview" component={Preview} />
+        {Account}
+      </Switch>
+    </App>
+  </HashRouter>
 );

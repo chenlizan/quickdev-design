@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 export function getDocument() {
   return window.document;
@@ -7,7 +7,7 @@ export function getDocument() {
 
 interface PortalProps {
   getContainer?: () => HTMLElement;
-  didUpdate?: (prevProps: Readonly<any>) => void
+  didUpdate?: (prevProps: Readonly<any>) => void;
 }
 
 export default class Portal extends React.Component<PortalProps> {

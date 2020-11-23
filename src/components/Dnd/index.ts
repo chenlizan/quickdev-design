@@ -1,5 +1,5 @@
-import Overlay from './Overlay';
-import './assets/index.less';
+import Overlay from "./Overlay";
+import "./assets/index.less";
 
-export {Overlay}
+export { Overlay };
 export default Overlay;
