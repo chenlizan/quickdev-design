@@ -83,11 +83,11 @@ const Color: React.FC<ColorProps> = (props) => {
     // this.setState({
     //     color,
     // }, () => {
-    //     if (!this.isColorDown) {
-    //         props.onChange(color);
-    //     } else {
-    //         props.onChange(color, true);
-    //     }
+        if (!isColorDown) {
+            props.onChange(color);
+        } else {
+            props.onChange(color, true);
+        }
     // });
   };
 
@@ -136,7 +136,7 @@ const Color: React.FC<ColorProps> = (props) => {
   const children = (
     <Popover
       title={false}
-      // content={this.getColorPicker()}
+      content={getColorPicker()}
       trigger="click"
       visible={showPicker}
       onVisibleChange={handleVisibleChange}
