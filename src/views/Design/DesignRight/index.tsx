@@ -40,8 +40,8 @@ export default class Index extends React.PureComponent<any, any> {
         </TabPane>
         <TabPane tab="样式" key="3">
           <BoxModel
-            name=""
-            value=""
+            name="color"
+            // value=""
             keys={["top", "right", "bottom", "left", "center"]}
             disabled={false}
           />

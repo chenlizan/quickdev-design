@@ -36,7 +36,7 @@ const InputGroup: React.FC<InputGroupProps> = (props) => {
       values.center = null;
       onChange(values, isDrag);
     }
-    setValues(values);
+    setValues({...values});
   };
 
   const children = toArrayChildren(otherProps.children).map((item) => {

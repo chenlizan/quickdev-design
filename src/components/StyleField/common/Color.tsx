@@ -76,6 +76,8 @@ const Color: React.FC<ColorProps> = (props) => {
     }
   };
 
+    window.addEventListener('mouseup', handleMouseUp);
+
   const handleColorChange = (value: any) => {
     const rgb = value.rgb;
     const color = rgb.a === 1 ? value.hex : `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`;
@@ -105,7 +107,7 @@ const Color: React.FC<ColorProps> = (props) => {
     return (
       <div key="picker" onMouseDown={handleMouseDown}>
         <SketchPicker
-          color={color && isColor(color) ? color : "rgba(0,0,0,0)"}
+          color={color && isColor(color) ? color : "rgba(0,0,0,1)"}
           presetColors={[
             "#f04134",
             "#00a854",
