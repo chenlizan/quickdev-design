@@ -11,19 +11,24 @@ import { alphaBg, getParentNode, isColor } from "../utils";
 export interface ColorProps {
   className: string;
   color: string;
-  title: any;
+  title?: any;
   type: string;
-  span: [3, 9, 12];
-  onChange: (value: string) => void;
-  gutter: number;
+  span?: number[];
+  onChange?: (value: string, isDrag?: boolean) => void;
+  gutter?: number;
 }
 
 const Color: React.FC<ColorProps> = (props) => {
   const [color, setColor] = React.useState(props.color);
   const [showPicker, setShowPicker] = React.useState(false);
-  const { onChange, title, type, span, ...otherProps } = props;
+  const [isColorDown, setIsColorDown] = React.useState(false);
 
-  let isColorDown = false;
+  React.useEffect(() => {
+    const { color } = props;
+    setColor(color);
+  }, [props.color]);
+
+  const { onChange, title, type, span, ...otherProps } = props;
 
   const classNameWrapper = classNames({
     "editor-color-wrapper": true,
@@ -38,7 +43,7 @@ const Color: React.FC<ColorProps> = (props) => {
   const handleInputBlur: React.ReactEventHandler<HTMLInputElement> = (event) => {
     const { target } = event;
     if (props.color !== (target as any).value) {
-      props.onChange((target as any).value);
+      props.onChange?.((target as any).value);
     }
   };
 
@@ -51,11 +56,11 @@ const Color: React.FC<ColorProps> = (props) => {
     // 渐变条没有样式，取上级样式，有个预览小块，用 style 判断；
     const isWhite = getParentNode(e.target, ["saturation-white", "flexbox-fix", ""], true);
     if (isWhite) {
-      isColorDown = true;
+      setIsColorDown(true);
     }
   };
 
-  const handleMouseUp = (e:any) => {
+  const handleMouseUp = (e: any) => {
     if (isColorDown) {
       const domStyle = e.target.style;
       // react-color 里的预览小块，无法判断，用 style 判断;
@@ -69,33 +74,27 @@ const Color: React.FC<ColorProps> = (props) => {
         domStyle.position === "absolute" &&
         domStyle.boxShadow
       );
-      isColorDown = false;
+      setIsColorDown(false);
       if (noPreviewDom) {
-        props.onChange(color);
+        props.onChange?.(color);
       }
     }
   };
-
-    window.addEventListener('mouseup', handleMouseUp);
 
   const handleColorChange = (value: any) => {
     const rgb = value.rgb;
     const color = rgb.a === 1 ? value.hex : `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`;
     setColor(color);
-    // this.setState({
-    //     color,
-    // }, () => {
-        if (!isColorDown) {
-            props.onChange(color);
-        } else {
-            props.onChange(color, true);
-        }
-    // });
+    if (!isColorDown) {
+      props.onChange?.(color);
+    } else {
+      props.onChange?.(color, true);
+    }
   };
 
   const handleRemoveColor = () => {
     if (props.color !== "initial") {
-      props.onChange("initial");
+      props.onChange?.("initial");
     }
   };
 
@@ -105,7 +104,7 @@ const Color: React.FC<ColorProps> = (props) => {
 
   const getColorPicker = () => {
     return (
-      <div key="picker" onMouseDown={handleMouseDown}>
+      <div key="picker" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
         <SketchPicker
           color={color && isColor(color) ? color : "rgba(0,0,0,1)"}
           presetColors={[
@@ -119,13 +118,10 @@ const Color: React.FC<ColorProps> = (props) => {
             "#00a2ae",
             "#222222",
             "#404040",
-            // '#5a5a5a',
             "#919191",
             "#bfbfbf",
             "#d9d9d9",
             "#e9e9e9",
-            // '#f5f5f5',
-            // '#f7f7f7',
             "#fbfbfb",
             "transparent",
           ]}
@@ -171,11 +167,11 @@ const Color: React.FC<ColorProps> = (props) => {
 
   return (
     <Row className={classNameWrapper}>
-      <Col span={span[0]}>{props.title}</Col>
-      <Col span={span[1]} style={{ position: "relative" }}>
+      <Col span={span?.[0]}>{props.title}</Col>
+      <Col span={span?.[1]} style={{ position: "relative" }}>
         {children}
       </Col>
-      <Col span={span[2]}>
+      <Col span={span?.[2]}>
         <Input value={color} onBlur={handleInputBlur} onPressEnter={handleInputBlur} onChange={handleInputChange} size="small" placeholder="Add color" />
       </Col>
     </Row>
@@ -183,5 +179,9 @@ const Color: React.FC<ColorProps> = (props) => {
 };
 
 Color.displayName = "Color";
+
+Color.defaultProps = {
+  span: [3, 9, 12],
+};
 
 export default Color;

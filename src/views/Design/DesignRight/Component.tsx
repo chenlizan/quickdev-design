@@ -12,10 +12,7 @@ interface ComponentProps {
   onClick?: ClickEventHandler;
 }
 
-export default class Component extends React.PureComponent<
-  ComponentProps,
-  any
-> {
+export default class Component extends React.PureComponent<ComponentProps, any> {
   getButtonDisabled(element: PropData): boolean {
     const { currentProps } = this.props;
     const predicate = {} as any;
@@ -24,10 +21,7 @@ export default class Component extends React.PureComponent<
       currentProps &&
       currentProps.namespace &&
       currentProps.type &&
-      _.find(
-        componentRelation[currentProps.namespace][currentProps.type],
-        predicate
-      ) !== undefined
+      _.find(componentRelation[currentProps.namespace][currentProps.type], predicate) !== undefined
     ) {
       return false;
     } else {
@@ -35,10 +29,7 @@ export default class Component extends React.PureComponent<
     }
   }
 
-  generateChild(
-    componentList: Array<any>,
-    namespace: string
-  ): Array<JSX.Element> {
+  generateChild(componentList: Array<any>, namespace: string): Array<JSX.Element> {
     const element = [];
     for (let i = 0, len = componentList.length; i < len; i++) {
       element.push(
@@ -65,10 +56,7 @@ export default class Component extends React.PureComponent<
     for (let i = 0, len = componentList.length; i < len; i++) {
       element.push(
         <Panel header={componentList[i].name} key={i.toString()}>
-          {this.generateChild(
-            componentList[i].components,
-            componentList[i].namespace
-          )}
+          {this.generateChild(componentList[i].components, componentList[i].namespace)}
         </Panel>
       );
     }

@@ -16,13 +16,7 @@ const initState: Design = {
   dropNode: undefined,
   currentProps: {},
   currentView: "view",
-  uiCode:
-    "class Index extends GenerateView {\n" +
-    "    static defaultProps = {\n" +
-    "        uiMeta: {},\n" +
-    "        uiProps: {}\n" +
-    "    };\n" +
-    "}",
+  uiCode: "class Index extends GenerateView {\n" + "    static defaultProps = {\n" + "        uiMeta: {},\n" + "        uiProps: {}\n" + "    };\n" + "}",
   uiMeta: {
     namespace: "html",
     type: "div",

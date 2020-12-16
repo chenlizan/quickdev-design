@@ -7,7 +7,4 @@ import "./assets/stylesheets/index.less"; //global style
 
 const store = configureStore();
 
-ReactDOM.render(
-  <Provider store={store}>{routes}</Provider>,
-  document.getElementById("root")
-);
+ReactDOM.render(<Provider store={store}>{routes}</Provider>, document.getElementById("root"));

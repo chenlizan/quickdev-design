@@ -3,10 +3,7 @@ import Scrollbars from "react-custom-scrollbars";
 import DesignPreview from "../../../containers/Design/DesignPreview";
 import * as styles from "../../../stylesheets/Design.less";
 
-export default class DesignContentForMobile extends React.PureComponent<
-  any,
-  any
-> {
+export default class DesignContentForMobile extends React.PureComponent<any, any> {
   private readonly iframeElement: React.RefObject<any>;
 
   constructor(props: Readonly<any>) {
@@ -21,16 +18,8 @@ export default class DesignContentForMobile extends React.PureComponent<
     }
     return (
       <div>
-        <Scrollbars
-          autoHide
-          className={styles.design_content_mobile}
-          style={modeSize}
-        >
-          {boostMode ? (
-            <iframe ref={this.iframeElement} src="#/preview" />
-          ) : (
-            <DesignPreview />
-          )}
+        <Scrollbars autoHide className={styles.design_content_mobile} style={modeSize}>
+          {boostMode ? <iframe ref={this.iframeElement} src="#/preview" /> : <DesignPreview />}
         </Scrollbars>
       </div>
     );

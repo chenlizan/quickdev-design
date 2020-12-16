@@ -1,7 +1,5 @@
 import * as React from "react";
-import AntAutoComplete, {
-  AutoCompleteProps as AntAutoCompleteProps,
-} from "antd/lib/auto-complete";
+import AntAutoComplete, { AutoCompleteProps as AntAutoCompleteProps } from "antd/lib/auto-complete";
 import Input from "antd/lib/input";
 import { getParentNode } from "../utils";
 import { SizeType } from "antd/lib/config-provider/SizeContext";
@@ -24,11 +22,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     if (props.onSearch) {
       props.onSearch(value);
     }
-    setOptions(
-      value && !value.match(/[a-z|%]/gi) && dataSource
-        ? dataSource.map((key) => ({ value: `${value}${key}` }))
-        : ([] as any)
-    );
+    setOptions(value && !value.match(/[a-z|%]/gi) && dataSource ? dataSource.map((key) => ({ value: `${value}${key}` })) : ([] as any));
   };
 
   const handleChange: (value: string) => void = (value) => {

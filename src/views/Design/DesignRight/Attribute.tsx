@@ -56,57 +56,32 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
       const { association, id, label, type } = configMeta[i];
       if (
         association &&
-        (fieldsValue[association.id] === association["condition"] ||
-          (currentProps as any).props[association.id] ===
-            association["condition"])
+        (fieldsValue[association.id] === association["condition"] || (currentProps as any).props[association.id] === association["condition"])
       ) {
         const { initialValue, valuePropName } = configMeta[i].props;
         element.push(
-          <LegacyForm.Item
-            key={i}
-            {...formItemLayout}
-            label={formItemLabel(configMeta[i])}
-            colon={false}
-          >
+          <LegacyForm.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
             {getFieldDecorator<string>(id, {
               initialValue,
               valuePropName: valuePropName || "value",
-            })(
-              React.createElement(
-                (AttributeField as any)[type],
-                configMeta[i].props
-              )
-            )}
+            })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
           </LegacyForm.Item>
         );
       } else if (!association && type !== "Button") {
         const { initialValue, valuePropName } = configMeta[i].props;
         element.push(
-          <LegacyForm.Item
-            key={i}
-            {...formItemLayout}
-            label={formItemLabel(configMeta[i])}
-            colon={false}
-          >
+          <LegacyForm.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
             {getFieldDecorator<string>(id, {
               initialValue,
               valuePropName: valuePropName || "value",
-            })(
-              React.createElement(
-                (AttributeField as any)[type],
-                configMeta[i].props
-              )
-            )}
+            })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
           </LegacyForm.Item>
         );
       } else if (type === "Button") {
         //no binging
         element.push(
           <LegacyForm.Item key={i}>
-            {React.createElement(
-              (AttributeField as any)[type],
-              _.assign(configMeta[i].props, { onClick: this.handleClick })
-            )}
+            {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, { onClick: this.handleClick }))}
           </LegacyForm.Item>
         );
       }
@@ -125,9 +100,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
     const { currentProps } = this.props;
     let formItem = [<span key={uuid()}>无属性配置</span>];
     if (currentProps && currentProps.namespace && currentProps.type) {
-      const propMeta = (AttributeConfig as any)[currentProps.namespace][
-        currentProps.type
-      ];
+      const propMeta = (AttributeConfig as any)[currentProps.namespace][currentProps.type];
       if (propMeta) {
         formItem = formItem.concat(this.generateFormItem(propMeta));
         formItem.shift();
@@ -141,16 +114,11 @@ export default LegacyForm.create<any>({
   mapPropsToFields: (props) => {
     if (props.currentProps && _.isObject(props.currentProps.props)) {
       const fieldData = {};
-      const propMeta = (AttributeConfig as any)[props.currentProps.namespace][
-        props.currentProps.type
-      ];
+      const propMeta = (AttributeConfig as any)[props.currentProps.namespace][props.currentProps.type];
       Object.keys(props.currentProps.props).forEach((key) => {
         const propMetaItem = _.find(propMeta, { id: key });
         (fieldData as any)[key] = LegacyForm.createFormField({
-          value:
-            propMetaItem && propMetaItem.toFields
-              ? propMetaItem.toFields(props.currentProps.props[key])
-              : props.currentProps.props[key],
+          value: propMetaItem && propMetaItem.toFields ? propMetaItem.toFields(props.currentProps.props[key]) : props.currentProps.props[key],
         });
       });
       if (props.currentProps.uiKey) {
@@ -162,9 +130,7 @@ export default LegacyForm.create<any>({
     }
   },
   onFieldsChange: (props, fields) => {
-    const propMeta = (AttributeConfig as any)[props.currentProps.namespace][
-      props.currentProps.type
-    ];
+    const propMeta = (AttributeConfig as any)[props.currentProps.namespace][props.currentProps.type];
     const propMetaItem = _.find(propMeta, { id: Object.keys(fields)[0] });
     if (propMetaItem.onFieldsChange) {
       props.onChange(propMetaItem.onFieldsChange(fields));

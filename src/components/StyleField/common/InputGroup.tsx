@@ -24,6 +24,10 @@ const InputGroup: React.FC<InputGroupProps> = (props) => {
 
   const [values, setValues] = React.useState(getValues(props));
 
+  React.useEffect(() => {
+    setValues(getValues(props));
+  }, [props.children]);
+
   const handleChange = (key: string, e: any, isDrag: boolean) => {
     const value = e && e.target ? e.target.value : e;
     if (key === "center") {
@@ -36,7 +40,7 @@ const InputGroup: React.FC<InputGroupProps> = (props) => {
       values.center = null;
       onChange(values, isDrag);
     }
-    setValues({...values});
+    setValues({ ...values });
   };
 
   const children = toArrayChildren(otherProps.children).map((item) => {

@@ -12,22 +12,14 @@ export default class Index extends React.PureComponent<any, any> {
   generateOption(configMeta: Array<any>): Array<JSX.Element> {
     const element = [];
     for (let i = 0, len = configMeta.length; i < len; i++) {
-      element.push(
-        <Select.Option value={configMeta[i].value}>
-          {configMeta[i].label}
-        </Select.Option>
-      );
+      element.push(<Select.Option value={configMeta[i].value}>{configMeta[i].label}</Select.Option>);
     }
     return element;
   }
 
   render(): React.ReactNode {
     return (
-      <Select
-        className={styles["attribute_field_select"]}
-        onChange={this.handleOnChange}
-        value={this.props.value}
-      >
+      <Select className={styles["attribute_field_select"]} onChange={this.handleOnChange} value={this.props.value}>
         {this.generateOption(this.props.options || [])}
       </Select>
     );

@@ -47,20 +47,12 @@ export default class Index extends React.Component<any, any> {
     const { boostMode, currentProps, currentView, uiCode, uiMeta } = this.props;
     const { modeName, modeSize } = this.state;
     let codeEditHeight = 0;
-    if (
-      (currentView === "code" || currentView === "json") &&
-      this.thisNode &&
-      this.thisNode.ownerDocument
-    ) {
-      const content = this.thisNode.ownerDocument.querySelector(
-        ".ant-layout-content"
-      );
+    if ((currentView === "code" || currentView === "json") && this.thisNode && this.thisNode.ownerDocument) {
+      const content = this.thisNode.ownerDocument.querySelector(".ant-layout-content");
       content.style.overflow = "hidden";
       codeEditHeight = content.clientHeight;
     } else if (this.thisNode && this.thisNode.ownerDocument) {
-      const content = this.thisNode.ownerDocument.querySelector(
-        ".ant-layout-content"
-      );
+      const content = this.thisNode.ownerDocument.querySelector(".ant-layout-content");
       content.style.overflow = "";
     }
     return (
@@ -75,24 +67,13 @@ export default class Index extends React.Component<any, any> {
           />
         ) : (
           [
-            <Dropdown
-              key="0"
-              className={styles.design_content_mode}
-              overlay={this.menu}
-              trigger={["click"]}
-            >
+            <Dropdown key="0" className={styles.design_content_mode} overlay={this.menu} trigger={["click"]}>
               <a>
                 {modeName}
                 <DownOutlined />
               </a>
             </Dropdown>,
-            <DesignContentForMobile
-              key="1"
-              boostMode={boostMode}
-              modeSize={modeSize}
-              uiCode={uiCode}
-              uiMeta={uiMeta}
-            />,
+            <DesignContentForMobile key="1" boostMode={boostMode} modeSize={modeSize} uiCode={uiCode} uiMeta={uiMeta} />,
           ]
         )}
       </div>

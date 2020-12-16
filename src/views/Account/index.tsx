@@ -11,19 +11,9 @@ export default class Design extends React.PureComponent<any, any> {
           <div className={styles.account_form_login}>
             <div className={styles.account_form_login_check} />
             <div className={styles.account_form_login_input}>
-              <Input
-                placeholder="Username"
-                size="large"
-                prefix={<UserOutlined />}
-              />
-              <Input
-                placeholder="Password"
-                size="large"
-                prefix={<LockOutlined />}
-              />
-              <Button className={styles.account_form_login_submit}>
-                Sign in
-              </Button>
+              <Input placeholder="Username" size="large" prefix={<UserOutlined />} />
+              <Input placeholder="Password" size="large" prefix={<LockOutlined />} />
+              <Button className={styles.account_form_login_submit}>Sign in</Button>
             </div>
           </div>
         </div>

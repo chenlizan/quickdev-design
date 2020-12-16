@@ -11,19 +11,10 @@ interface CatcherProps {
   type?: "hover" | "select" | "";
 }
 
-const Catcher: React.FC<CatcherProps> = ({
-  dom = document.createElement("div"),
-  domRect,
-  type,
-}) => {
+const Catcher: React.FC<CatcherProps> = ({ dom = document.createElement("div"), domRect, type }) => {
   const [drag, setDrag] = useState(false);
 
-  const styles = _.omit(domRect as DOMRectReadOnly, [
-    "bottom",
-    "right",
-    "x",
-    "y",
-  ]);
+  const styles = _.omit(domRect as DOMRectReadOnly, ["bottom", "right", "x", "y"]);
 
   const getMirror = () => {
     let mirror;
@@ -49,12 +40,7 @@ const Catcher: React.FC<CatcherProps> = ({
 
   if (type === "select") {
     return (
-      <div
-        className={classNames("catcher", "select")}
-        style={styles}
-        onMouseEnter={() => setDrag(true)}
-        onMouseOut={() => setDrag(false)}
-      >
+      <div className={classNames("catcher", "select")} style={styles} onMouseEnter={() => setDrag(true)} onMouseOut={() => setDrag(false)}>
         <ToolBar onClick={handleClick} />
         {/*<div dangerouslySetInnerHTML={{ __html: getMirror().toString() }}/>*/}
         {/*{drag ? <Portal getContainer={getMirror}/> : null}*/}

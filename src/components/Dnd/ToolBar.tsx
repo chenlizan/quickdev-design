@@ -57,22 +57,8 @@ const ToolBar: React.FC<ToolBarProps> = ({ onClick = noop }) => {
 
   return (
     <div className={classNames("toolbar")} ref={toolBarEl}>
-      <Button
-        icon={<MenuOutlined />}
-        size="small"
-        type="primary"
-        value="Menu"
-        onClick={handleClick}
-      />
-      <Button
-        icon={<DragOutlined />}
-        size="small"
-        type="primary"
-        value="Drag"
-        onClick={handleClick}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-      />
+      <Button icon={<MenuOutlined />} size="small" type="primary" value="Menu" onClick={handleClick} />
+      <Button icon={<DragOutlined />} size="small" type="primary" value="Drag" onClick={handleClick} onMouseDown={onMouseDown} onMouseUp={onMouseUp} />
     </div>
   );
 };

@@ -16,22 +16,12 @@ export default class Index extends React.PureComponent<any, any> {
     this.setState({ color: color.hex });
   };
 
-  renderContent = () => (
-    <ChromePicker color={this.state.color} onChange={this.handleOnChange} />
-  );
+  renderContent = () => <ChromePicker color={this.state.color} onChange={this.handleOnChange} />;
 
   render(): React.ReactNode {
     return (
-      <Popover
-        className={styles["attribute_field_color"]}
-        placement="left"
-        trigger="click"
-        content={this.renderContent()}
-      >
-        <Input
-          value={this.props.value}
-          style={{ backgroundColor: this.state.color }}
-        />
+      <Popover className={styles["attribute_field_color"]} placement="left" trigger="click" content={this.renderContent()}>
+        <Input value={this.props.value} style={{ backgroundColor: this.state.color }} />
       </Popover>
     );
   }

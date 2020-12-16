@@ -25,10 +25,7 @@ export default class Index extends React.PureComponent<any, any> {
       if (
         componentRelation[element.namespace] &&
         componentRelation[element.namespace][element.type] &&
-        _.find(
-          componentRelation[element.namespace][element.type],
-          predicate
-        ) === undefined
+        _.find(componentRelation[element.namespace][element.type], predicate) === undefined
       ) {
         return true;
       } else {
@@ -51,19 +48,13 @@ export default class Index extends React.PureComponent<any, any> {
               uiMeta[i].key === "app-root" ? (
                 ""
               ) : (
-                <ContextMenuTrigger
-                  id="contextmenu"
-                  holdToDisplay={-1}
-                  collect={() => uiMeta[i]}
-                >
+                <ContextMenuTrigger id="contextmenu" holdToDisplay={-1} collect={() => uiMeta[i]}>
                   {uiMeta[i].type}
                 </ContextMenuTrigger>
               )
             }
           >
-            {uiMeta[i].props && uiMeta[i].props.children
-              ? this.generateTreeNode(uiMeta[i].props.children)
-              : (null as any)}
+            {uiMeta[i].props && uiMeta[i].props.children ? this.generateTreeNode(uiMeta[i].props.children) : (null as any)}
           </TreeNode>
         );
       }
@@ -101,12 +92,7 @@ export default class Index extends React.PureComponent<any, any> {
     const treeNode = this.generateTreeNode([uiMeta]);
     return (
       <>
-        <Tabs
-          className={styles.design_left}
-          centered
-          defaultActiveKey="1"
-          tabPosition="bottom"
-        >
+        <Tabs className={styles.design_left} centered defaultActiveKey="1" tabPosition="bottom">
           <TabPane tab="视图大纲" key="1">
             <Tree
               blockNode

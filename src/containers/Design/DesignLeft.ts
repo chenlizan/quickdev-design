@@ -1,12 +1,7 @@
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import DesignLeft from "../../views/Design/DesignLeft";
-import {
-  current_choose_node,
-  current_drop_node,
-  current_delete_node,
-  drop_before_data,
-} from "../../action";
+import { current_choose_node, current_drop_node, current_delete_node, drop_before_data } from "../../action";
 
 const mapStateToProps = (state: object) => {
   return {

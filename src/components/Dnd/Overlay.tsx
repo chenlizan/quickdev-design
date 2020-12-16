@@ -13,12 +13,8 @@ interface OverlayProps {
 const Overlay: React.FC<OverlayProps> = ({ className, children }) => {
   const overlayEl = useRef(null);
 
-  const [currentHoverRect, setCurrentHoverRect] = useState(
-    {} as DOMRectReadOnly
-  );
-  const [currentSelectRect, setCurrentSelectRect] = useState(
-    {} as DOMRectReadOnly
-  );
+  const [currentHoverRect, setCurrentHoverRect] = useState({} as DOMRectReadOnly);
+  const [currentSelectRect, setCurrentSelectRect] = useState({} as DOMRectReadOnly);
   const [currentSelectDom, setCurrentSelectDom] = useState({} as HTMLElement);
 
   const getContainer = () => {
@@ -56,12 +52,7 @@ const Overlay: React.FC<OverlayProps> = ({ className, children }) => {
 
   return (
     <>
-      <div
-        className={classNames("overlay", className)}
-        ref={overlayEl}
-        onClick={overlayClick}
-        onMouseMove={overlayMove}
-      >
+      <div className={classNames("overlay", className)} ref={overlayEl} onClick={overlayClick} onMouseMove={overlayMove}>
         {children}
       </div>
       {!_.eq(currentHoverRect, currentSelectRect) && (
@@ -71,11 +62,7 @@ const Overlay: React.FC<OverlayProps> = ({ className, children }) => {
       )}
       {!_.isEmpty(currentSelectRect) && (
         <Portal getContainer={getContainer}>
-          <Catcher
-            dom={currentSelectDom}
-            domRect={currentSelectRect}
-            type="select"
-          />
+          <Catcher dom={currentSelectDom} domRect={currentSelectRect} type="select" />
         </Portal>
       )}
     </>

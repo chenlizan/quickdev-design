@@ -3,10 +3,7 @@ import * as monaco from "monaco-editor";
 import * as jsonFormat from "json-format";
 import * as styles from "../../../stylesheets/Design.less";
 
-export default class DesignContentForCodeEdit extends React.PureComponent<
-  any,
-  any
-> {
+export default class DesignContentForCodeEdit extends React.PureComponent<any, any> {
   private readonly containerCode: React.RefObject<HTMLDivElement>;
   private readonly containerJson: React.RefObject<HTMLDivElement>;
   private editorCode: monaco.editor.IStandaloneCodeEditor | undefined;
@@ -24,37 +21,31 @@ export default class DesignContentForCodeEdit extends React.PureComponent<
     const _this = this;
     const { uiCode, uiMeta, onChange } = props;
     if (this.containerCode) {
-      this.editorCode = monaco.editor.create(
-        this.containerCode.current as HTMLElement,
-        {
-          value: uiCode,
-          automaticLayout: true,
-          contextmenu: true,
-          language: "javascript",
-          readOnly: false,
-          wordWrap: "wordWrapColumn",
-          wordWrapMinified: true,
-          wrappingIndent: "indent",
-        }
-      );
+      this.editorCode = monaco.editor.create(this.containerCode.current as HTMLElement, {
+        value: uiCode,
+        automaticLayout: true,
+        contextmenu: true,
+        language: "javascript",
+        readOnly: false,
+        wordWrap: "wordWrapColumn",
+        wordWrapMinified: true,
+        wrappingIndent: "indent",
+      });
       this.editorCode.onDidChangeModelContent(() => {
         onChange((_this.editorCode as any).getValue());
       });
     }
     if (this.containerJson) {
-      this.editorJson = monaco.editor.create(
-        this.containerJson.current as HTMLElement,
-        {
-          value: jsonFormat(uiMeta),
-          automaticLayout: true,
-          contextmenu: true,
-          language: "json",
-          readOnly: true,
-          wordWrap: "wordWrapColumn",
-          wordWrapMinified: true,
-          wrappingIndent: "indent",
-        }
-      );
+      this.editorJson = monaco.editor.create(this.containerJson.current as HTMLElement, {
+        value: jsonFormat(uiMeta),
+        automaticLayout: true,
+        contextmenu: true,
+        language: "json",
+        readOnly: true,
+        wordWrap: "wordWrapColumn",
+        wordWrapMinified: true,
+        wrappingIndent: "indent",
+      });
     }
   };
 
@@ -85,16 +76,8 @@ export default class DesignContentForCodeEdit extends React.PureComponent<
     const hideStyle = { display: "none" };
     return (
       <div>
-        <div
-          className={styles.design_content_monaco}
-          style={currentView === "code" ? style : hideStyle}
-          ref={this.containerCode}
-        />
-        <div
-          className={styles.design_content_monaco}
-          style={currentView === "json" ? style : hideStyle}
-          ref={this.containerJson}
-        />
+        <div className={styles.design_content_monaco} style={currentView === "code" ? style : hideStyle} ref={this.containerCode} />
+        <div className={styles.design_content_monaco} style={currentView === "json" ? style : hideStyle} ref={this.containerJson} />
       </div>
     );
   }

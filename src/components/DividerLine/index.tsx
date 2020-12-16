@@ -20,18 +20,14 @@ type DraggableEventHandler = (e: MouseEvent, data: DraggableData) => void;
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-interface DividerLineProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag"> {
+interface DividerLineProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrag"> {
   prefixCls?: string;
   orientation?: "left" | "right";
   onDrag?: DraggableEventHandler;
   style?: React.CSSProperties;
 }
 
-export default class DividerLine extends React.PureComponent<
-  DividerLineProps,
-  any
-> {
+export default class DividerLine extends React.PureComponent<DividerLineProps, any> {
   static defaultProps = {
     prefixCls: "divider-line",
   };
@@ -58,8 +54,7 @@ export default class DividerLine extends React.PureComponent<
     const thisNode = ReactDOM.findDOMNode(this);
     const { orientation, onDrag } = this.props;
     if (thisNode && onDrag) {
-      const offsetX =
-        orientation === "left" ? 0 : thisNode.ownerDocument.body.clientWidth;
+      const offsetX = orientation === "left" ? 0 : thisNode.ownerDocument.body.clientWidth;
       onDrag(e, { x: Math.abs(offsetX - e.clientX), y: e.clientY });
     }
   };
@@ -89,13 +84,6 @@ export default class DividerLine extends React.PureComponent<
   render(): React.ReactNode {
     const { className } = this.props;
     const otherProps = omit(this.props, ["prefixCls", "onDrag"]);
-    return (
-      <div
-        {...otherProps}
-        className={classNames(this.getDividerLineClassName(), className)}
-        onMouseDown={this.onMouseDown}
-        onMouseUp={this.onMouseUp}
-      />
-    );
+    return <div {...otherProps} className={classNames(this.getDividerLineClassName(), className)} onMouseDown={this.onMouseDown} onMouseUp={this.onMouseUp} />;
   }
 }

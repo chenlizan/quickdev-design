@@ -12,12 +12,6 @@ export default class Index extends React.PureComponent<any, any> {
   };
 
   render(): React.ReactNode {
-    return (
-      <InputNumber
-        className={styles["attribute_field_inputnumber"]}
-        onChange={this.handleOnChange}
-        value={this.props.value}
-      />
-    );
+    return <InputNumber className={styles["attribute_field_inputnumber"]} onChange={this.handleOnChange} value={this.props.value} />;
   }
 }
