@@ -4,6 +4,7 @@ import Select from "antd/lib/select";
 import AutoComplete from "./AutoComplete";
 import Color from "./Color";
 import InputGroup from "./InputGroup";
+import { getParentNode } from "../utils";
 
 export interface BoxModelProps {
   name: string;
@@ -37,12 +38,37 @@ const BoxModel: React.FC<BoxModelProps> = (props) => {
     });
   };
 
+  const getSelect = () => {
+    const select = ["none", "solid", "dashed", "dotted", "double"];
+    const { value } = props;
+    return props.keys.map((key) => {
+      const v = (value && value[key]) || (typeof value === "string" ? value : select[0]);
+      return (
+        <Select
+          className={key}
+          size="small"
+          key={key}
+          value={v}
+          getPopupContainer={(node) => getParentNode(node, "editor-list")}
+          dropdownMatchSelectWidth={false}
+          dropdownClassName="editor-list-dropdown"
+        >
+          {select.map((cKey) => (
+            <Select.Option value={cKey} key={cKey}>
+              {cKey}
+            </Select.Option>
+          ))}
+        </Select>
+      );
+    });
+  };
+
   const getChildrenToBox = () => {
     switch (props.name) {
       case "color":
         return getColor();
       case "style":
-        return getColor();
+        return getSelect();
       default:
         return getInput(props.name === "radius");
     }

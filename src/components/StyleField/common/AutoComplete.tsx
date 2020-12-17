@@ -34,9 +34,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     const v = target ? target.value : e;
     if (v !== props.value) {
       setValue(v);
-      // if (onChange) {
       onChange?.(v);
-      // }
     }
   };
 

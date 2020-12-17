@@ -7,7 +7,7 @@ export const alphaBg =
 
 export const colorExp = /^rgba?\(((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?)\)$|(#[\d\w]+|\w+\((?:\d+%?(?:,\s)*){3}(?:\d*\.?\d+)?\))|^hsla?\(((\d+),\s*([\d.]+)%,\s*([\d.]+)%(?:,\s*(\d+(?:\.\d+)?))?)\)$/gi; // eslint-disable-line max-len
 
-export const colorLookup = {
+export const colorLookup: { [key: string]: string } = {
   aqua: "rgb(0, 255, 255)",
   lime: "rgb(0, 255, 0)",
   silver: "rgb(192, 192, 192)",
@@ -30,7 +30,7 @@ export const colorLookup = {
   transparent: "rgba(255, 255, 255, 0)",
 };
 
-export function getParentNode(node: any, className: string[], toBool: boolean = false): HTMLElement {
+export function getParentNode(node: any, className: string[] | string, toBool: boolean = false): HTMLElement {
   const parent = node.parentNode;
   const classNameArray = (parent.className || "").split(" ").some((name: string) => {
     if (Array.isArray(className)) {

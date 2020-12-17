@@ -20,6 +20,7 @@ export default class Index extends React.PureComponent<any, any> {
   };
 
   handleChange1 = (data: any) => {
+    console.log(data);
     this.setState({ value: data });
   };
 
@@ -39,7 +40,7 @@ export default class Index extends React.PureComponent<any, any> {
           <Attribute currentProps={currentProps} onChange={this.handleChange} onClick={this.handleClick} />
         </TabPane>
         <TabPane tab="样式" key="3">
-          <BoxModel name="color" value={value} onChange={this.handleChange1} keys={["top", "right", "bottom", "left", "center"]} disabled={false} />
+          <BoxModel name="style" value={value} onChange={this.handleChange1} keys={["top", "right", "bottom", "left", "center"]} disabled={false} />
         </TabPane>
       </Tabs>
     );
