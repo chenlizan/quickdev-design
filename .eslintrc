@@ -13,7 +13,7 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "max-len": ["error", 160],
+    "max-len": ["warn", 160],
     "prettier/prettier": "error"
   }
 }

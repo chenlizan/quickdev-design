@@ -133,5 +133,8 @@
     "Firefox ESR",
     "not ie < 9"
   ],
-  "config": {}
+  "config": {},
+  "dependencies": {
+    "rc-tween-one": "^2.7.3"
+  }
 }
