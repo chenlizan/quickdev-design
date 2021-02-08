@@ -3,28 +3,43 @@ import { TweenOneGroup } from "rc-tween-one";
 import Row from "antd/lib/row";
 import Col from "antd/lib/col";
 import Collapse from "antd/lib/collapse";
-import Radio from "antd/lib/radio";
+import Radio, { RadioChangeEvent } from "antd/lib/radio";
 import Icon from "./common/Icon";
 
 const Panel = Collapse.Panel;
-
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
-const Layout: React.FC<any> = (props) => {
+export interface LayoutProps {
+  className?: string;
+  header?: string;
+  locale: {
+    header: string;
+    name: string;
+    displaySelect: { [key: string]: string };
+    flexName: { [key: string]: { name: string; icon: string } };
+    flexSelect: { [key: string]: { [key: string]: string } };
+  };
+  value?: { [key: string]: string };
+  onChange?: (name: any, value: any) => void;
+}
+
+const Layout: React.FC<LayoutProps> = (props) => {
   const { value, locale, header, ...otherProps } = props;
 
-  const handleChange = (e, key) => {
+  const handleChange = (e: RadioChangeEvent, key: string) => {
     const type = e.target.value;
     const { value } = props;
-    value[key] = type;
-    props?.onChange("layout", value);
+    if (value) {
+      value[key] = type;
+    }
+    props.onChange?.("layout", value);
   };
 
   const getFlexChildToRender = () => {
     const { locale, value } = props;
     const { flexSelect, flexName } = locale;
-    const getItemToChild = (data, $key) => {
+    const getItemToChild = (data: { [key: string]: string }, $key: string) => {
       return Object.keys(data).map((key) => (
         <RadioButton value={key} key={key}>
           <Icon type={`${$key}-${key}`} prompt={data[key]} />
@@ -41,10 +56,10 @@ const Layout: React.FC<any> = (props) => {
           </Col>
           <Col span={21}>
             <RadioGroup
-              value={value[key]}
+              value={value?.[key]}
               size="small"
               onChange={(e) => {
-                props?.onChange(e, key);
+                handleChange(e, key);
               }}
             >
               {getItemToChild(item, key)}
@@ -63,7 +78,7 @@ const Layout: React.FC<any> = (props) => {
   const radioChildrenToRender = () => {
     return (
       <RadioGroup
-        value={value.display}
+        value={value?.display}
         size="small"
         onChange={(e) => {
           handleChange(e, "display");
@@ -77,10 +92,10 @@ const Layout: React.FC<any> = (props) => {
       </RadioGroup>
     );
   };
-  const flexChild = value.display === "flex" ? getFlexChildToRender() : null;
+  const flexChild = value?.display === "flex" ? getFlexChildToRender() : null;
 
   return (
-    <Panel {...otherProps} header={header || locale.header}>
+    <Panel key="layout" {...otherProps} header={header || locale.header}>
       <Row gutter={8}>
         <Col>{locale.name}</Col>
       </Row>
@@ -99,5 +114,14 @@ const Layout: React.FC<any> = (props) => {
 };
 
 Layout.displayName = "EditorLayout";
+
+Layout.defaultProps = {
+  className: "editor-layout",
+  value: {
+    display: "block",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+  },
+};
 
 export default Layout;

@@ -8,7 +8,7 @@ import { getParentNode } from "../utils";
 
 export interface BoxModelProps {
   name: string;
-  disabled: boolean;
+  disabled?: boolean;
   keys: string[];
   value: any;
   onChange?: (value: any, isDrag?: boolean) => void;
@@ -29,7 +29,7 @@ const BoxModel: React.FC<BoxModelProps> = (props) => {
     const { value } = props;
     return (isRadius ? radioKeys : props.keys).map((key) => {
       let v = (value && value[key]) || (typeof value === "string" ? value : null);
-      if (key === "center") {
+      if (key === "center" && value) {
         const values = Object.keys(value).map((c) => value[c]);
         const equal = values.every((c) => c === values[0]);
         v = equal ? values[0] : v;
@@ -91,5 +91,9 @@ const BoxModel: React.FC<BoxModelProps> = (props) => {
 };
 
 BoxModel.displayName = "BoxModel";
+
+BoxModel.defaultProps = {
+  disabled: false,
+};
 
 export default BoxModel;
