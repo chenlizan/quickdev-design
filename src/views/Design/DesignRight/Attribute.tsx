@@ -1,6 +1,5 @@
-import * as React from "react";
-import * as uuid from "uuid/v4";
-import * as _ from "lodash";
+import _ from "lodash";
+import React from "react";
 import { Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Form as LegacyForm } from "@ant-design/compatible";
@@ -53,10 +52,11 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
     const element = [];
     const fieldsValue = getFieldsValue();
     for (let i = 0, len = configMeta.length; i < len; i++) {
-      const { association, id, label, type } = configMeta[i];
+      const { association, id, type } = configMeta[i];
       if (
-        association &&
-        (fieldsValue[association.id] === association["condition"] || (currentProps as any).props[association.id] === association["condition"])
+        (!association && type !== "Button") ||
+        (association &&
+          (fieldsValue?.[association.id] === association["condition"] || (currentProps as any).props[association.id] === association["condition"]))
       ) {
         const { initialValue, valuePropName } = configMeta[i].props;
         element.push(
@@ -67,18 +67,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
             })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
           </LegacyForm.Item>
         );
-      } else if (!association && type !== "Button") {
-        const { initialValue, valuePropName } = configMeta[i].props;
-        element.push(
-          <LegacyForm.Item key={i} {...formItemLayout} label={formItemLabel(configMeta[i])} colon={false}>
-            {getFieldDecorator<string>(id, {
-              initialValue,
-              valuePropName: valuePropName || "value",
-            })(React.createElement((AttributeField as any)[type], configMeta[i].props))}
-          </LegacyForm.Item>
-        );
       } else if (type === "Button") {
-        //no binging
         element.push(
           <LegacyForm.Item key={i}>
             {React.createElement((AttributeField as any)[type], _.assign(configMeta[i].props, { onClick: this.handleClick }))}
@@ -98,7 +87,7 @@ class Attribute extends React.PureComponent<AttributeProps, any> {
 
   render(): React.ReactNode {
     const { currentProps } = this.props;
-    let formItem = [<span key={uuid()}>无属性配置</span>];
+    let formItem = [<span key={0}>无属性配置</span>];
     if (currentProps && currentProps.namespace && currentProps.type) {
       const propMeta = (AttributeConfig as any)[currentProps.namespace][currentProps.type];
       if (propMeta) {

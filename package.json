@@ -48,7 +48,7 @@
     "@types/uuid": "^3.4.6",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
-    "antd": "^4.7.0",
+    "antd": "^4.12.3",
     "antd-mobile": "^2.x",
     "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.0.3",

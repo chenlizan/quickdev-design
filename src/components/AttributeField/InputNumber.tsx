@@ -5,7 +5,7 @@ import * as styles from "./assets/index.less";
 export default class Index extends React.PureComponent<any, any> {
   displayName: "InputNumber" | undefined;
 
-  handleOnChange = (value: number | undefined | string) => {
+  handleOnChange: (value: number | string | undefined | null) => void = (value) => {
     this.props.onChange({
       target: { value: value === "" ? undefined : value },
     });
