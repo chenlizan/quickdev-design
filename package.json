@@ -1,6 +1,6 @@
 {
   "name": "quickdev-design",
-  "version": "0.2.5",
+  "version": "0.3.1",
   "description": "",
   "scripts": {
     "inst": "npm install",
@@ -33,6 +33,7 @@
     "@babel/preset-react": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@babel/standalone": "^7.12.3",
+    "@hot-loader/react-dom": "^17.0.1",
     "@types/classnames": "^2.2.9",
     "@types/lodash": "^4.14.162",
     "@types/prop-types": "^15.7.3",
@@ -96,6 +97,7 @@
     "react-dom": "^16.14.0",
     "react-draggable": "^4.4.3",
     "react-dropzone": "^10.2.1",
+    "react-hot-loader": "^4.13.0",
     "react-loadable": "^5.5.0",
     "react-redux": "^7.2.1",
     "react-resizable": "^1.10.1",

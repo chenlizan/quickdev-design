@@ -47,9 +47,9 @@
   .ant-input-number,
   .ant-input {
     width: 100%;
-    color: @text-color;
-    background: @bgColor;
-    border-color: @input-line-color;
+    //color: @text-color;
+    //background: @bgColor;
+    //border-color: @input-line-color;
 
     &.ant-input-disabled {
       color: fade(@text-color, 10);
@@ -57,69 +57,46 @@
     }
 
     input {
-      color: @text-color;
-      background: @bgColor !important;
-      border-color: @input-line-color;
+      //color: @text-color;
+      //background: @bgColor !important;
+      //border-color: @input-line-color;
     }
 
     &:hover,
     &:focus,
     &-focused {
-      border-color: @input-line-color-hover;
-      box-shadow: 0 0 4px @input-line-color-hover;
+      //border-color: @input-line-color-hover;
+      //box-shadow: 0 0 4px @input-line-color-hover;
     }
 
     &::-moz-placeholder {
-      color: fade(@text-color, 15);
+      //color: fade(@text-color, 15);
       opacity: 1;
     }
 
     &:-ms-input-placeholder {
-      color: fade(@text-color, 15);
+      //color: fade(@text-color, 15);
     }
 
     &::-webkit-input-placeholder {
-      color: fade(@text-color, 15);
+      //color: fade(@text-color, 15);
     }
   }
 
   .ant-input-group {
     &-addon {
       padding: 0 4px;
-      color: @text-color;
-      background-color: @bgColor;
-      border-color: @text-color;
+      //color: @text-color;
+      //background-color: @bgColor;
+      //border-color: @text-color;
     }
   }
   .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,
   .ant-select,
-  .ant-select-selection, .ant-select-auto-complete.ant-select {
-    color: @text-color;
-    background: @bgColor;
-    border-color: @input-line-color;
-
-    &:hover,
-    &:focus {
-      border-color: @input-line-color-hover;
-    }
-
-    .ant-select-selection-selected-value {
-      padding-right: 8px;
-    }
-
-    .ant-select-arrow {
-      right: 4px;
-      color: @text-color;
-    }
-
+  .ant-select-selection,
+  .ant-select-auto-complete.ant-select {
     input {
       padding: 0 7px;
-      &:hover,
-      &:focus,
-      &-focused {
-        border-color: @input-line-color-hover;
-        box-shadow: none;
-      }
     }
   }
 
@@ -129,12 +106,6 @@
       right: 0;
       left: 0;
     }
-  }
-
-  .ant-select-focused .ant-select-selection,
-  .ant-select-open .ant-select-selection {
-    border-color: @input-line-color-hover;
-    box-shadow: 0 0 4px @input-line-color-hover;
   }
 
   .ant-select-selection {
@@ -151,7 +122,6 @@
     background: transparent;
 
     .ant-input-number-handler {
-
       .ant-input-number-handler-up-inner,
       .ant-input-number-handler-down-inner {
         color: @text-color;
@@ -165,23 +135,8 @@
 
   .ant-radio-button-wrapper {
     width: 42px;
-    color: @text-color;
     text-align: center;
     background: transparent;
-    border-color: @input-line-color;
-  }
-
-  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):first-child,
-  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
-  .ant-radio-button-wrapper-checked {
-    color: @text-color-hover;
-    background: @heiColor;
-    border-color: @input-line-color-hover;
-    box-shadow: -1px 0 0 0 @input-line-color-hover;
-  }
-
-  .ant-radio-button-wrapper:not(:first-child)::before {
-    background-color: fade(@input-line-color, 30);
   }
 
   .ant-radio-button-auto-width {
@@ -216,7 +171,7 @@
     background: @heiColor;
     border-radius: 4px;
     box-shadow: 0 0 0 fade(#000, 0);
-    transition: transform .3s @ease-out, box-shadow .3s @ease-out, color .3s @ease-out, background .3s @ease-out;
+    transition: transform 0.3s @ease-out, box-shadow 0.3s @ease-out, color 0.3s @ease-out, background 0.3s @ease-out;
 
     &:hover {
       color: @text-color-hover;
@@ -275,7 +230,7 @@
   .ant-checkbox {
     color: @text-color;
 
-    &+span {
+    & + span {
       color: @text-color;
     }
 
@@ -290,7 +245,6 @@
         background-color: @heiColor;
         border-color: @text-color;
       }
-
     }
   }
 }
@@ -299,8 +253,8 @@
   .ant-popover-inner {
     position: relative;
     z-index: 1;
-    background-color: @huiColor;
-    box-shadow: 0 0 16px fade(@huiColor, 70);
+    //background-color: @huiColor;
+    //box-shadow: 0 0 16px fade(@huiColor, 70);
   }
 
   .ant-popover-arrow {

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Icon } from "@ant-design/compatible";
+import Icon, { IconProps } from "@ant-design/compatible/lib/icon";
 import Tooltip from "antd/lib/tooltip";
 
-const icon: { [key: string]: React.ReactNode } = {
+const icon: { [key: string]: React.ComponentType<React.SVGProps<SVGSVGElement>> } = {
   letterSpacing() {
     return (
       <svg width="18" viewBox="0 0 1024 1024" fill="currentColor">
@@ -376,7 +376,7 @@ const icon: { [key: string]: React.ReactNode } = {
 };
 
 export default ({ type, prompt, children }: { type: string; prompt: string; children?: React.ReactNode }) => {
-  const iconProps: { className: string; component?: React.ReactNode; type?: string } = {
+  const iconProps: IconProps = {
     className: "icon",
   };
   if (icon[type]) {
@@ -384,5 +384,9 @@ export default ({ type, prompt, children }: { type: string; prompt: string; chil
   } else {
     iconProps.type = type;
   }
-  return <Tooltip title={prompt}>{children || React.createElement(Icon as any, iconProps)}</Tooltip>;
+  return (
+    <Tooltip title={prompt}>
+      <div>{children || <Icon {...iconProps} />}</div>
+    </Tooltip>
+  );
 };

@@ -1,7 +1,6 @@
-import * as _ from "lodash";
-import * as React from "react";
+import _ from "lodash";
+import React from "react";
 import { Collapse, Button } from "antd";
-import * as uuid from "uuid/v4";
 import { componentList, componentRelation } from "../../../../designConfig";
 import { ClickEventHandler, PropData } from "./PropsType";
 
@@ -36,7 +35,7 @@ export default class Component extends React.PureComponent<ComponentProps, any> 
         <Button
           data-type={componentList[i].type}
           data-namespace={namespace}
-          key={uuid()}
+          key={i}
           onClick={this.handleClick}
           style={{ marginBottom: 5, marginRight: 5 }}
           disabled={this.getButtonDisabled({

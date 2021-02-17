@@ -1,87 +1,87 @@
 @import "custom";
 @prefixCls: ant-collapse;
-.@{prefixCls}.editor-list {
-  background-color: @bgColor;
-  border-radius: 0;
-  >.@{prefixCls}-item {
-    border-top: 1px solid #000;
-    border-bottom: none;
-    &:first-child {
-      border-top: none;
-    }
-    >.@{prefixCls}-header {
-      position: relative;
-      height: 32px;
-      padding: 0 0 0 12px;
-      color: #fff;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 32px;
-      text-indent: 10px;
-      border-bottom: 1px solid transparent;
-      cursor: pointer;
-      transition: border .3s @ease-in-out;
-      .@{prefixCls}-arrow {
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        left: auto;
-        display: inline-block;
-        transition: transform .3s @ease-in-out;
-        > svg {
-          display: none;
-        }
-        &::after,
-        &::before {
-          position: absolute;
-          display: block;
-          width: 6px;
-          height: 2px;
-          background: #fff;
-          transition: transform .3s @ease-in-out;
-          content: '';
-        }
-        &::after {
-          transform: rotate(45deg) translateX(-2px);
-        }
-        &::before {
-          transform: rotate(-45deg) translateX(2px);
-        }
-      }
-    }
-  }
-  >.@{prefixCls}-item-disabled>.@{prefixCls}-header {
-    color: #999;
-    background-color: #f3f3f3;
-    cursor: not-allowed;
-  }
-  .@{prefixCls}-content {
-    padding: 1px 16px;
-    // overflow: hidden;
-    color: @text-color; 
-    background-color: @bgColor;
-    > .@{prefixCls}-content-box {
-      margin-top: 16px;
-      margin-bottom: 16px;
-      padding: 0;
-    }
-    &-inactive {
-      display: none;
-    }
-  }
-  >.@{prefixCls}-item-active {
-    >.@{prefixCls}-header {
-      border-bottom-color: #000;
-      .@{prefixCls}-arrow {
-        transform: translateY(-3px);
-        &::after {
-          transform: rotate(-45deg) translateX(-2px);
-          ;
-        }
-        &::before {
-          transform: rotate(45deg) translateX(2px);
-        }
-      }
-    }
-  }
-}
+//.@{prefixCls}.editor-list {
+//  background-color: @bgColor;
+//  border-radius: 0;
+//  >.@{prefixCls}-item {
+//    border-top: 1px solid #000;
+//    border-bottom: none;
+//    &:first-child {
+//      border-top: none;
+//    }
+//    >.@{prefixCls}-header {
+//      position: relative;
+//      height: 32px;
+//      padding: 0 0 0 12px;
+//      color: #fff;
+//      font-weight: normal;
+//      font-size: 14px;
+//      line-height: 32px;
+//      text-indent: 10px;
+//      border-bottom: 1px solid transparent;
+//      cursor: pointer;
+//      transition: border .3s @ease-in-out;
+//      .@{prefixCls}-arrow {
+//        position: absolute;
+//        top: 50%;
+//        right: 20px;
+//        left: auto;
+//        display: inline-block;
+//        transition: transform .3s @ease-in-out;
+//        > svg {
+//          display: none;
+//        }
+//        &::after,
+//        &::before {
+//          position: absolute;
+//          display: block;
+//          width: 6px;
+//          height: 2px;
+//          background: #fff;
+//          transition: transform .3s @ease-in-out;
+//          content: '';
+//        }
+//        &::after {
+//          transform: rotate(45deg) translateX(-2px);
+//        }
+//        &::before {
+//          transform: rotate(-45deg) translateX(2px);
+//        }
+//      }
+//    }
+//  }
+//  >.@{prefixCls}-item-disabled>.@{prefixCls}-header {
+//    color: #999;
+//    background-color: #f3f3f3;
+//    cursor: not-allowed;
+//  }
+//  .@{prefixCls}-content {
+//    padding: 1px 16px;
+//    // overflow: hidden;
+//    color: @text-color;
+//    background-color: @bgColor;
+//    > .@{prefixCls}-content-box {
+//      margin-top: 16px;
+//      margin-bottom: 16px;
+//      padding: 0;
+//    }
+//    &-inactive {
+//      display: none;
+//    }
+//  }
+//  >.@{prefixCls}-item-active {
+//    >.@{prefixCls}-header {
+//      border-bottom-color: #000;
+//      .@{prefixCls}-arrow {
+//        transform: translateY(-3px);
+//        &::after {
+//          transform: rotate(-45deg) translateX(-2px);
+//          ;
+//        }
+//        &::before {
+//          transform: rotate(45deg) translateX(2px);
+//        }
+//      }
+//    }
+//  }
+//}

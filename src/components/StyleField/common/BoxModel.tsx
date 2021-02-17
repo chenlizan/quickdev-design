@@ -76,14 +76,7 @@ const BoxModel: React.FC<BoxModelProps> = (props) => {
 
   return (
     <div className={classNames("box-model-wrapper")}>
-      <InputGroup
-        className={classNames("box-model")}
-        onChange={(v, isDrag) => {
-          if (props.onChange) {
-            props.onChange(v, isDrag);
-          }
-        }}
-      >
+      <InputGroup className={classNames("box-model")} onChange={(v, isDrag) => props.onChange?.(v, isDrag)}>
         {getChildrenToBox()}
       </InputGroup>
     </div>

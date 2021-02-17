@@ -16,9 +16,10 @@ const clientConfig = {
   devServer: {
     port: PORT,
     historyApiFallback: true,
+    hot: true,
   },
   devtool: "eval-source-map",
-  entry: ["@babel/polyfill", path.resolve(__dirname, "src/index")],
+  entry: ["@babel/polyfill", "react-hot-loader/patch", path.resolve(__dirname, "src/index")],
   output: {
     chunkFilename: "chunk.[chunkhash:5].js",
     filename: "[name].js",
@@ -40,6 +41,7 @@ const clientConfig = {
                 ["import", { libraryName: "antd", style: "css" }, "ant"],
                 ["import", { libraryName: "antd-mobile", style: "css" }, "ant-mobile"],
                 ["lodash"],
+                ["react-hot-loader/babel"],
               ],
             },
           },
@@ -130,6 +132,7 @@ const clientConfig = {
   resolve: {
     alias: {
       "quickdev-lib-test": path.resolve("src/components"),
+      "react-dom": "@hot-loader/react-dom",
     },
     extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
   },
@@ -158,7 +161,6 @@ const clientConfig = {
       files: "**/*.(c|le)ss",
       fix: true,
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new OpenBrowserPlugin({
       url: `http://localhost:${PORT}`,
       browser: "chrome",

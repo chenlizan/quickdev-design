@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as _ from "lodash";
+import _ from "lodash";
+import React from "react";
 import { GenerateViewPropsType } from "./PropsType";
 
 export interface GenerateViewProps extends GenerateViewPropsType {
@@ -38,7 +38,7 @@ export default class GenerateView extends React.PureComponent<GenerateViewProps,
       return React.createElement(typeNode.length === 1 ? require("antd")[typeNode[0]] : require("antd")[typeNode[0]][typeNode[1]], props, props.children);
     } else if (namespace === "antd-mobile") {
       const typeNode = type.split(".");
-      _.assign(props, { key: key }, { ref: (node: any) => ((this as any)[uiKey] = node) }, (uiProps as any)[uiKey]);
+      _.assign(props, { "data-nid": key, key: key, ref: (node: any) => ((this as any)[uiKey] = node) }, (uiProps as any)[uiKey]);
       return React.createElement(
         typeNode.length === 1 ? require("antd-mobile")[typeNode[0]] : require("antd-mobile")[typeNode[0]][typeNode[1]],
         props,

@@ -56,3 +56,76 @@ export function toArrayChildren(children: React.ReactNode) {
   });
   return ret;
 }
+
+function toCssLowerCase(d: string) {
+  return d.replace(/[A-Z]/, ($1) => `-${$1.toLocaleLowerCase()}`);
+}
+
+function defaultToCss(d: { [key: string]: any }, current: { [key: string]: string }) {
+  return Object.keys(d)
+    .map((key) => {
+      const data = d[key];
+      if ((!data && data !== 0) || current[key] === data) {
+        return null;
+      }
+      return `${toCssLowerCase(key)}: ${data};`;
+    })
+    .filter((item) => item)
+    .join("\n");
+}
+
+function defaultToStyleList(d: { [key: string]: any }, current: { [key: string]: string }) {
+  Object.keys(current).forEach((key) => {
+    d[key] = current[key];
+  });
+}
+
+export function toCss(newData: { [key: string]: any }, currentData: { [key: string]: any }) {
+  let css = "";
+  Object.keys(newData).forEach((key) => {
+    let addCss;
+    switch (key) {
+      case "layout":
+        addCss = defaultToCss(newData[key], currentData[key]);
+        break;
+      default:
+        break;
+    }
+    if (addCss && addCss !== ";") {
+      css = css && addCss ? `${css}${addCss}` : addCss;
+    }
+  });
+  return css;
+}
+
+export function toStyleList(newData: { [key: string]: any }, currentData: { [key: string]: any }) {
+  Object.keys(currentData).forEach((key) => {
+    switch (key) {
+      case "layout":
+        defaultToStyleList(newData[key], currentData[key]);
+        break;
+      default:
+        break;
+    }
+  });
+}
+
+export function getDefaultData(style: any) {
+  if (!style) {
+    return null;
+  }
+  const borderBool =
+    (style.borderStyle !== "none" && style.borderColor !== "0px") ||
+    (style.borderTopStyle !== "none" && style.borderTopColor !== "0px") ||
+    (style.borderRightStyle !== "none" && style.borderRightColor !== "0px") ||
+    (style.borderBottomStyle !== "none" && style.borderBottomColor !== "0px") ||
+    (style.borderLeftStyle !== "none" && style.borderLeftColor !== "0px");
+  return {
+    layout: {
+      display: style.display,
+      // 只支持 row 布局
+      alignItems: style.alignItems || "stretch",
+      justifyContent: style.justifyContent || "flex-start",
+    },
+  };
+}

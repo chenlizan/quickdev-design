@@ -12,7 +12,11 @@ export default class Index extends React.PureComponent<any, any> {
   generateOption(configMeta: Array<any>): Array<JSX.Element> {
     const element = [];
     for (let i = 0, len = configMeta.length; i < len; i++) {
-      element.push(<Select.Option value={configMeta[i].value}>{configMeta[i].label}</Select.Option>);
+      element.push(
+        <Select.Option key={i} value={configMeta[i].value}>
+          {configMeta[i].label}
+        </Select.Option>
+      );
     }
     return element;
   }
