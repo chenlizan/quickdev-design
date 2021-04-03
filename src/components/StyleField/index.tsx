@@ -1,12 +1,13 @@
 import * as React from "react";
 import Collapse from "antd/lib/collapse";
 import Border from "./Border";
+import Margin from "./Margin";
 import Layout from "./Layout";
 import Locale from "./locale/zh_CN";
 import { getDefaultData, toStyleList } from "./utils";
 
 const StyleList: React.FC<any> = (props) => {
-  const [styleList, setStyleList] = React.useState({ layout: {}, border: {} });
+  const [styleList, setStyleList] = React.useState({ layout: {}, border: {}, margin: {} });
 
   React.useEffect(() => {
     const { currentProps } = props;
@@ -28,6 +29,7 @@ const StyleList: React.FC<any> = (props) => {
     <Collapse className="editor-list">
       <Layout locale={Locale.EditorLayout} onChange={handleChang} value={styleList["layout"]} />
       <Border locale={Locale.EditorBorder} onChange={handleChang} value={styleList["border"]} />
+      <Margin locale={Locale.EditorMargin} onChange={handleChang} value={styleList["margin"]} />
     </Collapse>
   );
 };
