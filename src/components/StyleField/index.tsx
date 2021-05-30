@@ -4,7 +4,7 @@ import Border from "./Border";
 import Margin from "./Margin";
 import Layout from "./Layout";
 import Locale from "./locale/zh_CN";
-import { getDefaultData, toStyleList } from "./utils";
+import { getDefaultData, toStyleList, toCss } from "./utils";
 
 const StyleList: React.FC<any> = (props) => {
   const [styleList, setStyleList] = React.useState({ layout: {}, border: {}, margin: {} });
@@ -23,6 +23,8 @@ const StyleList: React.FC<any> = (props) => {
   const handleChang = (name: string, value: any) => {
     console.log(name + ":", value);
     setStyleList({ ...styleList, [name]: value });
+    console.log("toCss", toCss(styleList, { layout: {}, border: {} }));
+    props.onChange(styleList);
   };
 
   return (

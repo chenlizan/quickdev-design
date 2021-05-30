@@ -74,6 +74,35 @@ function defaultToCss(d: { [key: string]: any }, current: { [key: string]: strin
     .join("\n");
 }
 
+function borderToCss(d: { [key: string]: any }, current: { [key: string]: string }) {
+  // if (!d.style && !d.radius) {
+  //   return null;
+  // }
+  return Object.keys(d)
+    .map((key) => {
+      const data = d[key];
+      if (!data || current[key] === data) {
+        return null;
+      }
+      if (typeof data === "string") {
+        return `border-${key}: ${data};`;
+      }
+      return Object.keys(data)
+        .map((cKey) => {
+          const cData = data[cKey];
+          const currentData = current[key] && current[key][cKey];
+          if (!cData || cData === "none" || currentData === cData) {
+            return null;
+          }
+          return `border-${cKey}-${key}: ${cData};`;
+        })
+        .filter((item) => item)
+        .join("\n");
+    })
+    .filter((item) => item)
+    .join("\n");
+}
+
 function defaultToStyleList(d: { [key: string]: any }, current: { [key: string]: string }) {
   Object.keys(current).forEach((key) => {
     d[key] = current[key];
@@ -87,6 +116,9 @@ export function toCss(newData: { [key: string]: any }, currentData: { [key: stri
     switch (key) {
       case "layout":
         addCss = defaultToCss(newData[key], currentData[key]);
+        break;
+      case "border":
+        addCss = borderToCss(newData[key], currentData[key]);
         break;
       default:
         break;
