@@ -74,7 +74,7 @@ function defaultToCss(d: { [key: string]: any }, current: { [key: string]: strin
     .join("\n");
 }
 
-function borderToCss(d: { [key: string]: any }, current: { [key: string]: string }) {
+function borderToCss(d: { [key: string]: any }, current: { [key: string]: any }) {
   // if (!d.style && !d.radius) {
   //   return null;
   // }
